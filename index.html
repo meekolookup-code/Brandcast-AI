@@ -327,7 +327,11 @@
   .flex-col { flex-direction: column; }
   .items-center { align-items: center; }
   .justify-between { justify-content: space-between; }
+  .gap-12 { gap: 12px; }
+  .gap-16 { gap: 16px; }
   .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mb-16 { margin-bottom: 16px; }
   .w-full { width: 100%; }
 
   /* ─── DROP ZONE ─────────────────────────── */
@@ -459,6 +463,7 @@
 
   /* ─── CATEGORY BARS ─────────────────────── */
   .cat-list { display: flex; flex-direction: column; gap: 16px; }
+  .cat-row { }
   .cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
   .cat-name { font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: .3px; display: flex; align-items: center; gap: 7px; }
   .cat-name .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
@@ -533,8 +538,17 @@
   .pill-rejected { background: var(--red-lo); color: var(--red); }
 
   /* ─── SECTION DIVIDER ───────────────────── */
+  .section-gap { margin-bottom: 20px; }
   .section-label { font-family: var(--font-head); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--text-low); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
   .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
+
+  /* ─── EMPTY STATE ───────────────────────── */
+  .empty-state {
+    text-align: center; padding: 60px 40px;
+    color: var(--text-low);
+  }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: .4; }
+  .empty-text { font-size: 14px; font-family: var(--font-head); }
 
   /* ─── TOAST ─────────────────────────────── */
   .toast {
@@ -553,6 +567,32 @@
 
   /* ─── DIVIDER ────────────────────────────── */
   .divider { height: 1px; background: var(--border); margin: 22px 0; }
+
+  /* ─── SCROLLABLE CONTENT ─────────────────── */
+  .scroll-fade { position: relative; }
+
+  /* ─── REVIEW ASSET PREVIEW ───────────────── */
+  .asset-preview-box {
+    background: var(--bg-mid); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); overflow: hidden;
+    aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .asset-preview-placeholder { text-align: center; color: var(--text-low); }
+  .asset-preview-placeholder svg { width: 40px; height: 40px; margin-bottom: 8px; opacity: .3; }
+
+  /* ─── ANNOTATION SPOTS ───────────────────── */
+  .annotation { position: absolute; }
+  .ann-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: #fff;
+    cursor: pointer;
+    animation: dotPulse 2s infinite;
+    box-shadow: 0 0 12px rgba(240,82,82,.5);
+  }
+  @keyframes dotPulse { 0%,100%{box-shadow: 0 0 6px rgba(240,82,82,.5)} 50%{box-shadow: 0 0 18px rgba(240,82,82,.8)} }
 
   /* ─── GUIDELINE SAVED CHIP ───────────────── */
   .saved-badge {
@@ -574,6 +614,7 @@
 <body>
 
 <div class="app">
+  <!-- ═══════ SIDEBAR ═══════ -->
   <aside class="sidebar">
     <div class="sidebar-brand">
       <div class="brand-icon">
@@ -637,8 +678,10 @@
     </div>
   </aside>
 
+  <!-- ═══════ MAIN ═══════ -->
   <main class="main" id="main-scroll">
 
+    <!-- Top Bar -->
     <div class="topbar">
       <div class="topbar-left">
         <div class="topbar-title" id="topbar-title">Brand Setup</div>
@@ -650,6 +693,7 @@
       </div>
     </div>
 
+    <!-- ═══ TAB 1: BRAND SETUP ═══ -->
     <section class="tab-panel active" id="tab-brand-setup">
       <div class="page-header">
         <div class="page-title">Brand Configuration</div>
@@ -657,6 +701,7 @@
       </div>
 
       <div class="grid-2" style="gap:20px; align-items:start;">
+        <!-- Left column -->
         <div style="display:flex;flex-direction:column;gap:16px;">
 
           <div class="card">
@@ -707,14 +752,15 @@
             <div id="inner-upload" class="inner-panel" style="display:none;">
               <div class="mini-upload" onclick="document.getElementById('guide-file').click()">
                 <div class="mini-upload-icon">📄</div>
-                <div class="mini-upload-text" id="guide-upload-text"><strong>Click to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported</div>
+                <div class="mini-upload-text"><strong>Click to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported</div>
               </div>
-              <input type="file" id="guide-file" accept=".pdf,.pptx,.docx" style="display:none" onchange="handleGuideUpload(this)">
+              <input type="file" id="guide-file" accept=".pdf,.pptx,.docx" style="display:none">
             </div>
           </div>
 
         </div>
 
+        <!-- Right column -->
         <div style="display:flex;flex-direction:column;gap:16px;">
 
           <div class="card">
@@ -724,7 +770,8 @@
             </div>
 
             <div class="palette-grid" id="palette-grid">
-              </div>
+              <!-- swatches injected by JS -->
+            </div>
 
             <div class="hex-input-row">
               <div class="hex-preview-swatch" id="hex-preview-swatch"></div>
@@ -740,7 +787,8 @@
               Approved Typefaces
             </div>
             <div id="typeface-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-              </div>
+              <!-- injected by JS -->
+            </div>
             <div class="hex-input-row">
               <input type="text" class="form-input" id="font-input" placeholder="e.g. Neue Haas Grotesk" style="font-size:13px;">
               <button class="btn btn-outline" onclick="addFont()" style="white-space:nowrap;flex-shrink:0;">+ Add</button>
@@ -775,6 +823,7 @@
       </div>
     </section>
 
+    <!-- ═══ TAB 2: UPLOAD & ANALYZE ═══ -->
     <section class="tab-panel" id="tab-upload">
       <div class="page-header">
         <div class="page-title">Upload Creative Asset</div>
@@ -784,6 +833,7 @@
       <div class="grid-2" style="gap:20px;align-items:start;">
         <div style="display:flex;flex-direction:column;gap:16px;">
 
+          <!-- Drop Zone -->
           <div class="drop-zone" id="drop-zone"
             ondragover="handleDragOver(event)"
             ondragleave="handleDragLeave(event)"
@@ -811,13 +861,15 @@
             <input type="file" id="asset-file" accept=".png,.jpg,.jpeg,.webp,.gif" style="display:none" onchange="handleFileSelect(this)">
           </div>
 
+          <!-- Platform selector -->
           <div class="card">
             <div class="card-title">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               Target Platform
             </div>
             <div class="platform-grid" id="platform-grid">
-              </div>
+              <!-- injected by JS -->
+            </div>
           </div>
 
         </div>
@@ -839,9 +891,9 @@
             </div>
             <div class="form-group">
               <label class="form-label">Apply Brand Profile</label>
-              <select class="form-select" id="brand-profile-select" onchange="handleProfileChange(this)">
-                <option value="Acme Creative Co.">Acme Creative Co. (active)</option>
-                <option value="add_new">— Add profile —</option>
+              <select class="form-select">
+                <option>Acme Creative Co. (active)</option>
+                <option>— Add profile —</option>
               </select>
             </div>
             <div class="form-group" style="margin-bottom:0">
@@ -856,7 +908,8 @@
               Review Checklist
             </div>
             <div id="checklist" style="display:flex;flex-direction:column;gap:8px;">
-              </div>
+              <!-- injected by JS -->
+            </div>
           </div>
 
           <button class="btn btn-teal btn-lg w-full" onclick="runReview()" id="run-btn" style="justify-content:center;">
@@ -869,12 +922,14 @@
       </div>
     </section>
 
+    <!-- ═══ TAB 3: APPROVAL DASHBOARD ═══ -->
     <section class="tab-panel" id="tab-dashboard">
       <div class="page-header">
         <div class="page-title">Approval Dashboard</div>
         <div class="page-sub">Brand compliance results, violation breakdowns, and historical review performance.</div>
       </div>
 
+      <!-- KPI ROW -->
       <div class="kpi-grid" style="margin-bottom:20px;">
         <div class="card kpi-card">
           <div class="kpi-label">Total Reviews</div>
@@ -898,12 +953,14 @@
         </div>
       </div>
 
+      <!-- LATEST RESULT (hidden until review runs) -->
       <div id="latest-result" style="display:none;">
         <div class="section-label">Latest Review Result</div>
 
         <div class="card" style="margin-bottom:16px;">
           <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
 
+            <!-- Score ring -->
             <div>
               <div class="score-hero">
                 <div class="score-ring-wrap">
@@ -934,19 +991,24 @@
           </div>
         </div>
 
+        <!-- Score tiles -->
         <div class="score-tiles" id="score-tiles">
-          </div>
+          <!-- injected by JS -->
+        </div>
 
         <div class="grid-2" style="gap:16px;margin-bottom:16px;">
+          <!-- Category bars -->
           <div class="card">
             <div class="card-title">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
               Score Breakdown
             </div>
             <div class="cat-list" id="cat-bars">
-              </div>
+              <!-- injected by JS -->
+            </div>
           </div>
 
+          <!-- Violations -->
           <div class="card">
             <div class="card-title" style="color:var(--red);">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -954,11 +1016,13 @@
               <span style="margin-left:auto;background:var(--red-lo);color:var(--red);font-size:10px;padding:2px 8px;border-radius:99px;font-family:var(--font-mono);" id="viol-count">0</span>
             </div>
             <div class="violation-list" id="violation-list">
-              </div>
+              <!-- injected by JS -->
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- HISTORY TABLE -->
       <div class="section-label">Review History</div>
       <div class="card" style="padding:0;overflow:hidden;">
         <table class="history-table" id="history-table">
@@ -973,7 +1037,8 @@
             </tr>
           </thead>
           <tbody id="history-tbody">
-            </tbody>
+            <!-- injected by JS -->
+          </tbody>
         </table>
       </div>
     </section>
@@ -981,6 +1046,7 @@
   </main>
 </div>
 
+<!-- ═══ ANALYZE OVERLAY ═══ -->
 <div class="analyze-overlay" id="analyze-overlay">
   <div class="analyze-box">
     <div style="font-size:36px;margin-bottom:10px;">🔍</div>
@@ -1000,6 +1066,7 @@
   </div>
 </div>
 
+<!-- ═══ TOAST ═══ -->
 <div class="toast" id="toast">
   <span class="toast-icon">✅</span>
   <span id="toast-msg">Action completed</span>
@@ -1008,29 +1075,31 @@
 <script>
 /* ═══════════════════════════════════════════════
    STATE
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const state = {
   palette: ['#D4351C', '#1B2B4B', '#F5F0E8', '#00A896', '#F2C94C'],
   fonts: ['Neue Haas Grotesk Display', 'Neue Haas Grotesk Text'],
   selectedPlatform: 'meta-post',
   uploadedFile: null,
-  imageWidth: null,
-  imageHeight: null,
+  guideFile: null,
+  assetMeta: null,
   reviewDone: false,
   scores: null,
   historyCount: 47,
+  brandProfiles: [],
+  currentProfileId: null,
 };
 
 const platforms = [
-  { id:'meta-post',     icon:'📘', name:'Meta Post',    w: 1080, h: 1080 },
-  { id:'instagram-story', icon:'📸', name:'IG Story',     w: 1080, h: 1920 },
-  { id:'tiktok',        icon:'🎵', name:'TikTok',       w: 1080, h: 1920 },
-  { id:'pinterest',     icon:'📌', name:'Pinterest',    w: 1000, h: 1500 },
-  { id:'google-ad',     icon:'🟦', name:'Google Ad',    w: 300,  h: 250 },
-  { id:'youtube',       icon:'▶️', name:'YouTube',      w: 1280, h: 720 },
-  { id:'twitter-x',     icon:'✖️', name:'Twitter / X',  w: 1200, h: 675 },
-  { id:'linkedin',      icon:'💼', name:'LinkedIn',     w: 1200, h: 627 },
-  { id:'email-banner',  icon:'📧', name:'Email Banner', w: 600,  h: 200 },
+  { id:'meta-post',        icon:'📘', name:'Meta Post',        width:1200, height:630 },
+  { id:'instagram-story',  icon:'📸', name:'IG Story',         width:1080, height:1920 },
+  { id:'tiktok',           icon:'🎵', name:'TikTok',           width:1080, height:1920 },
+  { id:'pinterest',        icon:'📌', name:'Pinterest',        width:1000, height:1500 },
+  { id:'google-ad',        icon:'🟦', name:'Google Ad',        width:1200, height:1200 },
+  { id:'youtube',          icon:'▶️', name:'YouTube',          width:1280, height:720 },
+  { id:'twitter-x',        icon:'✖️', name:'Twitter / X',      width:1200, height:675 },
+  { id:'linkedin',         icon:'💼', name:'LinkedIn',         width:1200, height:627 },
+  { id:'email-banner',     icon:'📧', name:'Email Banner',     width:1200, height:400 },
 ];
 
 const checklist = [
@@ -1042,21 +1111,21 @@ const checklist = [
 ];
 
 const history = [
-  { name:'hero_banner_jul.png',       platform:'Meta Post',    score:8.2, status:'approved', viols:1, date:'Jul 14, 2025' },
-  { name:'summer_promo_v2.jpg',       platform:'Instagram Story', score:4.9, status:'needs', viols:5, date:'Jul 12, 2025' },
-  { name:'product_launch_ad.png',     platform:'Google Ad',    score:9.1, status:'approved', viols:0, date:'Jul 11, 2025' },
-  { name:'q2_report_cover.jpg',       platform:'LinkedIn',     score:6.5, status:'needs', viols:3, date:'Jul 9, 2025'  },
-  { name:'email_header_may.png',      platform:'Email Banner', score:7.8, status:'approved', viols:2, date:'Jul 7, 2025'  },
-  { name:'tiktok_thumbnail_v1.jpg',   platform:'TikTok',       score:3.2, status:'rejected', viols:7, date:'Jul 4, 2025'  },
+  { name:'hero_banner_jul.png',     platform:'Meta Post',        score:8.2, status:'approved', viols:1, date:'Jul 14, 2025' },
+  { name:'summer_promo_v2.jpg',     platform:'IG Story',         score:4.9, status:'needs',    viols:5, date:'Jul 12, 2025' },
+  { name:'product_launch_ad.png',   platform:'Google Ad',        score:9.1, status:'approved', viols:0, date:'Jul 11, 2025' },
+  { name:'q2_report_cover.jpg',     platform:'LinkedIn',         score:6.5, status:'needs',    viols:3, date:'Jul 9, 2025'  },
+  { name:'email_header_may.png',    platform:'Email Banner',     score:7.8, status:'approved', viols:2, date:'Jul 7, 2025'  },
+  { name:'tiktok_thumbnail_v1.jpg', platform:'TikTok',           score:3.2, status:'rejected', viols:7, date:'Jul 4, 2025'  },
 ];
 
 /* ═══════════════════════════════════════════════
    NAVIGATION
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 const topbarMeta = {
-  'brand-setup': { title:'Brand Setup', crumb:'Configure your brand identity source of truth', action:'New Review' },
-  'upload':      { title:'Upload & Analyze', crumb:'Submit a creative asset for compliance review', action:'Brand Setup' },
-  'dashboard':   { title:'Approval Dashboard', crumb:'Compliance results and review history', action:'New Review' },
+  'brand-setup': { title:'Brand Setup',        crumb:'Configure your brand identity source of truth',        action:'New Review' },
+  'upload':      { title:'Upload & Analyze',   crumb:'Submit a creative asset for compliance review',       action:'Brand Setup' },
+  'dashboard':   { title:'Approval Dashboard', crumb:'Compliance results and review history',               action:'New Review' },
 };
 
 document.querySelectorAll('.nav-item[data-tab]').forEach(el => {
@@ -1074,67 +1143,31 @@ function switchTab(tab) {
   document.getElementById('topbar-action').textContent = m.action;
   document.getElementById('main-scroll').scrollTop = 0;
 
-  if(tab === 'dashboard' && state.reviewDone) animateScores();
+  if (tab === 'dashboard' && state.reviewDone) animateScores();
 }
 
 document.getElementById('topbar-action').addEventListener('click', () => {
   const cur = document.querySelector('.nav-item.active').dataset.tab;
-  if(cur==='brand-setup') switchTab('upload');
+  if (cur === 'brand-setup') switchTab('upload');
   else switchTab('upload');
 });
 
 /* ═══════════════════════════════════════════════
    INNER TABS (Brand Guidelines)
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 document.querySelectorAll('.inner-tab').forEach(el => {
   el.addEventListener('click', () => {
     document.querySelectorAll('.inner-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     const target = el.dataset.inner;
-    document.getElementById('inner-text').style.display = target==='text' ? 'block' : 'none';
-    document.getElementById('inner-upload').style.display = target==='upload' ? 'block' : 'none';
+    document.getElementById('inner-text').style.display   = target === 'text'   ? 'block' : 'none';
+    document.getElementById('inner-upload').style.display = target === 'upload' ? 'block' : 'none';
   });
 });
 
 /* ═══════════════════════════════════════════════
-   FILE UPLOADS (Guides & Logo)
-═══════════════════════════════════════════════ */
-function handleGuideUpload(input) {
-  if(input.files[0]) {
-    document.getElementById('guide-upload-text').innerHTML = `<strong>✅ ${input.files[0].name}</strong><br><span style="color:var(--green)">Guidelines loaded</span>`;
-    showToast('📄 Guidelines uploaded successfully');
-  }
-}
-
-function handleLogoUpload(input) {
-  if(input.files[0]) {
-    document.getElementById('logo-upload-text').innerHTML = `<strong>✅ ${input.files[0].name}</strong><br><span style="color:var(--green)">Logo uploaded</span>`;
-    showToast('🏷️ Logo file loaded');
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   BRAND PROFILE DROPDOWN
-═══════════════════════════════════════════════ */
-function handleProfileChange(sel) {
-  if(sel.value === 'add_new') {
-    const newName = prompt("Enter new brand profile name:");
-    if(newName && newName.trim() !== '') {
-      const opt = document.createElement('option');
-      opt.text = newName;
-      opt.value = newName;
-      sel.add(opt, sel.options[sel.length - 1]);
-      sel.value = newName;
-      showToast('🏢 Brand profile added');
-    } else {
-      sel.selectedIndex = 0; // fallback to default
-    }
-  }
-}
-
-/* ═══════════════════════════════════════════════
    COLOR PALETTE
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 function renderPalette() {
   const grid = document.getElementById('palette-grid');
   grid.innerHTML = '';
@@ -1160,11 +1193,13 @@ function removeColor(i, e) {
   renderPalette();
 }
 
-function focusHexInput() { document.getElementById('hex-input').focus(); }
+function focusHexInput() {
+  document.getElementById('hex-input').focus();
+}
 
 function addColor() {
   const val = document.getElementById('hex-input').value.trim();
-  if(/^#([0-9A-Fa-f]{6})$/.test(val)) {
+  if (/^#([0-9A-Fa-f]{6})$/.test(val)) {
     state.palette.push(val.toUpperCase());
     renderPalette();
     document.getElementById('hex-input').value = '';
@@ -1175,19 +1210,21 @@ function addColor() {
   }
 }
 
-document.getElementById('hex-input').addEventListener('input', function() {
+document.getElementById('hex-input').addEventListener('input', function () {
   const v = this.value.trim();
   document.getElementById('hex-preview-swatch').style.background =
     /^#([0-9A-Fa-f]{6})$/.test(v) ? v : 'var(--border)';
 });
-document.getElementById('hex-input').addEventListener('keydown', e => { if(e.key==='Enter') addColor(); });
+document.getElementById('hex-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addColor();
+});
 
 /* ═══════════════════════════════════════════════
    TYPEFACES
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 function renderFonts() {
   const list = document.getElementById('typeface-list');
-  list.innerHTML = state.fonts.map((f,i) => `
+  list.innerHTML = state.fonts.map((f, i) => `
     <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg-mid);border:1px solid var(--border);border-radius:8px;">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
       <span style="flex:1;font-size:13px;">${f}</span>
@@ -1198,59 +1235,231 @@ function renderFonts() {
 
 function addFont() {
   const val = document.getElementById('font-input').value.trim();
-  if(val) {
+  if (val) {
     state.fonts.push(val);
     renderFonts();
     document.getElementById('font-input').value = '';
     showToast('✏️ Typeface added');
   }
 }
-function removeFont(i) { state.fonts.splice(i,1); renderFonts(); }
-document.getElementById('font-input').addEventListener('keydown', e => { if(e.key==='Enter') addFont(); });
+function removeFont(i) {
+  state.fonts.splice(i, 1);
+  renderFonts();
+}
+document.getElementById('font-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addFont();
+});
+
+/* ═══════════════════════════════════════════════
+   LOGO UPLOAD
+════════════════════════════════════════════════ */
+function handleLogoUpload(input) {
+  if (input.files[0]) {
+    const name = input.files[0].name;
+    document.getElementById('logo-upload-text').innerHTML =
+      `<strong>✅ ${name}</strong><br><span style="color:var(--green)">Logo uploaded</span>`;
+    // sync into active profile if present
+    if (state.brandProfiles && state.currentProfileId) {
+      const profile = state.brandProfiles.find(p => p.id === state.currentProfileId);
+      if (profile) profile.logoName = name;
+    }
+    showToast('🏷️ Logo file loaded');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   BRAND GUIDELINES FILE UPLOAD
+════════════════════════════════════════════════ */
+function handleGuideUpload(input) {
+  if (input.files[0]) {
+    state.guideFile = input.files[0];
+    const name = input.files[0].name;
+    const txt = document.querySelector('#inner-upload .mini-upload-text');
+    if (txt) {
+      txt.innerHTML =
+        `<strong>✅ ${name}</strong><br><span style="color:var(--green)">Guidelines file attached</span>`;
+    }
+    if (state.brandProfiles && state.currentProfileId) {
+      const profile = state.brandProfiles.find(p => p.id === state.currentProfileId);
+      if (profile) profile.guideFileName = name;
+    }
+    showToast('📄 Brand guidelines file attached');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   BRAND PROFILES
+════════════════════════════════════════════════ */
+function initBrandProfiles() {
+  const nameInput = document.getElementById('brand-name');
+  const guidelinesTextarea = document.getElementById('brand-guidelines');
+  const initialName = nameInput ? (nameInput.value || 'Untitled Brand') : 'Untitled Brand';
+  const initialGuidelines = guidelinesTextarea ? guidelinesTextarea.value : '';
+  const profile = {
+    id: 'profile-1',
+    name: initialName,
+    active: true,
+    guidelinesText: initialGuidelines,
+    palette: [...state.palette],
+    fonts: [...state.fonts],
+    logoName: null,
+    guideFileName: null,
+  };
+  state.brandProfiles = [profile];
+  state.currentProfileId = profile.id;
+  renderProfileSelect();
+  updateProfileHint();
+}
+
+function renderProfileSelect() {
+  const select = document.getElementById('brand-profile-select');
+  if (!select) return;
+  select.innerHTML = '';
+  state.brandProfiles.forEach(profile => {
+    const opt = document.createElement('option');
+    opt.value = profile.id;
+    opt.textContent = profile.name + (profile.active ? ' (active)' : '');
+    if (profile.id === state.currentProfileId) opt.selected = true;
+    select.appendChild(opt);
+  });
+  const addOpt = document.createElement('option');
+  addOpt.value = '__add';
+  addOpt.textContent = '＋ Add new profile…';
+  select.appendChild(addOpt);
+}
+
+function updateProfileHint() {
+  const hint = document.getElementById('profile-hint');
+  if (!hint) return;
+  const active = state.brandProfiles.find(p => p.id === state.currentProfileId);
+  hint.textContent = active ? `Active profile: ${active.name}` : 'No active profile selected';
+}
+
+function handleProfileChange(selectEl) {
+  const value = selectEl.value;
+  if (value === '__add') {
+    // reset to current to avoid selecting the placeholder
+    selectEl.value = state.currentProfileId || '';
+    const name = window.prompt('Name for new brand profile?');
+    if (!name) return;
+    const current = state.brandProfiles.find(p => p.id === state.currentProfileId);
+    const newProfile = {
+      id: 'profile-' + (state.brandProfiles.length + 1),
+      name,
+      active: true,
+      guidelinesText: document.getElementById('brand-guidelines')?.value || '',
+      palette: [...state.palette],
+      fonts: [...state.fonts],
+      logoName: current?.logoName || null,
+      guideFileName: current?.guideFileName || null,
+    };
+    state.brandProfiles.forEach(p => (p.active = false));
+    state.brandProfiles.push(newProfile);
+    state.currentProfileId = newProfile.id;
+    renderProfileSelect();
+    updateProfileHint();
+    applyProfileToBrandSetup(newProfile);
+    showToast('🆕 Brand profile created');
+  } else {
+    const profile = state.brandProfiles.find(p => p.id === value);
+    if (!profile) return;
+    state.currentProfileId = profile.id;
+    state.brandProfiles.forEach(p => (p.active = p.id === profile.id));
+    applyProfileToBrandSetup(profile);
+    renderProfileSelect();
+    updateProfileHint();
+    showToast('📂 Applied brand profile');
+  }
+}
+
+function applyProfileToBrandSetup(profile) {
+  if (!profile) return;
+  const nameInput = document.getElementById('brand-name');
+  const guidelinesTextarea = document.getElementById('brand-guidelines');
+  if (nameInput) nameInput.value = profile.name;
+  if (guidelinesTextarea) guidelinesTextarea.value = profile.guidelinesText || '';
+  if (profile.palette && profile.palette.length) {
+    state.palette = [...profile.palette];
+    renderPalette();
+  }
+  if (profile.fonts && profile.fonts.length) {
+    state.fonts = [...profile.fonts];
+    renderFonts();
+  }
+  if (profile.logoName) {
+    document.getElementById('logo-upload-text').innerHTML =
+      `<strong>✅ ${profile.logoName}</strong><br><span style="color:var(--green)">Logo uploaded</span>`;
+  }
+  if (profile.guideFileName) {
+    const txt = document.querySelector('#inner-upload .mini-upload-text');
+    if (txt) {
+      txt.innerHTML =
+        `<strong>✅ ${profile.guideFileName}</strong><br><span style="color:var(--green)">Guidelines file attached</span>`;
+    }
+  }
+}
 
 /* ═══════════════════════════════════════════════
    SAVE GUIDELINES
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 function saveGuidelines() {
   const badge = document.getElementById('saved-badge');
   badge.classList.add('visible');
+  if (state.brandProfiles && state.currentProfileId) {
+    const profile = state.brandProfiles.find(p => p.id === state.currentProfileId);
+    if (profile) {
+      profile.name = document.getElementById('brand-name').value || profile.name;
+      profile.guidelinesText = document.getElementById('brand-guidelines')?.value || '';
+      profile.palette = [...state.palette];
+      profile.fonts = [...state.fonts];
+    }
+    renderProfileSelect();
+    updateProfileHint();
+  }
   showToast('✅ Brand guidelines saved successfully');
   setTimeout(() => badge.classList.remove('visible'), 3000);
 }
 
 /* ═══════════════════════════════════════════════
    PLATFORMS
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 function renderPlatforms() {
   const grid = document.getElementById('platform-grid');
-  grid.innerHTML = platforms.map(p => `
-    <div class="platform-opt ${p.id===state.selectedPlatform?'selected':''}" onclick="selectPlatform('${p.id}')">
-      <span class="plat-icon">${p.icon}</span>
-      <div class="plat-name">${p.name}</div>
-    </div>
-  `).join('');
+  grid.innerHTML = platforms
+    .map(p => `
+      <div class="platform-opt ${p.id === state.selectedPlatform ? 'selected' : ''}" onclick="selectPlatform('${p.id}')">
+        <span class="plat-icon">${p.icon}</span>
+        <div class="plat-name">${p.name}</div>
+      </div>
+    `)
+    .join('');
 }
 
 function selectPlatform(id) {
   state.selectedPlatform = id;
   renderPlatforms();
+  updateSizeWarning();
 }
 
 /* ═══════════════════════════════════════════════
    CHECKLIST
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 function renderChecklist() {
-  document.getElementById('checklist').innerHTML = checklist.map(item => `
+  document.getElementById('checklist').innerHTML = checklist
+    .map(
+      item => `
     <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--text-mid);">
       <input type="checkbox" checked style="accent-color:var(--accent);width:14px;height:14px;">
       ${item}
     </label>
-  `).join('');
+  `
+    )
+    .join('');
 }
 
 /* ═══════════════════════════════════════════════
-   FILE DROP / SELECT & SIZE CAPTURE
-═══════════════════════════════════════════════ */
+   FILE DROP / SELECT + SIZE CHECK
+════════════════════════════════════════════════ */
 function handleDragOver(e) {
   e.preventDefault();
   document.getElementById('drop-zone').classList.add('drag-over');
@@ -1263,11 +1472,12 @@ function handleDrop(e) {
   const dz = document.getElementById('drop-zone');
   dz.classList.remove('drag-over');
   const file = e.dataTransfer.files[0];
-  if(file) loadFile(file);
+  if (file) loadFile(file);
 }
 function handleFileSelect(input) {
-  if(input.files[0]) loadFile(input.files[0]);
+  if (input.files[0]) loadFile(input.files[0]);
 }
+
 function loadFile(file) {
   state.uploadedFile = file;
   const reader = new FileReader();
@@ -1276,26 +1486,57 @@ function loadFile(file) {
     const pc = document.getElementById('preview-container');
     pc.classList.add('visible');
     document.getElementById('preview-img').src = ev.target.result;
-    document.getElementById('preview-name').textContent = `📎 ${file.name} (${(file.size/1024).toFixed(1)} KB)`;
+    document.getElementById('preview-name').textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
     document.getElementById('drop-zone').classList.add('has-file');
     document.getElementById('pending-badge').style.display = 'flex';
 
-    // Capture Image Dimensions for Platform Validation
+    // read dimensions for size check
     const img = new Image();
-    img.onload = function() {
-      state.imageWidth = this.width;
-      state.imageHeight = this.height;
-    }
+    img.onload = () => {
+      state.assetMeta = { width: img.width, height: img.height };
+      updateSizeWarning();
+    };
     img.src = ev.target.result;
   };
   reader.readAsDataURL(file);
   showToast(`📁 ${file.name} loaded`);
 }
 
+function updateSizeWarning() {
+  const el = document.getElementById('size-warning');
+  if (!el) return;
+  if (!state.assetMeta) {
+    el.textContent = '';
+    return;
+  }
+  const plat = platforms.find(p => p.id === state.selectedPlatform);
+  if (!plat || !plat.width || !plat.height) {
+    el.textContent = '';
+    return;
+  }
+  const w = state.assetMeta.width;
+  const h = state.assetMeta.height;
+  const ratio = w / h;
+  const expectedRatio = plat.width / plat.height;
+  const diff = Math.abs(ratio - expectedRatio) / expectedRatio;
+  if (diff < 0.05) {
+    el.style.color = 'var(--green)';
+    el.textContent = `✅ ${w}×${h} matches ${plat.name} (${plat.width}×${plat.height}).`;
+  } else {
+    el.style.color = 'var(--amber)';
+    el.textContent = `⚠️ ${w}×${h} differs from ${plat.name} (${plat.width}×${plat.height}). Expect cropping or padding.`;
+  }
+}
+
 /* ═══════════════════════════════════════════════
    RUN REVIEW
-═══════════════════════════════════════════════ */
+════════════════════════════════════════════════ */
 function runReview() {
+  if (!state.uploadedFile) {
+    showToast('⚠️ Please upload a creative asset first');
+    return;
+  }
+
   const overlay = document.getElementById('analyze-overlay');
   overlay.classList.add('visible');
 
@@ -1307,10 +1548,10 @@ function runReview() {
   const pcts = [20, 40, 60, 80, 100];
 
   function advance() {
-    if(current < steps.length) {
-      if(current > 0) {
-        steps[current-1].classList.add('done');
-        steps[current-1].classList.remove('running');
+    if (current < steps.length) {
+      if (current > 0) {
+        steps[current - 1].classList.add('done');
+        steps[current - 1].classList.remove('running');
       }
       steps[current].classList.add('running');
       bar.style.width = pcts[current] + '%';
@@ -1318,11 +1559,13 @@ function runReview() {
       current++;
       setTimeout(advance, 1100);
     } else {
-      steps[steps.length-1].classList.add('done');
-      steps[steps.length-1].classList.remove('running');
+      steps[steps.length - 1].classList.add('done');
+      steps[steps.length - 1].classList.remove('running');
       setTimeout(() => {
         overlay.classList.remove('visible');
-        steps.forEach(s => { s.classList.remove('done','running'); });
+        steps.forEach(s => {
+          s.classList.remove('done', 'running');
+        });
         bar.style.width = '0%';
         pct.textContent = '0%';
         buildResults();
@@ -1335,19 +1578,21 @@ function runReview() {
 }
 
 /* ═══════════════════════════════════════════════
-   BUILD RESULTS (DYNAMIC SCORE & VALIDATION)
-═══════════════════════════════════════════════ */
-function buildResults(isHistoryView = false, overrideData = null) {
-  const plat = platforms.find(p => p.id === state.selectedPlatform) || platforms[0];
+   MOCK SCORES + RESULT RENDERING
+════════════════════════════════════════════════ */
+function buildResults() {
+  const plat = platforms.find(p => p.id === state.selectedPlatform);
   const filename = state.uploadedFile ? state.uploadedFile.name : 'summer_campaign_v3.png';
 
-  let scores = {
-    logo:     7.5,
-    color:    5.5,
+  const scores = {
+    logo: 7.5,
+    color: 5.5,
     typography: 6.0,
-    layout:   8.0,
-    overall:  6.8,
+    layout: 8.0,
+    overall: 6.8,
   };
+  state.scores = scores;
+  state.reviewDone = true;
 
   const violations = [
     { cat:'logo',   icon:'🔴', cls:'vi-logo',  catLabel:'Logo',       text:'<strong>Logo distortion detected:</strong> Primary logo scaled non-proportionally (15% horizontal stretch applied).' },
@@ -1357,32 +1602,41 @@ function buildResults(isHistoryView = false, overrideData = null) {
     { cat:'layout', icon:'🟡', cls:'vi-layout',catLabel:'Layout',     text:'<strong>Margin violation:</strong> CTA button extends 8px beyond the defined right margin boundary (40px required).' },
   ];
 
-  // Dynamic Validation: Check file dimensions vs Platform spec
-  if (!isHistoryView && state.imageWidth && state.imageHeight && plat.w && plat.h) {
-    if (state.imageWidth !== plat.w || state.imageHeight !== plat.h) {
-      violations.push({
-        cat:'layout', icon:'🟡', cls:'vi-layout', catLabel:'Layout',
-        text:`<strong>Incorrect Platform Dimensions:</strong> Image is ${state.imageWidth}x${state.imageHeight}px. ${plat.name} requires ${plat.w}x${plat.h}px.`
-      });
-      // Deduct score dynamically
-      scores.layout = Math.max(1, scores.layout - 2.5);
-      scores.overall = ((scores.logo + scores.color + scores.typography + scores.layout) / 4).toFixed(1);
-    }
-  }
+  const platformName = plat ? plat.name : 'Meta Post';
+  const brandName = document.getElementById('brand-name').value || 'Acme Creative Co.';
+  const sensitivityLabel = document.getElementById('sensitivity')?.value || 'standard';
+  const timestampLabel = `Reviewed just now · ${platformName} · ${sensitivityLabel.charAt(0).toUpperCase() + sensitivityLabel.slice(1)} sensitivity`;
 
-  // Override logic when clicking history log
-  if(overrideData) {
-      scores.overall = overrideData.score;
-      violations.length = overrideData.viols; // Just slice standard violations to match count for visual mock
-  }
+  renderResultView({
+    filename,
+    brandName,
+    platformName,
+    scores,
+    violations,
+    timestampLabel,
+  });
 
-  state.scores = scores;
-  state.reviewDone = true;
+  // push to history
+  const record = {
+    name: filename,
+    platform: platformName,
+    score: scores.overall,
+    status: scores.overall >= 8 ? 'approved' : 'needs',
+    viols: violations.length,
+    date: 'Just now',
+  };
+  history.unshift(record);
+  renderHistory();
+  state.historyCount = history.length;
+  const dashBadge = document.getElementById('dash-badge');
+  if (dashBadge) dashBadge.textContent = state.historyCount;
+}
 
-  // verdict
+function renderResultView({ filename, brandName, platformName, scores, violations, timestampLabel }) {
+  // verdict badge
   const verdictEl = document.getElementById('verdict-badge');
   const verdictTxt = document.getElementById('verdict-text');
-  if(scores.overall >= 8.5) {
+  if (scores.overall >= 8.5) {
     verdictEl.className = 'score-verdict verdict-approved';
     verdictTxt.textContent = 'Approved';
   } else {
@@ -1391,104 +1645,98 @@ function buildResults(isHistoryView = false, overrideData = null) {
   }
 
   document.getElementById('result-filename').textContent = filename;
-  
-  // Connect Profile name dynamically
-  const profileSelect = document.getElementById('brand-profile-select');
-  const activeProfile = profileSelect ? profileSelect.value : 'Acme Creative Co.';
-  document.getElementById('result-brand-name').textContent = activeProfile;
-  
-  document.getElementById('result-timestamp').textContent = `Reviewed ${isHistoryView ? 'previously' : 'just now'} · ${plat.name} · Standard sensitivity`;
+  document.getElementById('result-brand-name').textContent = brandName;
+  document.getElementById('result-timestamp').textContent = timestampLabel;
 
+  // violations list
   document.getElementById('viol-count').textContent = violations.length;
-
   const violList = document.getElementById('violation-list');
-  violList.innerHTML = violations.map((v, i) => `
-    <div class="violation-item" style="animation-delay:${i*80}ms;">
+  violList.innerHTML = violations
+    .map(
+      (v, i) => `
+    <div class="violation-item" style="animation-delay:${i * 80}ms;">
       <div class="violation-icon ${v.cls}">${v.icon}</div>
       <div>
         <div class="violation-text">${v.text}</div>
         <div class="violation-cat" style="color:var(--text-low);">${v.catLabel}</div>
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join('');
 
   // score tiles
   const tiles = [
-    { label:'Logo Placement', value:scores.logo,        color:'var(--red)',    fill:'#f05252' },
-    { label:'Color Palette',  value:scores.color,       color:'var(--accent)', fill:'#5c7cfa' },
-    { label:'Typography',     value:scores.typography,  color:'var(--teal)',   fill:'#00d4aa' },
-    { label:'Layout & Margin',value:scores.layout,      color:'var(--amber)',  fill:'#f5a623' },
+    { label: 'Logo Placement',     value: scores.logo,       color: 'var(--red)',    fill: '#f05252' },
+    { label: 'Color Palette',      value: scores.color,      color: 'var(--accent)', fill: '#5c7cfa' },
+    { label: 'Typography',         value: scores.typography, color: 'var(--teal)',   fill: '#00d4aa' },
+    { label: 'Layout & Margin',    value: scores.layout,     color: 'var(--amber)',  fill: '#f5a623' },
   ];
-  document.getElementById('score-tiles').innerHTML = tiles.map((t,i) => `
+  document.getElementById('score-tiles').innerHTML = tiles
+    .map(
+      t => `
     <div class="score-tile">
       <div class="tile-label">${t.label}</div>
       <div class="tile-value" style="color:${t.color};" data-val="${t.value}">—</div>
-      <div class="tile-bar"><div class="tile-bar-fill" style="background:${t.fill};" data-pct="${t.value*10}"></div></div>
+      <div class="tile-bar"><div class="tile-bar-fill" style="background:${t.fill};" data-pct="${t.value * 10}"></div></div>
     </div>
-  `).join('');
+  `
+    )
+    .join('');
 
-  // cat bars
+  // category bars
   const cats = [
-    { name:'Logo Placement', score:scores.logo,       color:'#f05252', dotCol:'var(--red)',    detail:'Logo stretched horizontally; clear space insufficient.' },
-    { name:'Color Palette',  score:scores.color,      color:'#5c7cfa', dotCol:'var(--accent)', detail:'1 of 5 colors out of spec; background hue drift detected.' },
-    { name:'Typography',     score:scores.typography, color:'#00d4aa', dotCol:'var(--teal)',   detail:'Unapproved typeface; 9pt body below readable threshold.' },
-    { name:'Layout & Margin',score:scores.layout,     color:'#f5a623', dotCol:'var(--amber)',  detail: scores.layout < 8 ? 'Platform dimension or safe zone violated.' : 'Layout matches standard constraints.' },
+    { name: 'Logo Placement', score: scores.logo,       color: '#f05252', dotCol: 'var(--red)',    detail: 'Logo stretched horizontally; clear space insufficient.' },
+    { name: 'Color Palette',  score: scores.color,      color: '#5c7cfa', dotCol: 'var(--accent)', detail: '1 of 5 colors out of spec; background hue drift detected.' },
+    { name: 'Typography',     score: scores.typography, color: '#00d4aa', dotCol: 'var(--teal)',   detail: 'Unapproved typeface; 9pt body below readable threshold.' },
+    { name: 'Layout & Margin',score: scores.layout,     color: '#f5a623', dotCol: 'var(--amber)',  detail: 'CTA bleeds 8px over right margin; safe zone otherwise OK.' },
   ];
-  document.getElementById('cat-bars').innerHTML = cats.map(c => `
+  document.getElementById('cat-bars').innerHTML = cats
+    .map(
+      c => `
     <div class="cat-row">
       <div class="cat-header">
         <div class="cat-name"><span class="dot" style="background:${c.dotCol};"></span>${c.name}</div>
         <div class="cat-score" style="color:${c.dotCol};" data-cat-val="${c.score}">—</div>
       </div>
-      <div class="cat-bar-track"><div class="cat-bar-fill" style="background:${c.color};" data-pct="${c.score*10}"></div></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="background:${c.color};" data-pct="${c.score * 10}"></div></div>
       <div class="cat-detail">${c.detail}</div>
     </div>
-  `).join('');
-
-  // add to history dynamically if it's a new review run
-  if(!isHistoryView) {
-    const tbody = document.getElementById('history-tbody');
-    const newRow = document.createElement('tr');
-    newRow.style.cursor = "pointer";
-    // Passing inline parameters for clicking
-    newRow.onclick = () => loadPastReview(filename, plat.name, scores.overall, scores.overall >= 8.5 ? 'approved' : 'needs', violations.length);
-    newRow.innerHTML = `
-      <td class="asset-name">${filename}</td>
-      <td>${plat.name}</td>
-      <td><span style="font-family:var(--font-mono);color:${scores.overall >= 8.5 ? 'var(--green)' : 'var(--amber)'};">${scores.overall}</span></td>
-      <td><span class="status-pill ${scores.overall >= 8.5 ? 'pill-approved' : 'pill-needs'}">${scores.overall >= 8.5 ? 'Approved' : 'Needs Edits'}</span></td>
-      <td><span style="font-family:var(--font-mono);color:${violations.length > 0 ? 'var(--red)' : 'var(--green)'};">${violations.length}</span></td>
-      <td>Just now</td>
-    `;
-    tbody.insertBefore(newRow, tbody.firstChild);
-  }
+  `
+    )
+    .join('');
 
   document.getElementById('latest-result').style.display = 'block';
   animateScores();
 }
 
+/* ═══════════════════════════════════════════════
+   SCORE ANIMATIONS
+════════════════════════════════════════════════ */
 function animateScores() {
-  if(!state.scores) return;
+  if (!state.scores) return;
   const s = state.scores;
 
   // overall ring
   const overall = s.overall;
-  const circumference = 2 * Math.PI * 60;  // r=60
+  const circumference = 2 * Math.PI * 60;
   const ring = document.getElementById('main-ring');
-  const offset = circumference - (overall/10) * circumference;
+  const offset = circumference - (overall / 10) * circumference;
   ring.style.strokeDasharray = circumference;
   ring.style.strokeDashoffset = circumference;
-  ring.className = `score-ring-fill ${overall>=8.5?'teal':overall>=6?'accent':'amber'}`;
-  setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+  ring.className = `score-ring-fill ${overall >= 8.5 ? 'teal' : overall >= 6 ? 'accent' : 'amber'}`;
+  setTimeout(() => {
+    ring.style.strokeDashoffset = offset;
+  }, 100);
 
   // overall number count-up
   const numEl = document.getElementById('overall-num');
   let n = 0;
-  const target = parseFloat(overall);
+  const target = overall;
   const step = () => {
     n = Math.min(n + 0.2, target);
     numEl.textContent = n.toFixed(1);
-    if(n < target) requestAnimationFrame(step);
+    if (n < target) requestAnimationFrame(step);
   };
   setTimeout(step, 200);
 
@@ -1499,7 +1747,7 @@ function animateScores() {
     const ts = () => {
       tn = Math.min(tn + 0.3, tv);
       el.textContent = tn.toFixed(1);
-      if(tn < tv) requestAnimationFrame(ts);
+      if (tn < tv) requestAnimationFrame(ts);
     };
     setTimeout(ts, 300);
   });
@@ -1518,7 +1766,7 @@ function animateScores() {
     const cs = () => {
       cn = Math.min(cn + 0.25, cv);
       el.textContent = cn.toFixed(1) + '/10';
-      if(cn < cv) requestAnimationFrame(cs);
+      if (cn < cv) requestAnimationFrame(cs);
     };
     setTimeout(cs, 350);
   });
@@ -1532,5 +1780,73 @@ function animateScores() {
 }
 
 /* ═══════════════════════════════════════════════
-   HISTORY INTERACTION
-══════════════════════════════════════════════
+   HISTORY TABLE SEED + ROW CLICK
+════════════════════════════════════════════════ */
+function renderHistory() {
+  const tbody = document.getElementById('history-tbody');
+  tbody.innerHTML = history
+    .map((h, idx) => {
+      const pillClass = h.status === 'approved' ? 'pill-approved' : h.status === 'needs' ? 'pill-needs' : 'pill-rejected';
+      const pillTxt = h.status === 'approved' ? 'Approved' : h.status === 'needs' ? 'Needs Edits' : 'Rejected';
+      const scoreColor = h.score >= 8 ? 'var(--green)' : h.score >= 6 ? 'var(--amber)' : 'var(--red)';
+      return `
+        <tr data-history-index="${idx}" onclick="openHistoryRow(${idx})">
+          <td class="asset-name">${h.name}</td>
+          <td>${h.platform}</td>
+          <td><span style="font-family:var(--font-mono);color:${scoreColor};">${h.score}</span></td>
+          <td><span class="status-pill ${pillClass}">${pillTxt}</span></td>
+          <td><span style="font-family:var(--font-mono);color:${h.viols > 0 ? 'var(--red)' : 'var(--green)'};">${h.viols}</span></td>
+          <td>${h.date}</td>
+        </tr>
+      `;
+    })
+    .join('');
+}
+
+function openHistoryRow(idx) {
+  const record = history[idx];
+  if (!record) return;
+  // set platform based on record
+  const plat = platforms.find(p => p.name === record.platform);
+  if (plat) {
+    state.selectedPlatform = plat.id;
+    renderPlatforms();
+    updateSizeWarning();
+  }
+  switchTab('upload');
+  setTimeout(() => {
+    document.getElementById('checklist')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+  showToast(`📝 Review tasks loaded for ${record.name}`);
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST
+════════════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  const [icon, ...rest] = msg.split(' ');
+  t.querySelector('.toast-icon').textContent = icon;
+  document.getElementById('toast-msg').textContent = rest.join(' ');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ═══════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════ */
+renderPalette();
+renderFonts();
+renderPlatforms();
+renderChecklist();
+renderHistory();
+state.historyCount = history.length;
+const dashBadge = document.getElementById('dash-badge');
+if (dashBadge) dashBadge.textContent = state.historyCount;
+document.getElementById('hex-preview-swatch').style.background = 'var(--border)';
+initBrandProfiles();
+</script>
+</body>
+</html>
