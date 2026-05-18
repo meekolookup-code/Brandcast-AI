@@ -42,15 +42,13 @@
 
   html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.6; overflow: hidden; }
 
-  /* ─── SCROLLBAR ─────────────────────────── */
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 99px; }
 
-  /* ─── APP SHELL ─────────────────────────── */
   .app { display: flex; height: 100vh; overflow: hidden; }
 
-  /* ─── SIDEBAR ───────────────────────────── */
+  /* ─── SIDEBAR ─────────────────────────────── */
   .sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg-mid); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 0; position: relative; overflow: hidden; }
   .sidebar::before { content: ''; position: absolute; top: -60px; left: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(92,124,250,.15) 0%, transparent 70%); pointer-events: none; }
   .sidebar-brand { padding: 22px 20px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
@@ -76,7 +74,7 @@
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); flex-shrink: 0; }
   .status-text { font-size: 10px; color: var(--text-mid); font-family: var(--font-mono); }
 
-  /* ─── MAIN CONTENT ──────────────────────── */
+  /* ─── MAIN CONTENT ───────────────────────── */
   .main { flex: 1; overflow-y: auto; background: var(--bg); position: relative; }
   .topbar { position: sticky; top: 0; z-index: 50; background: rgba(7,9,15,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 28px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
   .topbar-left { display: flex; align-items: center; gap: 10px; }
@@ -88,7 +86,7 @@
   .topbar-chip.primary { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 12px var(--accent-glow); }
   .topbar-chip.primary:hover { opacity: .9; }
 
-  /* ─── PANELS & CARDS ────────────────────── */
+  /* ─── PANELS & CARDS ─────────────────────── */
   .tab-panel { display: none; padding: 28px; animation: fadeSlide .3s ease; }
   .tab-panel.active { display: block; }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -100,7 +98,7 @@
   .card-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text-mid); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .card-title svg { width: 14px; height: 14px; }
 
-  /* ─── FORMS & INPUTS ────────────────────── */
+  /* ─── FORMS & INPUTS ─────────────────────── */
   .form-group { margin-bottom: 20px; }
   .form-label { display: block; font-size: 12px; font-weight: 600; font-family: var(--font-head); color: var(--text-mid); margin-bottom: 8px; letter-spacing: .3px; text-transform: uppercase; }
   .form-input, .form-textarea, .form-select { width: 100%; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-body); font-size: 14px; padding: 11px 14px; transition: border-color var(--transition), box-shadow var(--transition); outline: none; appearance: none; }
@@ -111,16 +109,26 @@
   .form-select option { background: var(--panel); }
   .input-hint { font-size: 11px; color: var(--text-low); margin-top: 5px; }
 
-  /* ─── UPLOADS & BUTTONS ─────────────────── */
+  /* ─── TABS & UPLOADS ─────────────────────── */
   .inner-tabs { display: flex; gap: 4px; margin-bottom: 14px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; }
   .inner-tab { flex: 1; text-align: center; padding: 7px; border-radius: 6px; font-size: 12px; font-family: var(--font-head); font-weight: 600; cursor: pointer; color: var(--text-mid); transition: all var(--transition); }
   .inner-tab.active { background: var(--panel-hi); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.3); }
   .inner-tab:hover:not(.active) { color: var(--text); }
+
   .mini-upload { border: 1.5px dashed var(--border-hi); border-radius: var(--radius); padding: 20px; text-align: center; cursor: pointer; transition: border-color var(--transition), background var(--transition); background: var(--bg-mid); }
   .mini-upload:hover { border-color: var(--accent); background: var(--accent-lo); }
+  .mini-upload.has-file { border-color: var(--teal); border-style: solid; background: var(--teal-lo); }
   .mini-upload-icon { font-size: 24px; margin-bottom: 6px; }
   .mini-upload-text { font-size: 12px; color: var(--text-mid); }
   .mini-upload-text strong { color: var(--accent); }
+  .mini-upload.has-file .mini-upload-text strong { color: var(--teal); }
+
+  /* Guideline file preview */
+  .guideline-file-info { margin-top: 10px; padding: 10px 14px; background: var(--panel-hi); border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; gap: 10px; }
+  .guideline-file-info .file-name { font-family: var(--font-mono); font-size: 11px; color: var(--teal); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .guideline-file-info .file-size { font-family: var(--font-mono); font-size: 10px; color: var(--text-low); flex-shrink: 0; }
+  .guideline-file-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: 12px; padding: 2px 6px; border-radius: 4px; transition: background var(--transition); }
+  .guideline-file-remove:hover { background: var(--red-lo); }
 
   .palette-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
   .color-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; cursor: pointer; }
@@ -132,7 +140,7 @@
   .add-color-btn { width: 52px; height: 52px; border-radius: 10px; border: 2px dashed var(--border-hi); background: transparent; color: var(--text-low); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color var(--transition), color var(--transition), background var(--transition); font-size: 20px; font-weight: 300; }
   .add-color-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lo); }
   .hex-input-row { display: flex; gap: 8px; margin-top: 8px; }
-  .hex-preview-swatch { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); flex-shrink: 0; background: #fff; transition: background .1s; }
+  .hex-preview-swatch { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); flex-shrink: 0; background: var(--border); transition: background .1s; }
 
   .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--radius); font-family: var(--font-head); font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all var(--transition); letter-spacing: .2px; }
   .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 0 16px var(--accent-glow); }
@@ -141,6 +149,8 @@
   .btn-outline:hover { border-color: var(--border-hi); color: var(--text); background: var(--panel-hi); }
   .btn-teal { background: var(--teal); color: #000; box-shadow: 0 0 16px rgba(0,212,170,.3); }
   .btn-teal:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-danger { background: var(--red-lo); color: var(--red); border: 1px solid rgba(240,82,82,.3); }
+  .btn-danger:hover { background: var(--red); color: #fff; }
   .btn-lg { padding: 13px 28px; font-size: 14px; }
   .btn svg { width: 15px; height: 15px; }
 
@@ -157,11 +167,21 @@
   .drop-zone-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 14px; }
   .drop-zone-types { display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
   .file-type-tag { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; font-family: var(--font-mono); font-size: 11px; color: var(--text-mid); }
-  
+
   .preview-container { display: none; }
   .preview-container.visible { display: block; }
   .preview-img { max-width: 100%; max-height: 200px; border-radius: var(--radius); object-fit: contain; margin: 0 auto; display: block; }
   .preview-name { font-size: 12px; color: var(--text-mid); margin-top: 10px; font-family: var(--font-mono); }
+  .preview-dims { font-size: 11px; color: var(--text-low); margin-top: 4px; font-family: var(--font-mono); }
+  .dim-ok { color: var(--teal); }
+  .dim-warn { color: var(--amber); }
+
+  /* Dimension check alert */
+  .dim-alert { margin-top: 12px; padding: 10px 14px; border-radius: var(--radius); display: flex; align-items: center; gap: 10px; font-size: 12px; }
+  .dim-alert.ok { background: var(--teal-lo); border: 1px solid rgba(0,212,170,.25); color: var(--teal); }
+  .dim-alert.warn { background: var(--amber-lo); border: 1px solid rgba(245,166,35,.25); color: var(--amber); }
+  .dim-alert.error { background: var(--red-lo); border: 1px solid rgba(240,82,82,.25); color: var(--red); }
+  .dim-alert-icon { font-size: 16px; flex-shrink: 0; }
 
   .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .platform-opt { padding: 12px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-mid); cursor: pointer; text-align: center; transition: all var(--transition); position: relative; }
@@ -171,11 +191,13 @@
   .platform-opt .plat-name { font-size: 11px; font-family: var(--font-head); font-weight: 600; color: var(--text-mid); }
   .platform-opt .plat-dims { font-size: 9px; font-family: var(--font-mono); color: var(--text-low); margin-top: 3px; display: block; }
   .platform-opt.selected .plat-name { color: var(--accent); }
+  .platform-opt .check-badge { display: none; position: absolute; top: 4px; right: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 8px; align-items: center; justify-content: center; }
+  .platform-opt.selected .check-badge { display: flex; }
 
-  /* ─── MODALS & OVERLAYS ─────────────────── */
+  /* ─── OVERLAYS & MODALS ──────────────────── */
   .analyze-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(7,9,15,.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
   .analyze-overlay.visible { display: flex; }
-  .analyze-box { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px 48px; width: 400px; text-align: center; max-height: 90vh; overflow-y: auto; }
+  .analyze-box { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px 48px; width: 440px; text-align: center; max-height: 90vh; overflow-y: auto; }
   .analyze-title { font-family: var(--font-head); font-size: 20px; font-weight: 800; margin-bottom: 6px; }
   .analyze-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 28px; }
   .analyze-steps { text-align: left; display: flex; flex-direction: column; gap: 10px; }
@@ -190,7 +212,29 @@
   .analyze-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 99px; width: 0%; transition: width .5s ease; }
   .analyze-pct { font-family: var(--font-mono); font-size: 11px; color: var(--text-mid); margin-top: 6px; }
 
-  /* ─── DASHBOARD ELEMENTS ────────────────── */
+  /* ─── PROFILE MODAL ──────────────────────── */
+  .modal-overlay { position: fixed; inset: 0; z-index: 150; background: rgba(7,9,15,.85); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; }
+  .modal-overlay.visible { display: flex; }
+  .modal-box { background: var(--panel); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); padding: 32px 36px; width: 460px; max-width: 95vw; max-height: 85vh; overflow-y: auto; }
+  .modal-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+  .modal-title { font-family: var(--font-head); font-size: 18px; font-weight: 800; }
+  .modal-close { background: none; border: none; color: var(--text-mid); cursor: pointer; font-size: 20px; line-height: 1; padding: 0; transition: color var(--transition); }
+  .modal-close:hover { color: var(--text); }
+  .modal-footer { display: flex; gap: 10px; margin-top: 24px; }
+
+  /* ─── HISTORY MODAL ──────────────────────── */
+  .history-modal-overlay { position: fixed; inset: 0; z-index: 150; background: rgba(7,9,15,.85); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; }
+  .history-modal-overlay.visible { display: flex; }
+  .history-modal-box { background: var(--panel); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); padding: 0; width: 580px; max-width: 95vw; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
+  .history-modal-header { padding: 24px 28px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; }
+  .history-modal-body { flex: 1; overflow-y: auto; padding: 24px 28px; }
+  .history-modal-footer { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+  .detail-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label { color: var(--text-mid); font-family: var(--font-head); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; }
+  .detail-value { font-family: var(--font-mono); font-size: 12px; color: var(--text); }
+
+  /* ─── SCORE ELEMENTS ─────────────────────── */
   .score-hero { display: flex; gap: 20px; align-items: center; }
   .score-ring-wrap { flex-shrink: 0; position: relative; width: 140px; height: 140px; }
   .score-ring-svg { transform: rotate(-90deg); }
@@ -236,30 +280,21 @@
   .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; font-family: var(--font-head); font-weight: 600; color: var(--text-mid); margin-bottom: 8px; }
   .kpi-value { font-family: var(--font-mono); font-size: 28px; font-weight: 600; line-height: 1; }
   .kpi-unit { font-size: 13px; font-weight: 400; color: var(--text-mid); }
-  .kpi-delta { font-size: 11px; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
-  .delta-up { color: var(--green); }
-  .delta-down { color: var(--red); }
 
-  .score-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-  .score-tile { padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color var(--transition); }
-  .score-tile:hover { border-color: var(--border-hi); }
-  .tile-label { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; font-family: var(--font-head); font-weight: 700; color: var(--text-low); margin-bottom: 8px; }
-  .tile-value { font-family: var(--font-mono); font-size: 24px; font-weight: 600; }
-  .tile-bar { margin-top: 8px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
-  .tile-bar-fill { height: 100%; border-radius: 99px; width: 0%; transition: width 1.4s cubic-bezier(.4,0,.2,1); }
+  .section-label { font-family: var(--font-head); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--text-low); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
   .history-table { width: 100%; border-collapse: collapse; }
   .history-table th { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text-low); padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
   .history-table td { padding: 12px 14px; font-size: 12.5px; color: var(--text-mid); border-bottom: 1px solid rgba(29,35,64,.5); cursor: pointer; }
   .history-table tr:hover td { background: var(--panel-hi); }
   .history-table .asset-name { color: var(--text); font-weight: 500; }
+  .history-table .row-link { color: var(--accent); font-family: var(--font-head); font-size: 11px; font-weight: 600; text-decoration: underline; cursor: pointer; }
+
   .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 99px; font-size: 10px; font-family: var(--font-head); font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
   .pill-approved { background: var(--green-lo); color: var(--green); }
   .pill-needs { background: var(--amber-lo); color: var(--amber); }
   .pill-rejected { background: var(--red-lo); color: var(--red); }
-
-  .section-label { font-family: var(--font-head); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--text-low); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-  .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
   .toast { position: fixed; bottom: 28px; right: 28px; z-index: 300; background: var(--panel-hi); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text); box-shadow: 0 8px 32px rgba(0,0,0,.4); transform: translateY(80px); opacity: 0; transition: all .4s cubic-bezier(.4,0,.2,1); pointer-events: none; }
   .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
@@ -267,6 +302,22 @@
   .saved-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-lo); border: 1px solid rgba(34,197,94,.2); border-radius: 99px; padding: 4px 12px; font-size: 11px; color: var(--green); font-family: var(--font-head); font-weight: 600; opacity: 0; transition: opacity .3s; }
   .saved-badge.visible { opacity: 1; }
 
+  /* Profile card list */
+  .profile-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .profile-card { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color var(--transition); }
+  .profile-card.active-profile { border-color: var(--accent); background: var(--accent-lo); }
+  .profile-card-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), #7c3aed); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .profile-card-name { font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+  .profile-card-badge { font-size: 9px; font-family: var(--font-mono); color: var(--accent); background: var(--accent-lo); padding: 2px 6px; border-radius: 4px; }
+  .profile-card-actions { display: flex; gap: 6px; }
+  .profile-action-btn { background: none; border: 1px solid var(--border); color: var(--text-mid); cursor: pointer; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-head); font-weight: 600; transition: all var(--transition); }
+  .profile-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .profile-action-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+  /* Empty state */
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-low); }
+  .empty-state-icon { font-size: 32px; margin-bottom: 10px; }
+  .empty-state-text { font-size: 13px; }
 </style>
 </head>
 <body>
@@ -278,9 +329,20 @@
       <div><div class="brand-name">Brandcast AI</div><span class="brand-tag">v2.4.1 BETA</span></div>
     </div>
     <nav class="sidebar-nav">
-      <div class="nav-item active" data-tab="brand-setup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg> Brand Setup</div>
-      <div class="nav-item" data-tab="upload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload &amp; Analyze <span class="nav-badge warn" id="pending-badge" style="display:none">1</span></div>
-      <div class="nav-item" data-tab="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Approval Dashboard <span class="nav-badge" id="dash-badge">47</span></div>
+      <div class="nav-item active" data-tab="brand-setup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        Brand Setup
+      </div>
+      <div class="nav-item" data-tab="upload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload &amp; Analyze
+        <span class="nav-badge warn" id="pending-badge" style="display:none">1</span>
+      </div>
+      <div class="nav-item" data-tab="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Approval Dashboard
+        <span class="nav-badge" id="dash-badge">47</span>
+      </div>
     </nav>
     <div class="sidebar-footer">
       <div class="user-pill"><div class="user-avatar">AJ</div><div class="user-info"><div class="user-name">Alex Johnson</div><div class="user-role">Brand Manager</div></div></div>
@@ -290,89 +352,220 @@
 
   <main class="main" id="main-scroll">
     <div class="topbar">
-      <div class="topbar-left"><div class="topbar-title" id="topbar-title">Brand Setup</div><div class="topbar-crumb" id="topbar-crumb">Configure your brand identity source of truth</div></div>
-      <div class="topbar-right"><div class="topbar-chip" id="help-chip">? Help</div><div class="topbar-chip primary" id="topbar-action">New Review</div></div>
+      <div class="topbar-left">
+        <div class="topbar-title" id="topbar-title">Brand Setup</div>
+        <div class="topbar-crumb" id="topbar-crumb">Configure your brand identity source of truth</div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-chip" onclick="switchTab('upload')">+ New Review</div>
+        <div class="topbar-chip primary" onclick="switchTab('brand-setup')">⚙ Settings</div>
+      </div>
     </div>
 
+    <!-- ═══ BRAND SETUP TAB ═══ -->
     <section class="tab-panel active" id="tab-brand-setup">
-      <div class="page-header"><div class="page-title">Brand Configuration</div><div class="page-sub">Define your brand identity rules. This becomes the Source of Truth for all automated compliance checks.</div></div>
+      <div class="page-header">
+        <div class="page-title">Brand Configuration</div>
+        <div class="page-sub">Define your brand identity rules. This becomes the Source of Truth for all automated compliance checks.</div>
+      </div>
       <div class="grid-2" style="gap:20px; align-items:start;">
         <div style="display:flex;flex-direction:column;gap:16px;">
+          <!-- Identity -->
           <div class="card">
-            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Identity</div>
-            <div class="form-group"><label class="form-label">Brand Name</label><input type="text" class="form-input" id="brand-name" placeholder="e.g. Acme Corporation" value="Acme Creative Co."></div>
+            <div class="card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              Identity
+            </div>
+            <div class="form-group">
+              <label class="form-label">Brand Name</label>
+              <input type="text" class="form-input" id="brand-name" placeholder="e.g. Acme Corporation" value="Acme Creative Co.">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Active Brand Profile</label>
+              <select class="form-select" id="brand-profile-select" onchange="handleProfileSelectChange(this)">
+                <option value="Acme Creative Co.">Acme Creative Co. (active)</option>
+                <option value="new">＋ Add new profile…</option>
+              </select>
+              <div class="input-hint">Select or create a brand profile to apply during reviews.</div>
+            </div>
           </div>
+
+          <!-- Guidelines -->
           <div class="card">
-            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> Brand Guidelines &amp; Rules</div>
-            <div class="inner-tabs"><div class="inner-tab active" data-inner="text">Write Guidelines</div><div class="inner-tab" data-inner="upload">Upload File</div></div>
+            <div class="card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              Brand Guidelines &amp; Rules
+            </div>
+            <div class="inner-tabs" id="guideline-inner-tabs">
+              <div class="inner-tab active" data-inner="text">Write Guidelines</div>
+              <div class="inner-tab" data-inner="upload">Upload File</div>
+            </div>
             <div id="inner-text" class="inner-panel">
               <textarea class="form-textarea" id="brand-guidelines" style="min-height:160px;">• Logo must always appear on a white or brand-primary background
 • Minimum logo size: 40px height on digital
-• Primary typeface: Neue Haas Grotesk Display</textarea>
+• Primary typeface: Neue Haas Grotesk Display
+• Never stretch or distort the logo
+• Maintain minimum clear space equal to the height of the wordmark</textarea>
             </div>
             <div id="inner-upload" class="inner-panel" style="display:none;">
-              <div class="mini-upload" onclick="document.getElementById('guide-file').click()">
+              <div class="mini-upload" id="guideline-drop" onclick="document.getElementById('guide-file').click()">
                 <div class="mini-upload-icon">📄</div>
                 <div class="mini-upload-text" id="guide-upload-text"><strong>Click to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported</div>
               </div>
               <input type="file" id="guide-file" accept=".pdf,.pptx,.docx" style="display:none" onchange="handleGuidelineUpload(this)">
+              <div id="guideline-file-info" style="display:none;" class="guideline-file-info">
+                <span style="font-size:18px;">📎</span>
+                <span class="file-name" id="guideline-file-name"></span>
+                <span class="file-size" id="guideline-file-size"></span>
+                <button class="guideline-file-remove" onclick="removeGuidelineFile()">✕ Remove</button>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- Right column -->
         <div style="display:flex;flex-direction:column;gap:16px;">
+          <!-- Color Palette -->
           <div class="card">
-            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg> Brand Color Palette</div>
+            <div class="card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+              Brand Color Palette
+            </div>
             <div class="palette-grid" id="palette-grid"></div>
-            <div class="hex-input-row"><div class="hex-preview-swatch" id="hex-preview-swatch"></div><input type="text" class="form-input" id="hex-input" placeholder="#FF5A5F" style="font-family:var(--font-mono);font-size:13px;" maxlength="7"><button class="btn btn-outline" onclick="addColor()">+ Add</button></div>
+            <div class="hex-input-row">
+              <div class="hex-preview-swatch" id="hex-preview-swatch"></div>
+              <input type="text" class="form-input" id="hex-input" placeholder="#FF5A5F" style="font-family:var(--font-mono);font-size:13px;" maxlength="7">
+              <button class="btn btn-outline" onclick="addColor()">+ Add</button>
+            </div>
+          </div>
+
+          <!-- Brand Profiles Management -->
+          <div class="card">
+            <div class="card-title" style="justify-content:space-between;">
+              <span style="display:flex;align-items:center;gap:8px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Brand Profiles
+              </span>
+              <button class="btn btn-outline" style="padding:5px 12px;font-size:11px;" onclick="openAddProfileModal()">+ Add Profile</button>
+            </div>
+            <div class="profile-list" id="profile-list"></div>
           </div>
         </div>
       </div>
       <div class="divider"></div>
       <div style="display:flex;align-items:center;gap:14px;">
-        <button class="btn btn-primary btn-lg" onclick="saveGuidelines()">Save guidelines &amp; continue</button>
+        <button class="btn btn-primary btn-lg" onclick="saveGuidelines()">Save guidelines &amp; continue →</button>
         <div class="saved-badge" id="saved-badge">✅ Saved successfully</div>
       </div>
     </section>
 
+    <!-- ═══ UPLOAD & ANALYZE TAB ═══ -->
     <section class="tab-panel" id="tab-upload">
-      <div class="page-header"><div class="page-title">Upload Creative Asset</div><div class="page-sub">Drop in your finished creative. Brandcast AI will scan it against your brand guidelines in seconds.</div></div>
+      <div class="page-header">
+        <div class="page-title">Upload Creative Asset</div>
+        <div class="page-sub">Drop in your finished creative. Brandcast AI will scan it against your brand guidelines in seconds.</div>
+      </div>
       <div class="grid-2" style="gap:20px;align-items:start;">
         <div style="display:flex;flex-direction:column;gap:16px;">
-          <div class="drop-zone" id="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" onclick="document.getElementById('asset-file').click()">
+          <!-- Drop Zone -->
+          <div class="drop-zone" id="drop-zone"
+            ondragover="handleDragOver(event)"
+            ondragleave="handleDragLeave(event)"
+            ondrop="handleDrop(event)"
+            onclick="triggerAssetUpload(event)">
             <div id="drop-content">
-              <div class="drop-zone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+              <div class="drop-zone-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
               <div class="drop-zone-title">Drop your creative asset here</div>
               <div class="drop-zone-sub">or click to browse from your computer</div>
+              <div class="drop-zone-types">
+                <span class="file-type-tag">PNG</span>
+                <span class="file-type-tag">JPG</span>
+                <span class="file-type-tag">WEBP</span>
+                <span class="file-type-tag">GIF</span>
+              </div>
             </div>
-            <div class="preview-container" id="preview-container"><img class="preview-img" id="preview-img" src="" alt="Preview"><div class="preview-name" id="preview-name"></div></div>
+            <div class="preview-container" id="preview-container">
+              <img class="preview-img" id="preview-img" src="" alt="Preview">
+              <div class="preview-name" id="preview-name"></div>
+              <div class="preview-dims" id="preview-dims"></div>
+            </div>
             <input type="file" id="asset-file" accept=".png,.jpg,.jpeg,.webp,.gif" style="display:none" onchange="handleFileSelect(this)">
           </div>
+
+          <!-- Dimension check alert -->
+          <div class="dim-alert" id="dim-alert" style="display:none;">
+            <span class="dim-alert-icon" id="dim-alert-icon">⚠️</span>
+            <div id="dim-alert-text"></div>
+          </div>
+
+          <!-- Change file button (shown after upload) -->
+          <div id="change-file-row" style="display:none;">
+            <button class="btn btn-outline w-full" style="justify-content:center;" onclick="clearAsset()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.87"/></svg>
+              Replace asset
+            </button>
+          </div>
+
+          <!-- Platform Grid -->
           <div class="card">
             <div class="card-title">Target Platform</div>
             <div class="platform-grid" id="platform-grid"></div>
           </div>
         </div>
+
         <div style="display:flex;flex-direction:column;gap:16px;">
+          <!-- Review Settings -->
           <div class="card">
             <div class="card-title">Review Settings</div>
             <div class="form-group">
               <label class="form-label">Apply Brand Profile</label>
-              <select class="form-select" id="brand-profile-select" onchange="handleProfileChange(this)">
-                <option value="Acme Creative Co.">Acme Creative Co. (active)</option>
-                <option value="new">— Add profile —</option>
+              <select class="form-select" id="upload-profile-select">
+                <option value="Acme Creative Co.">Acme Creative Co.</option>
               </select>
             </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Review Notes (optional)</label>
+              <textarea class="form-textarea" id="review-notes" placeholder="Add any notes for this review, e.g. 'Summer campaign hero image for Meta'" style="min-height:80px;"></textarea>
+            </div>
           </div>
-          <button class="btn btn-teal btn-lg w-full" onclick="runReview()" id="run-btn" style="justify-content:center;">Run Automated Review</button>
+
+          <!-- Checklist -->
+          <div class="card">
+            <div class="card-title">Pre-flight Checklist</div>
+            <div id="checklist-items" style="display:flex;flex-direction:column;gap:8px;">
+              <div class="checklist-row" id="check-file" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-low);">
+                <span id="check-file-icon">⬜</span> Asset uploaded
+              </div>
+              <div class="checklist-row" id="check-dims" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-low);">
+                <span id="check-dims-icon">⬜</span> Dimensions verified
+              </div>
+              <div class="checklist-row" id="check-profile" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-low);">
+                <span id="check-profile-icon">✅</span> <span style="color:var(--text-mid);">Brand profile selected</span>
+              </div>
+              <div class="checklist-row" id="check-platform" style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-mid);">
+                <span>✅</span> Platform selected
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-teal btn-lg w-full" onclick="runReview()" id="run-btn" style="justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Run Automated Review
+          </button>
         </div>
       </div>
     </section>
 
+    <!-- ═══ DASHBOARD TAB ═══ -->
     <section class="tab-panel" id="tab-dashboard">
       <div class="page-header"><div class="page-title">Approval Dashboard</div></div>
       <div class="kpi-grid" style="margin-bottom:20px;">
         <div class="card kpi-card"><div class="kpi-label">Total Reviews</div><div class="kpi-value" id="kpi-total">47</div></div>
-        <div class="card kpi-card"><div class="kpi-label">Approval Rate</div><div class="kpi-value" id="kpi-rate">66%</div></div>
+        <div class="card kpi-card"><div class="kpi-label">Approval Rate</div><div class="kpi-value" id="kpi-rate">66<span class="kpi-unit">%</span></div></div>
+        <div class="card kpi-card"><div class="kpi-label">Avg Score</div><div class="kpi-value" id="kpi-avg">7.4<span class="kpi-unit">/10</span></div></div>
+        <div class="card kpi-card"><div class="kpi-label">Open Violations</div><div class="kpi-value" id="kpi-viols" style="color:var(--amber);">12</div></div>
       </div>
 
       <div id="latest-result" style="display:none;">
@@ -391,6 +584,7 @@
               <div style="font-family:var(--font-head);font-size:17px;font-weight:800;margin-bottom:4px;" id="result-brand-name">Acme Creative Co.</div>
               <div class="score-filename" id="result-filename">summer_campaign.png</div>
               <div class="score-timestamp" id="result-timestamp">Reviewed just now</div>
+              <div id="result-notes-row" style="display:none;margin-top:6px;font-size:11px;color:var(--text-mid);font-style:italic;" id="result-notes"></div>
             </div>
           </div>
         </div>
@@ -401,7 +595,10 @@
             <div class="cat-list" id="cat-bars"></div>
           </div>
           <div class="card">
-            <div class="card-title" style="color:var(--red);">Violations Found <span style="margin-left:auto;background:var(--red-lo);color:var(--red);font-size:10px;padding:2px 8px;border-radius:99px;font-family:var(--font-mono);" id="viol-count">0</span></div>
+            <div class="card-title" style="color:var(--red);">
+              Violations Found
+              <span style="margin-left:auto;background:var(--red-lo);color:var(--red);font-size:10px;padding:2px 8px;border-radius:99px;font-family:var(--font-mono);" id="viol-count">0</span>
+            </div>
             <div class="violation-list" id="violation-list"></div>
           </div>
         </div>
@@ -410,18 +607,42 @@
       <div class="section-label">Review History</div>
       <div class="card" style="padding:0;overflow:hidden;">
         <table class="history-table" id="history-table">
-          <thead><tr><th>Asset</th><th>Platform</th><th>Overall Score</th><th>Status</th><th>Violations</th><th>Date</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Platform</th>
+              <th>Overall Score</th>
+              <th>Status</th>
+              <th>Violations</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
           <tbody id="history-tbody"></tbody>
         </table>
+        <div id="history-empty" class="empty-state" style="display:none;">
+          <div class="empty-state-icon">📋</div>
+          <div class="empty-state-text">No reviews yet. Upload an asset to get started.</div>
+        </div>
       </div>
     </section>
   </main>
 </div>
 
+<!-- ═══ ANALYZE OVERLAY ═══ -->
 <div class="analyze-overlay" id="analyze-overlay">
   <div class="analyze-box">
     <div style="font-size:36px;margin-bottom:10px;">🔍</div>
     <div class="analyze-title">Analyzing Asset…</div>
+    <div class="analyze-sub" id="analyze-step-label">Running brand compliance checks</div>
+    <div class="analyze-steps" id="analyze-steps-list">
+      <div class="analyze-step" id="step-upload"><div class="step-dot"></div> Loading asset</div>
+      <div class="analyze-step" id="step-dims"><div class="step-dot"></div> Verifying platform dimensions</div>
+      <div class="analyze-step" id="step-colors"><div class="step-dot"></div> Checking brand color compliance</div>
+      <div class="analyze-step" id="step-logo"><div class="step-dot"></div> Scanning logo usage</div>
+      <div class="analyze-step" id="step-type"><div class="step-dot"></div> Auditing typography</div>
+      <div class="analyze-step" id="step-score"><div class="step-dot"></div> Computing overall score</div>
+    </div>
     <div class="analyze-bar-wrap">
       <div class="analyze-bar-track"><div class="analyze-bar-fill" id="analyze-bar"></div></div>
       <div class="analyze-pct" id="analyze-pct">0%</div>
@@ -429,15 +650,102 @@
   </div>
 </div>
 
-<div class="analyze-overlay" id="history-modal" onclick="closeHistoryModal(event)">
-  <div class="analyze-box" style="text-align:left; width: 500px;" onclick="event.stopPropagation()">
-    <div class="card-title" style="margin-bottom: 5px;">Historical Review Audit</div>
-    <div id="history-modal-content"></div>
-    <button class="btn btn-outline" style="margin-top: 20px; width: 100%; justify-content:center;" onclick="document.getElementById('history-modal').classList.remove('visible')">Close</button>
+<!-- ═══ ADD PROFILE MODAL ═══ -->
+<div class="modal-overlay" id="add-profile-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Add Brand Profile</div>
+        <div style="font-size:12px;color:var(--text-mid);margin-top:4px;">Create a new brand profile to manage multiple brands or sub-brands.</div>
+      </div>
+      <button class="modal-close" onclick="closeAddProfileModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Profile Name</label>
+      <input type="text" class="form-input" id="new-profile-name" placeholder="e.g. Sub-Brand Europe">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description (optional)</label>
+      <input type="text" class="form-input" id="new-profile-desc" placeholder="e.g. European market campaigns">
+    </div>
+    <div class="form-group" style="margin-bottom:0;">
+      <label class="form-label">Copy settings from</label>
+      <select class="form-select" id="new-profile-copy">
+        <option value="">— Start from scratch —</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="createProfile()">Create Profile</button>
+      <button class="btn btn-outline" onclick="closeAddProfileModal()">Cancel</button>
+    </div>
   </div>
 </div>
 
-<div class="toast" id="toast"><span class="toast-icon">✅</span><span id="toast-msg">Action completed</span></div>
+<!-- ═══ HISTORY DETAIL MODAL ═══ -->
+<div class="history-modal-overlay" id="history-modal">
+  <div class="history-modal-box">
+    <div class="history-modal-header">
+      <div>
+        <div style="font-family:var(--font-head);font-size:18px;font-weight:800;" id="hm-title">Review Detail</div>
+        <div style="font-size:12px;color:var(--text-mid);margin-top:3px;" id="hm-date"></div>
+      </div>
+      <button class="modal-close" onclick="closeHistoryModal()">✕</button>
+    </div>
+    <div class="history-modal-body">
+      <!-- Score row -->
+      <div style="display:flex;align-items:center;gap:20px;padding:16px;background:var(--bg-mid);border-radius:var(--radius);margin-bottom:20px;">
+        <div style="position:relative;width:80px;height:80px;flex-shrink:0;">
+          <svg style="transform:rotate(-90deg);" width="80" height="80" viewBox="0 0 80 80">
+            <circle fill="none" stroke="var(--border)" stroke-width="7" cx="40" cy="40" r="33"/>
+            <circle fill="none" stroke-width="7" stroke-linecap="round" cx="40" cy="40" r="33" id="hm-ring"
+              stroke="var(--teal)" stroke-dasharray="207" stroke-dashoffset="207" style="transition:stroke-dashoffset 1s ease;"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-mono);font-size:18px;font-weight:600;line-height:1;" id="hm-score">—</span>
+            <span style="font-size:9px;color:var(--text-low);font-family:var(--font-mono);">/10</span>
+          </div>
+        </div>
+        <div>
+          <div id="hm-verdict" class="score-verdict verdict-needs" style="margin-bottom:8px;"></div>
+          <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" id="hm-filename"></div>
+          <div style="font-size:11px;color:var(--text-mid);margin-top:2px;" id="hm-profile"></div>
+        </div>
+      </div>
+
+      <!-- Meta details -->
+      <div style="background:var(--bg-mid);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;">
+        <div class="detail-row" style="padding:10px 16px;">
+          <span class="detail-label">Platform</span><span class="detail-value" id="hm-platform">—</span>
+        </div>
+        <div class="detail-row" style="padding:10px 16px;">
+          <span class="detail-label">Violations Found</span><span class="detail-value" id="hm-viols" style="color:var(--amber);">—</span>
+        </div>
+        <div class="detail-row" style="padding:10px 16px;">
+          <span class="detail-label">Dimensions</span><span class="detail-value" id="hm-dims">—</span>
+        </div>
+        <div class="detail-row" style="padding:10px 16px;">
+          <span class="detail-label">File Size</span><span class="detail-value" id="hm-filesize">—</span>
+        </div>
+      </div>
+
+      <!-- Review notes -->
+      <div id="hm-notes-section" style="display:none;margin-bottom:16px;">
+        <div class="section-label" style="margin-bottom:10px;">Reviewer Notes</div>
+        <div style="padding:12px 16px;background:var(--bg-mid);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--text-mid);font-style:italic;" id="hm-notes"></div>
+      </div>
+
+      <!-- Violations detail -->
+      <div class="section-label" style="margin-bottom:10px;">Violation Detail</div>
+      <div class="violation-list" id="hm-violations"></div>
+    </div>
+    <div class="history-modal-footer">
+      <button class="btn btn-outline" onclick="closeHistoryModal()">Close</button>
+      <button class="btn btn-primary" onclick="resubmitFromHistory()">Re-run Review</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span></span><span id="toast-msg">Action completed</span></div>
 
 <script>
 /* ═══════════════════════════════════════════════
@@ -450,21 +758,45 @@ const state = {
   imageDimensions: { w: 0, h: 0 },
   reviewDone: false,
   scores: null,
+  guidelineFile: null,
+  currentHistoryIndex: null,
 };
 
+const brandProfiles = [
+  { id: 'acme', name: 'Acme Creative Co.', desc: 'Primary brand profile', active: true }
+];
+
 const platforms = [
-  { id:'meta-post',     icon:'📘', name:'Meta Post', w: 1080, h: 1080 },
-  { id:'instagram-story', icon:'📸', name:'IG Story', w: 1080, h: 1920 },
-  { id:'tiktok',        icon:'🎵', name:'TikTok', w: 1080, h: 1920 },
-  { id:'pinterest',     icon:'📌', name:'Pinterest', w: 1000, h: 1500 },
-  { id:'google-ad',     icon:'🟦', name:'Google Ad', w: 300, h: 250 },
-  { id:'linkedin',      icon:'💼', name:'LinkedIn', w: 1200, h: 627 },
+  { id:'meta-post',      icon:'📘', name:'Meta Post',    w:1080, h:1080 },
+  { id:'instagram-story',icon:'📸', name:'IG Story',     w:1080, h:1920 },
+  { id:'tiktok',         icon:'🎵', name:'TikTok',       w:1080, h:1920 },
+  { id:'pinterest',      icon:'📌', name:'Pinterest',    w:1000, h:1500 },
+  { id:'google-ad',      icon:'🟦', name:'Google Ad',    w:300,  h:250  },
+  { id:'linkedin',       icon:'💼', name:'LinkedIn',     w:1200, h:627  },
 ];
 
 const historyData = [
-  { name:'hero_banner_jul.png', platform:'Meta Post', score:8.2, status:'approved', viols:1, date:'Jul 14, 2025', details: 'Minor typography spacing issue. Approved.' },
-  { name:'summer_promo_v2.jpg', platform:'IG Story', score:4.9, status:'needs', viols:5, date:'Jul 12, 2025', details: 'Critical failure: Wrong dimensions (uploaded 1080x1080, expected 1080x1920), logo distorted, unapproved colors used.' },
-  { name:'product_launch_ad.png', platform:'Google Ad', score:9.1, status:'approved', viols:0, date:'Jul 11, 2025', details: 'Perfect compliance. No issues found.' }
+  {
+    name:'hero_banner_jul.png', platform:'Meta Post', score:8.2, status:'approved', viols:1,
+    date:'Jul 14, 2025', profile:'Acme Creative Co.', dims:'1080x1080', filesize:'342 KB', notes:'',
+    violations:[{ catLabel:'Typography', cls:'vi-type', icon:'🟡', text:'<strong>Letter-spacing:</strong> Minor spacing deviation detected in headline text. Acceptable within tolerance.' }]
+  },
+  {
+    name:'summer_promo_v2.jpg', platform:'IG Story', score:4.9, status:'needs', viols:5,
+    date:'Jul 12, 2025', profile:'Acme Creative Co.', dims:'1080x1080', filesize:'589 KB', notes:'Urgent fix needed before campaign launch.',
+    violations:[
+      { catLabel:'Layout', cls:'vi-layout', icon:'🔴', text:'<strong>Platform Dimension Mismatch:</strong> Uploaded asset is 1080x1080. IG Story strictly requires 1080x1920.' },
+      { catLabel:'Logo', cls:'vi-logo', icon:'🔴', text:'<strong>Logo distortion detected:</strong> Logo appears horizontally stretched beyond allowed ratio.' },
+      { catLabel:'Color', cls:'vi-color', icon:'🔴', text:'<strong>Unapproved color used:</strong> #FF0000 is not in the approved brand palette.' },
+      { catLabel:'Typography', cls:'vi-type', icon:'🟡', text:'<strong>Font not recognized:</strong> Headline uses a font not in the approved typeface list.' },
+      { catLabel:'Logo', cls:'vi-logo', icon:'🟡', text:'<strong>Logo clear space:</strong> Background elements intrude on logo minimum padding zone.' }
+    ]
+  },
+  {
+    name:'product_launch_ad.png', platform:'Google Ad', score:9.1, status:'approved', viols:0,
+    date:'Jul 11, 2025', profile:'Acme Creative Co.', dims:'300x250', filesize:'128 KB', notes:'',
+    violations:[]
+  }
 ];
 
 /* ═══════════════════════════════════════════════
@@ -485,50 +817,54 @@ function switchTab(tab) {
   document.querySelector(`.nav-item[data-tab="${tab}"]`).classList.add('active');
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById(`tab-${tab}`).classList.add('active');
-  
   document.getElementById('topbar-title').textContent = topbarMeta[tab].title;
   document.getElementById('topbar-crumb').textContent = topbarMeta[tab].crumb;
-  
+  document.getElementById('main-scroll').scrollTo(0, 0);
   if(tab === 'dashboard' && state.reviewDone) animateScores();
 }
 
 /* ═══════════════════════════════════════════════
-   BRAND PROFILES & GUIDELINES
+   INNER TABS (Brand Guidelines)
 ═══════════════════════════════════════════════ */
-function handleProfileChange(selectObj) {
-  if (selectObj.value === 'new') {
-    const newBrand = prompt("Enter new brand profile name:");
-    if (newBrand && newBrand.trim() !== '') {
-      const newOption = document.createElement('option');
-      newOption.value = newBrand;
-      newOption.text = newBrand + " (active)";
-      selectObj.add(newOption, selectObj.options[0]);
-      selectObj.value = newBrand;
-      document.getElementById('brand-name').value = newBrand;
-      showToast(`🏢 Created profile: ${newBrand}`);
-    } else {
-      selectObj.selectedIndex = 0; // revert
-    }
-  } else {
-    document.getElementById('brand-name').value = selectObj.value;
-  }
-}
-
-document.querySelectorAll('.inner-tab').forEach(el => {
+document.querySelectorAll('#guideline-inner-tabs .inner-tab').forEach(el => {
   el.addEventListener('click', () => {
-    document.querySelectorAll('.inner-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#guideline-inner-tabs .inner-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     const target = el.dataset.inner;
-    document.getElementById('inner-text').style.display = target==='text' ? 'block' : 'none';
-    document.getElementById('inner-upload').style.display = target==='upload' ? 'block' : 'none';
+    document.getElementById('inner-text').style.display = target === 'text' ? 'block' : 'none';
+    document.getElementById('inner-upload').style.display = target === 'upload' ? 'block' : 'none';
   });
 });
 
+/* ═══════════════════════════════════════════════
+   GUIDELINE FILE UPLOAD
+═══════════════════════════════════════════════ */
 function handleGuidelineUpload(input) {
-  if(input.files[0]) {
-    document.getElementById('guide-upload-text').innerHTML = `<strong>✅ ${input.files[0].name}</strong><br><span style="color:var(--green)">Document Parsed</span>`;
-    showToast('📄 Guidelines document successfully imported');
-  }
+  if (!input.files[0]) return;
+  const file = input.files[0];
+  state.guidelineFile = file;
+  const ext = file.name.split('.').pop().toUpperCase();
+  const sizeKB = (file.size / 1024).toFixed(1);
+
+  const drop = document.getElementById('guideline-drop');
+  drop.classList.add('has-file');
+  document.getElementById('guide-upload-text').innerHTML = `<strong>✅ ${ext} uploaded</strong><br><span style="color:var(--green);">Document ready for parsing</span>`;
+
+  document.getElementById('guideline-file-name').textContent = file.name;
+  document.getElementById('guideline-file-size').textContent = sizeKB + ' KB';
+  document.getElementById('guideline-file-info').style.display = 'flex';
+
+  showToast(`📄 ${file.name} imported — guidelines extracted`);
+}
+
+function removeGuidelineFile() {
+  state.guidelineFile = null;
+  document.getElementById('guide-file').value = '';
+  document.getElementById('guideline-file-info').style.display = 'none';
+  const drop = document.getElementById('guideline-drop');
+  drop.classList.remove('has-file');
+  document.getElementById('guide-upload-text').innerHTML = `<strong>Click to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported`;
+  showToast('🗑 Guideline file removed');
 }
 
 /* ═══════════════════════════════════════════════
@@ -538,150 +874,379 @@ function renderPalette() {
   const grid = document.getElementById('palette-grid');
   grid.innerHTML = state.palette.map((hex, i) => `
     <div class="color-chip">
-      <div class="color-swatch" style="background:${hex};"><div class="color-remove" onclick="removeColor(${i},event)">✕</div></div>
+      <div class="color-swatch" style="background:${hex};">
+        <div class="color-remove" onclick="removeColor(${i},event)">✕</div>
+      </div>
       <div class="color-hex">${hex}</div>
     </div>
   `).join('') + `<div onclick="document.getElementById('hex-input').focus()"><button class="add-color-btn">+</button></div>`;
 }
-function removeColor(i, e) { e.stopPropagation(); state.palette.splice(i, 1); renderPalette(); }
+
+function removeColor(i, e) {
+  e.stopPropagation();
+  state.palette.splice(i, 1);
+  renderPalette();
+  showToast('🎨 Color removed');
+}
+
 function addColor() {
   const val = document.getElementById('hex-input').value.trim();
-  if(/^#([0-9A-Fa-f]{6})$/.test(val)) {
-    state.palette.push(val.toUpperCase()); renderPalette();
+  if (/^#([0-9A-Fa-f]{6})$/.test(val)) {
+    if (state.palette.includes(val.toUpperCase())) return showToast('⚠️ Color already in palette');
+    state.palette.push(val.toUpperCase());
+    renderPalette();
     document.getElementById('hex-input').value = '';
+    document.getElementById('hex-preview-swatch').style.background = 'var(--border)';
     showToast('🎨 Color added to palette');
-  } else showToast('⚠️ Enter valid hex (e.g. #FF5A5F)');
+  } else {
+    showToast('⚠️ Enter valid hex e.g. #FF5A5F');
+  }
 }
+
 document.getElementById('hex-input').addEventListener('input', function() {
   const v = this.value.trim();
   document.getElementById('hex-preview-swatch').style.background = /^#([0-9A-Fa-f]{6})$/.test(v) ? v : 'var(--border)';
 });
 
+document.getElementById('hex-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') addColor();
+});
+
+/* ═══════════════════════════════════════════════
+   BRAND PROFILES
+═══════════════════════════════════════════════ */
+function renderProfileList() {
+  const container = document.getElementById('profile-list');
+  container.innerHTML = brandProfiles.map((p, i) => `
+    <div class="profile-card ${p.active ? 'active-profile' : ''}">
+      <div class="profile-card-icon">${p.name.charAt(0)}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="profile-card-name">${p.name}</div>
+        <div style="font-size:11px;color:var(--text-low);">${p.desc || ''}</div>
+      </div>
+      ${p.active ? '<span class="profile-card-badge">ACTIVE</span>' : ''}
+      <div class="profile-card-actions">
+        ${!p.active ? `<button class="profile-action-btn" onclick="setActiveProfile(${i})">Set Active</button>` : ''}
+        ${brandProfiles.length > 1 ? `<button class="profile-action-btn danger" onclick="deleteProfile(${i})">Delete</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  // Sync dropdowns
+  syncProfileDropdowns();
+}
+
+function syncProfileDropdowns() {
+  const names = brandProfiles.map(p => p.name);
+  const active = brandProfiles.find(p => p.active);
+
+  // Brand Setup select
+  const setupSelect = document.getElementById('brand-profile-select');
+  setupSelect.innerHTML = names.map(n => `<option value="${n}">${n}${brandProfiles.find(p=>p.name===n).active?' (active)':''}</option>`).join('') +
+    '<option value="new">＋ Add new profile…</option>';
+  if (active) setupSelect.value = active.name;
+
+  // Upload select
+  const uploadSelect = document.getElementById('upload-profile-select');
+  uploadSelect.innerHTML = names.map(n => `<option value="${n}">${n}</option>`).join('');
+  if (active) uploadSelect.value = active.name;
+
+  // Copy-from in modal
+  const copySelect = document.getElementById('new-profile-copy');
+  copySelect.innerHTML = '<option value="">— Start from scratch —</option>' +
+    names.map(n => `<option value="${n}">${n}</option>`).join('');
+}
+
+function handleProfileSelectChange(sel) {
+  if (sel.value === 'new') {
+    sel.value = brandProfiles.find(p => p.active)?.name || brandProfiles[0].name;
+    openAddProfileModal();
+  } else {
+    const idx = brandProfiles.findIndex(p => p.name === sel.value);
+    if (idx >= 0) setActiveProfile(idx);
+  }
+}
+
+function setActiveProfile(idx) {
+  brandProfiles.forEach((p, i) => p.active = (i === idx));
+  document.getElementById('brand-name').value = brandProfiles[idx].name;
+  renderProfileList();
+  showToast(`✅ Active profile: ${brandProfiles[idx].name}`);
+}
+
+function deleteProfile(idx) {
+  const name = brandProfiles[idx].name;
+  if (!confirm(`Delete profile "${name}"? This cannot be undone.`)) return;
+  brandProfiles.splice(idx, 1);
+  if (!brandProfiles.some(p => p.active) && brandProfiles.length > 0) brandProfiles[0].active = true;
+  renderProfileList();
+  showToast(`🗑 Profile "${name}" deleted`);
+}
+
+function openAddProfileModal() {
+  document.getElementById('new-profile-name').value = '';
+  document.getElementById('new-profile-desc').value = '';
+  syncProfileDropdowns();
+  document.getElementById('add-profile-modal').classList.add('visible');
+  setTimeout(() => document.getElementById('new-profile-name').focus(), 100);
+}
+
+function closeAddProfileModal() {
+  document.getElementById('add-profile-modal').classList.remove('visible');
+}
+
+function createProfile() {
+  const name = document.getElementById('new-profile-name').value.trim();
+  if (!name) { showToast('⚠️ Please enter a profile name'); return; }
+  if (brandProfiles.some(p => p.name === name)) { showToast('⚠️ A profile with that name already exists'); return; }
+  const desc = document.getElementById('new-profile-desc').value.trim();
+  brandProfiles.push({ id: name.toLowerCase().replace(/\s+/g,'-'), name, desc, active: false });
+  renderProfileList();
+  closeAddProfileModal();
+  showToast(`🏢 Profile "${name}" created`);
+}
+
+// Close modal on overlay click
+document.getElementById('add-profile-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeAddProfileModal();
+});
+
+/* ═══════════════════════════════════════════════
+   SAVE GUIDELINES
+═══════════════════════════════════════════════ */
 function saveGuidelines() {
   document.getElementById('saved-badge').classList.add('visible');
-  showToast('✅ Brand guidelines saved successfully');
+  showToast('✅ Brand guidelines saved');
   setTimeout(() => document.getElementById('saved-badge').classList.remove('visible'), 3000);
 }
 
 /* ═══════════════════════════════════════════════
-   PLATFORMS & ASSET UPLOAD
+   PLATFORMS
 ═══════════════════════════════════════════════ */
 function renderPlatforms() {
   const grid = document.getElementById('platform-grid');
   grid.innerHTML = platforms.map(p => `
-    <div class="platform-opt ${p.id===state.selectedPlatform?'selected':''}" onclick="selectPlatform('${p.id}')">
+    <div class="platform-opt ${p.id === state.selectedPlatform ? 'selected' : ''}" onclick="selectPlatform('${p.id}')">
+      <div class="check-badge">✓</div>
       <span class="plat-icon">${p.icon}</span>
       <div class="plat-name">${p.name}</div>
-      <span class="plat-dims">${p.w}x${p.h}</span>
+      <span class="plat-dims">${p.w}×${p.h}</span>
     </div>
   `).join('');
 }
 
-function selectPlatform(id) { state.selectedPlatform = id; renderPlatforms(); }
+function selectPlatform(id) {
+  state.selectedPlatform = id;
+  renderPlatforms();
+  checkDimensions(); // re-check on platform change
+}
+
+/* ═══════════════════════════════════════════════
+   ASSET UPLOAD
+═══════════════════════════════════════════════ */
+function triggerAssetUpload(e) {
+  // Don't trigger if clicking the change file button
+  if (e.target.closest('#change-file-row')) return;
+  document.getElementById('asset-file').click();
+}
 
 function handleDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over'); }
-function handleDragLeave(e) { document.getElementById('drop-zone').classList.remove('drag-over'); }
-function handleDrop(e) { e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over'); if(e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]); }
-function handleFileSelect(input) { if(input.files[0]) loadFile(input.files[0]); }
+function handleDragLeave() { document.getElementById('drop-zone').classList.remove('drag-over'); }
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+}
+function handleFileSelect(input) {
+  if (input.files[0]) loadFile(input.files[0]);
+}
 
 function loadFile(file) {
+  const allowedTypes = ['image/png','image/jpeg','image/webp','image/gif'];
+  if (!allowedTypes.includes(file.type)) {
+    showToast('⚠️ Unsupported file type. Use PNG, JPG, WEBP, or GIF.');
+    return;
+  }
+
   state.uploadedFile = file;
+  state.imageDimensions = { w: 0, h: 0 };
+
   const reader = new FileReader();
   reader.onload = ev => {
     document.getElementById('drop-content').style.display = 'none';
     const pc = document.getElementById('preview-container');
     pc.classList.add('visible');
     document.getElementById('preview-img').src = ev.target.result;
-    document.getElementById('preview-name').textContent = `📎 ${file.name} (${(file.size/1024).toFixed(1)} KB)`;
+    document.getElementById('preview-name').textContent = `📎 ${file.name}  ·  ${(file.size / 1024).toFixed(1)} KB`;
     document.getElementById('drop-zone').classList.add('has-file');
-    
-    // Extract actual dimensions for validation
+    document.getElementById('change-file-row').style.display = 'block';
+    document.getElementById('pending-badge').style.display = 'inline';
+
+    // Update checklist
+    document.getElementById('check-file-icon').textContent = '✅';
+    document.getElementById('check-file').style.color = 'var(--text-mid)';
+
+    // Get real dimensions
     const img = new Image();
     img.onload = function() {
       state.imageDimensions = { w: this.width, h: this.height };
+      document.getElementById('preview-dims').textContent = `${this.width} × ${this.height} px`;
+      checkDimensions();
     };
     img.src = ev.target.result;
-
   };
   reader.readAsDataURL(file);
   showToast(`📁 ${file.name} loaded`);
 }
 
+function clearAsset() {
+  state.uploadedFile = null;
+  state.imageDimensions = { w: 0, h: 0 };
+  document.getElementById('asset-file').value = '';
+  document.getElementById('drop-content').style.display = 'block';
+  document.getElementById('preview-container').classList.remove('visible');
+  document.getElementById('preview-img').src = '';
+  document.getElementById('preview-name').textContent = '';
+  document.getElementById('preview-dims').textContent = '';
+  document.getElementById('drop-zone').classList.remove('has-file');
+  document.getElementById('change-file-row').style.display = 'none';
+  document.getElementById('dim-alert').style.display = 'none';
+  document.getElementById('pending-badge').style.display = 'none';
+  document.getElementById('check-file-icon').textContent = '⬜';
+  document.getElementById('check-dims-icon').textContent = '⬜';
+  document.getElementById('check-file').style.color = 'var(--text-low)';
+  document.getElementById('check-dims').style.color = 'var(--text-low)';
+}
+
+function checkDimensions() {
+  if (!state.uploadedFile || state.imageDimensions.w === 0) return;
+  const plat = platforms.find(p => p.id === state.selectedPlatform);
+  const alert = document.getElementById('dim-alert');
+  const alertIcon = document.getElementById('dim-alert-icon');
+  const alertText = document.getElementById('dim-alert-text');
+  const checkDimsIcon = document.getElementById('check-dims-icon');
+  const checkDimsRow = document.getElementById('check-dims');
+
+  alert.style.display = 'flex';
+
+  if (state.imageDimensions.w === plat.w && state.imageDimensions.h === plat.h) {
+    alert.className = 'dim-alert ok';
+    alertIcon.textContent = '✅';
+    alertText.innerHTML = `<strong>Perfect sizing!</strong> Asset matches ${plat.name} specs exactly (${plat.w}×${plat.h}).`;
+    checkDimsIcon.textContent = '✅';
+    checkDimsRow.style.color = 'var(--text-mid)';
+  } else {
+    alert.className = 'dim-alert error';
+    alertIcon.textContent = '🚫';
+    alertText.innerHTML = `<strong>Size mismatch!</strong> Asset is ${state.imageDimensions.w}×${state.imageDimensions.h} but ${plat.name} requires ${plat.w}×${plat.h}. This will flag in review.`;
+    checkDimsIcon.textContent = '⚠️';
+    checkDimsRow.style.color = 'var(--amber)';
+  }
+}
+
 /* ═══════════════════════════════════════════════
-   REVIEW & VALIDATION LOGIC
+   REVIEW LOGIC
 ═══════════════════════════════════════════════ */
 function runReview() {
-  if(!state.uploadedFile) return showToast("⚠️ Please upload a creative asset first");
-  
+  if (!state.uploadedFile) return showToast('⚠️ Please upload a creative asset first');
+
   const overlay = document.getElementById('analyze-overlay');
   overlay.classList.add('visible');
   const bar = document.getElementById('analyze-bar');
   const pct = document.getElementById('analyze-pct');
 
+  const steps = ['step-upload','step-dims','step-colors','step-logo','step-type','step-score'];
+  const stepDuration = 300;
   let current = 0;
-  const interval = setInterval(() => {
-    current += 10;
-    bar.style.width = current + '%';
-    pct.textContent = current + '%';
-    if(current >= 100) {
-      clearInterval(interval);
+
+  steps.forEach((id, i) => {
+    document.getElementById(id).className = 'analyze-step';
+  });
+
+  function advanceStep(i) {
+    if (i > 0) document.getElementById(steps[i-1]).className = 'analyze-step done';
+    if (i < steps.length) {
+      document.getElementById(steps[i]).className = 'analyze-step running';
+      const progress = Math.round((i / steps.length) * 100);
+      bar.style.width = progress + '%';
+      pct.textContent = progress + '%';
+      setTimeout(() => advanceStep(i + 1), stepDuration);
+    } else {
+      // All done
+      bar.style.width = '100%';
+      pct.textContent = '100%';
       setTimeout(() => {
         overlay.classList.remove('visible');
         bar.style.width = '0%';
+        pct.textContent = '0%';
+        steps.forEach(id => document.getElementById(id).className = 'analyze-step');
         buildResults();
         switchTab('dashboard');
       }, 500);
     }
-  }, 150);
+  }
+
+  advanceStep(0);
 }
 
 function buildResults() {
   const plat = platforms.find(p => p.id === state.selectedPlatform);
   const filename = state.uploadedFile.name;
-  
-  // Base mock score
+  const reviewNotes = document.getElementById('review-notes').value.trim();
+  const selectedProfile = document.getElementById('upload-profile-select').value;
+
   let scores = { logo: 7.5, color: 8.5, layout: 9.0, overall: 8.3 };
   let violations = [];
 
-  // DYNAMIC VALIDATION: Check platform dimensions
+  // Dimension check
   if (state.imageDimensions.w > 0) {
     if (state.imageDimensions.w !== plat.w || state.imageDimensions.h !== plat.h) {
-      scores.layout = 3.0; // penalize layout heavily
-      scores.overall = 5.5; 
+      scores.layout = 3.0;
+      scores.overall = 5.5;
       violations.push({
-        catLabel:'Layout', cls:'vi-layout', icon:'🟡',
-        text:`<strong>Platform Dimension Mismatch:</strong> Uploaded asset is ${state.imageDimensions.w}x${state.imageDimensions.h}. Selected platform (${plat.name}) strictly requires ${plat.w}x${plat.h}.`
+        catLabel:'Layout', cls:'vi-layout', icon:'🔴',
+        text:`<strong>Platform Dimension Mismatch:</strong> Uploaded asset is ${state.imageDimensions.w}×${state.imageDimensions.h}. Selected platform (${plat.name}) requires ${plat.w}×${plat.h}.`
       });
     } else {
       violations.push({
         catLabel:'Layout', cls:'vi-layout', icon:'🟢',
-        text:`<strong>Perfect Sizing:</strong> Asset matches ${plat.name} specs exactly (${plat.w}x${plat.h}).`
+        text:`<strong>Perfect Sizing:</strong> Asset matches ${plat.name} specs exactly (${plat.w}×${plat.h}).`
       });
     }
   }
 
-  // Add a static mock violation for flavor
   violations.push({
     catLabel:'Logo', cls:'vi-logo', icon:'🔴',
-    text:'<strong>Logo clear space:</strong> Background elements intrude on logo minimum padding.'
+    text:'<strong>Logo clear space:</strong> Background elements intrude on logo minimum padding zone.'
   });
+
+  // Recalc overall
+  scores.overall = parseFloat(((scores.logo + scores.color + scores.layout) / 3).toFixed(1));
 
   state.scores = scores;
   state.reviewDone = true;
 
-  // Verdict UI
+  // Verdict
   const verdictEl = document.getElementById('verdict-badge');
   const verdictTxt = document.getElementById('verdict-text');
-  if(scores.overall >= 8.0) {
+  if (scores.overall >= 8.0) {
     verdictEl.className = 'score-verdict verdict-approved'; verdictTxt.textContent = 'Approved';
   } else {
     verdictEl.className = 'score-verdict verdict-needs'; verdictTxt.textContent = 'Needs Edits';
   }
 
   document.getElementById('result-filename').textContent = filename;
-  const selectedProfile = document.getElementById('brand-profile-select').value;
-  document.getElementById('result-brand-name').textContent = selectedProfile !== 'new' ? selectedProfile : 'Acme Creative Co.';
-  
+  document.getElementById('result-brand-name').textContent = selectedProfile;
+  document.getElementById('result-timestamp').textContent = 'Reviewed ' + new Date().toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+  const notesRow = document.getElementById('result-notes-row');
+  if (reviewNotes) {
+    notesRow.style.display = 'block';
+    notesRow.textContent = '📝 ' + reviewNotes;
+  } else {
+    notesRow.style.display = 'none';
+  }
+
   document.getElementById('viol-count').textContent = violations.length;
   document.getElementById('violation-list').innerHTML = violations.map(v => `
     <div class="violation-item">
@@ -691,20 +1256,46 @@ function buildResults() {
   `).join('');
 
   document.getElementById('cat-bars').innerHTML = `
-    <div class="cat-row"><div class="cat-header"><div class="cat-name">Logo</div><div class="cat-score">${scores.logo}/10</div></div></div>
-    <div class="cat-row"><div class="cat-header"><div class="cat-name">Color</div><div class="cat-score">${scores.color}/10</div></div></div>
-    <div class="cat-row"><div class="cat-header"><div class="cat-name">Layout & Sizing</div><div class="cat-score">${scores.layout}/10</div></div></div>
+    <div class="cat-row">
+      <div class="cat-header"><div class="cat-name"><span class="dot" style="background:var(--red);"></span>Logo</div><div class="cat-score" style="color:${scores.logo>=7?'var(--teal)':'var(--amber)'}">${scores.logo}/10</div></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${scores.logo*10}%;background:${scores.logo>=7?'var(--teal)':'var(--amber)'}"></div></div>
+    </div>
+    <div class="cat-row">
+      <div class="cat-header"><div class="cat-name"><span class="dot" style="background:var(--accent);"></span>Color</div><div class="cat-score" style="color:${scores.color>=7?'var(--teal)':'var(--amber)'}">${scores.color}/10</div></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${scores.color*10}%;background:${scores.color>=7?'var(--teal)':'var(--amber)'}"></div></div>
+    </div>
+    <div class="cat-row">
+      <div class="cat-header"><div class="cat-name"><span class="dot" style="background:var(--amber);"></span>Layout & Sizing</div><div class="cat-score" style="color:${scores.layout>=7?'var(--teal)':'var(--amber)'}">${scores.layout}/10</div></div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${scores.layout*10}%;background:${scores.layout>=7?'var(--teal)':'var(--amber)'}"></div></div>
+    </div>
   `;
 
-  // Inject into history
+  // Add to history
+  const totalReviews = historyData.length + 1;
   historyData.unshift({
-    name: filename, platform: plat.name, score: scores.overall, 
-    status: scores.overall >= 8.0 ? 'approved' : 'needs', viols: violations.length, date: 'Just now',
-    details: violations.map(v => v.text.replace(/<[^>]*>?/gm, '')).join(' | ') // Strip HTML for details
+    name: filename,
+    platform: plat.name,
+    score: scores.overall,
+    status: scores.overall >= 8.0 ? 'approved' : 'needs',
+    viols: violations.length,
+    date: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }),
+    profile: selectedProfile,
+    dims: state.imageDimensions.w > 0 ? `${state.imageDimensions.w}×${state.imageDimensions.h}` : 'Unknown',
+    filesize: `${(state.uploadedFile.size / 1024).toFixed(1)} KB`,
+    notes: reviewNotes,
+    violations: violations
   });
+
+  // Update KPIs
+  const total = 47 + historyData.length;
+  document.getElementById('kpi-total').textContent = total;
+  const approvedCount = historyData.filter(h => h.status === 'approved').length + 31;
+  document.getElementById('kpi-rate').innerHTML = `${Math.round(approvedCount/total*100)}<span class="kpi-unit">%</span>`;
+
   renderHistory();
 
   document.getElementById('latest-result').style.display = 'block';
+  document.getElementById('pending-badge').style.display = 'none';
   animateScores();
 }
 
@@ -713,50 +1304,101 @@ function animateScores() {
   const ring = document.getElementById('main-ring');
   const circumference = 380;
   ring.style.strokeDasharray = circumference;
-  ring.style.strokeDashoffset = circumference - (overall/10) * circumference;
-  ring.className = `score-ring-fill ${overall>=8.0?'teal':'amber'}`;
+  ring.style.strokeDashoffset = circumference - (overall / 10) * circumference;
+  ring.className = `score-ring-fill ${overall >= 8.0 ? 'teal' : overall >= 6 ? 'amber' : 'red'}`;
   document.getElementById('overall-num').textContent = overall.toFixed(1);
 }
 
 /* ═══════════════════════════════════════════════
-   HISTORY MODAL
+   REVIEW HISTORY
 ═══════════════════════════════════════════════ */
 function renderHistory() {
   const tbody = document.getElementById('history-tbody');
+  const emptyState = document.getElementById('history-empty');
+  if (historyData.length === 0) {
+    tbody.innerHTML = '';
+    emptyState.style.display = 'block';
+    return;
+  }
+  emptyState.style.display = 'none';
   tbody.innerHTML = historyData.map((h, index) => `
-    <tr onclick="openHistoryDetail(${index})">
+    <tr>
       <td class="asset-name">${h.name}</td>
       <td>${h.platform}</td>
-      <td><span style="font-family:var(--font-mono);">${h.score}</span></td>
-      <td><span class="status-pill ${h.status==='approved'?'pill-approved':h.status==='needs'?'pill-needs':'pill-rejected'}">${h.status}</span></td>
-      <td>${h.viols}</td>
+      <td><span style="font-family:var(--font-mono);color:${h.score>=8?'var(--teal)':h.score>=6?'var(--amber)':'var(--red)'};">${h.score}</span></td>
+      <td><span class="status-pill ${h.status==='approved'?'pill-approved':h.status==='needs'?'pill-needs':'pill-rejected'}">${h.status === 'needs' ? 'Needs Edits' : h.status}</span></td>
+      <td style="color:${h.viols===0?'var(--teal)':h.viols<=2?'var(--amber)':'var(--red)'};">${h.viols}</td>
       <td>${h.date}</td>
+      <td><span class="row-link" onclick="openHistoryDetail(${index})">View Details →</span></td>
     </tr>
   `).join('');
 }
 
 function openHistoryDetail(index) {
-  const data = historyData[index];
-  const modal = document.getElementById('history-modal');
-  document.getElementById('history-modal-content').innerHTML = `
-    <div style="font-size: 18px; font-family: var(--font-head); font-weight: bold; margin-bottom: 10px;">${data.name}</div>
-    <div style="margin-bottom: 5px;"><strong>Platform:</strong> ${data.platform}</div>
-    <div style="margin-bottom: 5px;"><strong>Score:</strong> ${data.score}/10</div>
-    <div style="margin-bottom: 15px;"><strong>Date:</strong> ${data.date}</div>
-    <div style="padding: 15px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px;">
-      <strong>Review Notes / Violations:</strong><br><br>
-      ${data.details}
-    </div>
-  `;
-  modal.classList.add('visible');
+  const h = historyData[index];
+  state.currentHistoryIndex = index;
+
+  document.getElementById('hm-title').textContent = h.name;
+  document.getElementById('hm-date').textContent = h.date + ' · ' + h.profile;
+  document.getElementById('hm-score').textContent = h.score;
+  document.getElementById('hm-filename').textContent = h.name;
+  document.getElementById('hm-platform').textContent = h.platform;
+  document.getElementById('hm-viols').textContent = h.viols + (h.viols === 1 ? ' violation' : ' violations');
+  document.getElementById('hm-dims').textContent = h.dims || '—';
+  document.getElementById('hm-filesize').textContent = h.filesize || '—';
+  document.getElementById('hm-profile').textContent = 'Profile: ' + h.profile;
+
+  const verdict = document.getElementById('hm-verdict');
+  verdict.className = h.status === 'approved' ? 'score-verdict verdict-approved' : 'score-verdict verdict-needs';
+  verdict.textContent = h.status === 'approved' ? '✅ Approved' : '⚠️ Needs Edits';
+
+  // Score ring
+  const ring = document.getElementById('hm-ring');
+  const circ = 207;
+  ring.style.strokeDashoffset = circ - (h.score / 10) * circ;
+  ring.style.stroke = h.score >= 8 ? 'var(--teal)' : h.score >= 6 ? 'var(--amber)' : 'var(--red)';
+
+  // Notes
+  const notesSection = document.getElementById('hm-notes-section');
+  if (h.notes && h.notes.trim()) {
+    notesSection.style.display = 'block';
+    document.getElementById('hm-notes').textContent = h.notes;
+  } else {
+    notesSection.style.display = 'none';
+  }
+
+  // Violations
+  const violList = document.getElementById('hm-violations');
+  if (h.violations && h.violations.length > 0) {
+    violList.innerHTML = h.violations.map(v => `
+      <div class="violation-item">
+        <div class="violation-icon ${v.cls}">${v.icon}</div>
+        <div><div class="violation-text">${v.text}</div><div class="violation-cat" style="color:var(--text-low);">${v.catLabel}</div></div>
+      </div>
+    `).join('');
+  } else {
+    violList.innerHTML = '<div style="text-align:center;padding:20px;color:var(--teal);font-size:13px;">🎉 No violations found — perfect compliance!</div>';
+  }
+
+  document.getElementById('history-modal').classList.add('visible');
 }
 
-function closeHistoryModal(e) {
-  if (e.target.id === 'history-modal') document.getElementById('history-modal').classList.remove('visible');
+function closeHistoryModal() {
+  document.getElementById('history-modal').classList.remove('visible');
 }
+
+function resubmitFromHistory() {
+  closeHistoryModal();
+  switchTab('upload');
+  showToast('💡 Upload a new version to re-run the review');
+}
+
+document.getElementById('history-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeHistoryModal();
+});
 
 /* ═══════════════════════════════════════════════
-   TOAST & INIT
+   TOAST
 ═══════════════════════════════════════════════ */
 let toastTimer;
 function showToast(msg) {
@@ -764,12 +1406,16 @@ function showToast(msg) {
   document.getElementById('toast-msg').textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
 }
 
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
 renderPalette();
 renderPlatforms();
 renderHistory();
+renderProfileList();
 </script>
 </body>
 </html>
