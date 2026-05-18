@@ -51,93 +51,24 @@
   .app { display: flex; height: 100vh; overflow: hidden; }
 
   /* ─── SIDEBAR ───────────────────────────── */
-  .sidebar {
-    width: var(--sidebar-w);
-    min-width: var(--sidebar-w);
-    background: var(--bg-mid);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .sidebar::before {
-    content: '';
-    position: absolute;
-    top: -60px; left: -60px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(92,124,250,.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .sidebar-brand {
-    padding: 22px 20px 18px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .brand-icon {
-    width: 34px; height: 34px;
-    background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 0 16px var(--accent-glow);
-  }
+  .sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg-mid); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 0; position: relative; overflow: hidden; }
+  .sidebar::before { content: ''; position: absolute; top: -60px; left: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(92,124,250,.15) 0%, transparent 70%); pointer-events: none; }
+  .sidebar-brand { padding: 22px 20px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .brand-icon { width: 34px; height: 34px; background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 16px var(--accent-glow); }
   .brand-icon svg { width: 18px; height: 18px; }
   .brand-name { font-family: var(--font-head); font-weight: 700; font-size: 15px; letter-spacing: -.3px; color: var(--text); }
   .brand-tag { font-size: 9px; font-family: var(--font-mono); color: var(--accent); background: var(--accent-lo); padding: 2px 6px; border-radius: 4px; display: block; margin-top: 1px; letter-spacing: .5px; }
-
   .sidebar-nav { flex: 1; padding: 14px 10px; display: flex; flex-direction: column; gap: 2px; }
-
-  .nav-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 11px 12px;
-    border-radius: var(--radius);
-    cursor: pointer;
-    color: var(--text-mid);
-    font-family: var(--font-head); font-size: 13px; font-weight: 500;
-    letter-spacing: .1px;
-    position: relative;
-    transition: color var(--transition), background var(--transition);
-    user-select: none;
-  }
+  .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: var(--radius); cursor: pointer; color: var(--text-mid); font-family: var(--font-head); font-size: 13px; font-weight: 500; letter-spacing: .1px; position: relative; transition: color var(--transition), background var(--transition); user-select: none; }
   .nav-item:hover { color: var(--text); background: var(--panel-hi); }
   .nav-item.active { color: var(--text); background: var(--accent-lo); }
-  .nav-item.active::before {
-    content: '';
-    position: absolute; left: 0; top: 20%; bottom: 20%;
-    width: 3px; background: var(--accent);
-    border-radius: 0 4px 4px 0;
-    box-shadow: 0 0 8px var(--accent-glow);
-  }
+  .nav-item.active::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 3px; background: var(--accent); border-radius: 0 4px 4px 0; box-shadow: 0 0 8px var(--accent-glow); }
   .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-  .nav-badge {
-    margin-left: auto;
-    background: var(--accent);
-    color: #fff; font-family: var(--font-mono); font-size: 10px;
-    padding: 1px 6px; border-radius: 99px; min-width: 20px; text-align: center;
-  }
+  .nav-badge { margin-left: auto; background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 10px; padding: 1px 6px; border-radius: 99px; min-width: 20px; text-align: center; }
   .nav-badge.warn { background: var(--amber); }
-
-  .sidebar-footer {
-    padding: 14px 10px;
-    border-top: 1px solid var(--border);
-  }
-  .user-pill {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 12px; border-radius: var(--radius);
-    background: var(--panel); border: 1px solid var(--border);
-  }
-  .user-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: linear-gradient(135deg, #7c3aed, var(--accent));
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-head); font-size: 11px; font-weight: 700; color: #fff;
-    flex-shrink: 0;
-  }
+  .sidebar-footer { padding: 14px 10px; border-top: 1px solid var(--border); }
+  .user-pill { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--border); }
+  .user-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #7c3aed, var(--accent)); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; }
   .user-info { flex: 1; min-width: 0; }
   .user-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .user-role { font-size: 10px; color: var(--text-mid); }
@@ -147,274 +78,104 @@
 
   /* ─── MAIN CONTENT ──────────────────────── */
   .main { flex: 1; overflow-y: auto; background: var(--bg); position: relative; }
-
-  /* ─── TOP BAR ───────────────────────────── */
-  .topbar {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(7,9,15,.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 28px;
-    height: 58px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  .topbar { position: sticky; top: 0; z-index: 50; background: rgba(7,9,15,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 28px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
   .topbar-left { display: flex; align-items: center; gap: 10px; }
   .topbar-title { font-family: var(--font-head); font-size: 16px; font-weight: 700; }
   .topbar-crumb { font-size: 12px; color: var(--text-mid); }
   .topbar-right { display: flex; align-items: center; gap: 10px; }
-  .topbar-chip {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 99px; padding: 5px 14px;
-    font-size: 12px; color: var(--text-mid); cursor: pointer;
-    transition: border-color var(--transition), color var(--transition);
-    font-family: var(--font-head); font-weight: 500;
-  }
+  .topbar-chip { background: var(--panel); border: 1px solid var(--border); border-radius: 99px; padding: 5px 14px; font-size: 12px; color: var(--text-mid); cursor: pointer; transition: border-color var(--transition), color var(--transition); font-family: var(--font-head); font-weight: 500; }
   .topbar-chip:hover { border-color: var(--border-hi); color: var(--text); }
-  .topbar-chip.primary {
-    background: var(--accent); border-color: var(--accent);
-    color: #fff;
-    box-shadow: 0 0 12px var(--accent-glow);
-  }
+  .topbar-chip.primary { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 12px var(--accent-glow); }
   .topbar-chip.primary:hover { opacity: .9; }
 
-  /* ─── PANELS ────────────────────────────── */
+  /* ─── PANELS & CARDS ────────────────────── */
   .tab-panel { display: none; padding: 28px; animation: fadeSlide .3s ease; }
   .tab-panel.active { display: block; }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
   .page-header { margin-bottom: 26px; }
   .page-title { font-family: var(--font-head); font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
   .page-sub { font-size: 13px; color: var(--text-mid); margin-top: 4px; }
-
-  /* ─── CARDS ─────────────────────────────── */
-  .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 22px 24px;
-    transition: border-color var(--transition);
-  }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; transition: border-color var(--transition); }
   .card:hover { border-color: var(--border-hi); }
   .card-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text-mid); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .card-title svg { width: 14px; height: 14px; }
 
-  /* ─── FORM ELEMENTS ─────────────────────── */
+  /* ─── FORMS & INPUTS ────────────────────── */
   .form-group { margin-bottom: 20px; }
   .form-label { display: block; font-size: 12px; font-weight: 600; font-family: var(--font-head); color: var(--text-mid); margin-bottom: 8px; letter-spacing: .3px; text-transform: uppercase; }
-  .form-input, .form-textarea, .form-select {
-    width: 100%;
-    background: var(--bg-mid);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 14px;
-    padding: 11px 14px;
-    transition: border-color var(--transition), box-shadow var(--transition);
-    outline: none;
-    appearance: none;
-  }
+  .form-input, .form-textarea, .form-select { width: 100%; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-body); font-size: 14px; padding: 11px 14px; transition: border-color var(--transition), box-shadow var(--transition); outline: none; appearance: none; }
   .form-input::placeholder, .form-textarea::placeholder { color: var(--text-low); }
-  .form-input:focus, .form-textarea:focus, .form-select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-lo);
-  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-lo); }
   .form-textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
   .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238892b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
   .form-select option { background: var(--panel); }
-
   .input-hint { font-size: 11px; color: var(--text-low); margin-top: 5px; }
 
-  /* ─── TABS INSIDE BRAND GUIDELINES ─────── */
+  /* ─── UPLOADS & BUTTONS ─────────────────── */
   .inner-tabs { display: flex; gap: 4px; margin-bottom: 14px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px; }
   .inner-tab { flex: 1; text-align: center; padding: 7px; border-radius: 6px; font-size: 12px; font-family: var(--font-head); font-weight: 600; cursor: pointer; color: var(--text-mid); transition: all var(--transition); }
   .inner-tab.active { background: var(--panel-hi); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.3); }
   .inner-tab:hover:not(.active) { color: var(--text); }
-
-  /* ─── FILE UPLOAD SMALL ─────────────────── */
-  .mini-upload {
-    border: 1.5px dashed var(--border-hi);
-    border-radius: var(--radius);
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color var(--transition), background var(--transition);
-    background: var(--bg-mid);
-  }
+  .mini-upload { border: 1.5px dashed var(--border-hi); border-radius: var(--radius); padding: 20px; text-align: center; cursor: pointer; transition: border-color var(--transition), background var(--transition); background: var(--bg-mid); }
   .mini-upload:hover { border-color: var(--accent); background: var(--accent-lo); }
   .mini-upload-icon { font-size: 24px; margin-bottom: 6px; }
   .mini-upload-text { font-size: 12px; color: var(--text-mid); }
   .mini-upload-text strong { color: var(--accent); }
 
-  /* ─── COLOR PALETTE ─────────────────────── */
   .palette-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-  .color-chip {
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    position: relative; cursor: pointer;
-  }
-  .color-swatch {
-    width: 52px; height: 52px;
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
+  .color-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; cursor: pointer; }
+  .color-swatch { width: 52px; height: 52px; border-radius: 10px; border: 2px solid var(--border); transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); cursor: pointer; position: relative; overflow: hidden; }
   .color-swatch:hover { border-color: var(--border-hi); transform: scale(1.05); box-shadow: 0 4px 16px rgba(0,0,0,.4); }
   .color-hex { font-family: var(--font-mono); font-size: 9px; color: var(--text-low); text-transform: uppercase; }
-  .color-remove {
-    position: absolute; top: -4px; right: -4px;
-    width: 16px; height: 16px; border-radius: 50%;
-    background: var(--red); color: #fff;
-    font-size: 9px; display: none;
-    align-items: center; justify-content: center;
-    cursor: pointer; z-index: 1; font-weight: 700;
-    border: 1.5px solid var(--panel);
-  }
+  .color-remove { position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; border-radius: 50%; background: var(--red); color: #fff; font-size: 9px; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 1; font-weight: 700; border: 1.5px solid var(--panel); }
   .color-chip:hover .color-remove { display: flex; }
-
-  .add-color-btn {
-    width: 52px; height: 52px;
-    border-radius: 10px;
-    border: 2px dashed var(--border-hi);
-    background: transparent;
-    color: var(--text-low);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: border-color var(--transition), color var(--transition), background var(--transition);
-    font-size: 20px; font-weight: 300;
-  }
+  .add-color-btn { width: 52px; height: 52px; border-radius: 10px; border: 2px dashed var(--border-hi); background: transparent; color: var(--text-low); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color var(--transition), color var(--transition), background var(--transition); font-size: 20px; font-weight: 300; }
   .add-color-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lo); }
-
   .hex-input-row { display: flex; gap: 8px; margin-top: 8px; }
   .hex-preview-swatch { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); flex-shrink: 0; background: #fff; transition: background .1s; }
 
-  /* ─── BUTTON ────────────────────────────── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 11px 22px;
-    border-radius: var(--radius);
-    font-family: var(--font-head); font-size: 13px; font-weight: 700;
-    cursor: pointer; border: none;
-    transition: all var(--transition);
-    letter-spacing: .2px;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-    box-shadow: 0 0 16px var(--accent-glow);
-  }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--radius); font-family: var(--font-head); font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all var(--transition); letter-spacing: .2px; }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 0 16px var(--accent-glow); }
   .btn-primary:hover { opacity: .88; transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-outline {
-    background: transparent;
-    color: var(--text-mid);
-    border: 1px solid var(--border);
-  }
+  .btn-outline { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
   .btn-outline:hover { border-color: var(--border-hi); color: var(--text); background: var(--panel-hi); }
   .btn-teal { background: var(--teal); color: #000; box-shadow: 0 0 16px rgba(0,212,170,.3); }
   .btn-teal:hover { opacity: .88; transform: translateY(-1px); }
   .btn-lg { padding: 13px 28px; font-size: 14px; }
   .btn svg { width: 15px; height: 15px; }
 
-  /* ─── GRID HELPERS ──────────────────────── */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .gap-16 { gap: 16px; }
-  .col-span-2 { grid-column: span 2; }
-  .flex { display: flex; }
-  .flex-col { flex-direction: column; }
-  .items-center { align-items: center; }
-  .justify-between { justify-content: space-between; }
-  .gap-12 { gap: 12px; }
-  .gap-16 { gap: 16px; }
-  .mt-16 { margin-top: 16px; }
-  .mt-24 { margin-top: 24px; }
-  .mb-16 { margin-bottom: 16px; }
   .w-full { width: 100%; }
 
-  /* ─── DROP ZONE ─────────────────────────── */
-  .drop-zone {
-    border: 2px dashed var(--border-hi);
-    border-radius: var(--radius-lg);
-    background: var(--panel);
-    padding: 56px 40px;
-    text-align: center;
-    cursor: pointer;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-  .drop-zone::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 100%, rgba(92,124,250,.06) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .drop-zone:hover, .drop-zone.drag-over {
-    border-color: var(--accent);
-    background: var(--panel-hi);
-    box-shadow: 0 0 40px rgba(92,124,250,.08), inset 0 0 40px rgba(92,124,250,.04);
-  }
-  .drop-zone.drag-over { border-style: solid; }
+  .drop-zone { border: 2px dashed var(--border-hi); border-radius: var(--radius-lg); background: var(--panel); padding: 56px 40px; text-align: center; cursor: pointer; transition: all var(--transition); position: relative; overflow: hidden; }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: var(--panel-hi); box-shadow: 0 0 40px rgba(92,124,250,.08), inset 0 0 40px rgba(92,124,250,.04); }
   .drop-zone.has-file { border-color: var(--teal); border-style: solid; }
-  .drop-zone-icon {
-    width: 64px; height: 64px; margin: 0 auto 16px;
-    background: var(--panel-hi); border: 1px solid var(--border);
-    border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--transition);
-  }
-  .drop-zone:hover .drop-zone-icon, .drop-zone.drag-over .drop-zone-icon { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-lo); }
+  .drop-zone-icon { width: 64px; height: 64px; margin: 0 auto 16px; background: var(--panel-hi); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+  .drop-zone:hover .drop-zone-icon { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-lo); }
   .drop-zone-icon svg { width: 28px; height: 28px; color: var(--accent); }
   .drop-zone-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; margin-bottom: 6px; }
   .drop-zone-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 14px; }
   .drop-zone-types { display: inline-flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
   .file-type-tag { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; font-family: var(--font-mono); font-size: 11px; color: var(--text-mid); }
-  .drop-zone input[type="file"] { display: none; }
-
+  
   .preview-container { display: none; }
   .preview-container.visible { display: block; }
-  .preview-img {
-    max-width: 100%; max-height: 200px;
-    border-radius: var(--radius); object-fit: contain;
-    margin: 0 auto; display: block;
-  }
+  .preview-img { max-width: 100%; max-height: 200px; border-radius: var(--radius); object-fit: contain; margin: 0 auto; display: block; }
   .preview-name { font-size: 12px; color: var(--text-mid); margin-top: 10px; font-family: var(--font-mono); }
 
-  /* ─── PLATFORM SELECTOR ─────────────────── */
   .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .platform-opt {
-    padding: 12px 10px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--bg-mid);
-    cursor: pointer; text-align: center;
-    transition: all var(--transition);
-  }
+  .platform-opt { padding: 12px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-mid); cursor: pointer; text-align: center; transition: all var(--transition); position: relative; }
   .platform-opt:hover { border-color: var(--border-hi); background: var(--panel-hi); }
   .platform-opt.selected { border-color: var(--accent); background: var(--accent-lo); }
   .platform-opt svg, .platform-opt .plat-icon { font-size: 20px; display: block; margin: 0 auto 5px; }
   .platform-opt .plat-name { font-size: 11px; font-family: var(--font-head); font-weight: 600; color: var(--text-mid); }
+  .platform-opt .plat-dims { font-size: 9px; font-family: var(--font-mono); color: var(--text-low); margin-top: 3px; display: block; }
   .platform-opt.selected .plat-name { color: var(--accent); }
 
-  /* ─── ANALYZING OVERLAY ─────────────────── */
-  .analyze-overlay {
-    position: fixed; inset: 0; z-index: 200;
-    background: rgba(7,9,15,.92);
-    backdrop-filter: blur(8px);
-    display: none; align-items: center; justify-content: center;
-    flex-direction: column; gap: 20px;
-  }
+  /* ─── MODALS & OVERLAYS ─────────────────── */
+  .analyze-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(7,9,15,.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
   .analyze-overlay.visible { display: flex; }
-  .analyze-box {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 40px 48px;
-    width: 400px;
-    text-align: center;
-  }
+  .analyze-box { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px 48px; width: 400px; text-align: center; max-height: 90vh; overflow-y: auto; }
   .analyze-title { font-family: var(--font-head); font-size: 20px; font-weight: 800; margin-bottom: 6px; }
   .analyze-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 28px; }
   .analyze-steps { text-align: left; display: flex; flex-direction: column; gap: 10px; }
@@ -424,16 +185,13 @@
   .analyze-step.running .step-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); animation: pulse 1s infinite; }
   .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all .3s; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
   .analyze-bar-wrap { margin-top: 24px; }
   .analyze-bar-track { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
   .analyze-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 99px; width: 0%; transition: width .5s ease; }
   .analyze-pct { font-family: var(--font-mono); font-size: 11px; color: var(--text-mid); margin-top: 6px; }
 
-  /* ─── DASHBOARD ─────────────────────────── */
-  .score-hero {
-    display: flex; gap: 20px; align-items: center;
-  }
+  /* ─── DASHBOARD ELEMENTS ────────────────── */
+  .score-hero { display: flex; gap: 20px; align-items: center; }
   .score-ring-wrap { flex-shrink: 0; position: relative; width: 140px; height: 140px; }
   .score-ring-svg { transform: rotate(-90deg); }
   .score-ring-bg { fill: none; stroke: var(--border); stroke-width: 10; }
@@ -442,28 +200,17 @@
   .score-ring-fill.accent { stroke: var(--accent); }
   .score-ring-fill.amber { stroke: var(--amber); }
   .score-ring-fill.red { stroke: var(--red); }
-  .score-label {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
+  .score-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .score-number { font-family: var(--font-mono); font-size: 30px; font-weight: 600; line-height: 1; }
   .score-denom { font-size: 10px; color: var(--text-low); font-family: var(--font-mono); }
   .score-info { flex: 1; }
-  .score-verdict {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 14px; border-radius: 99px;
-    font-family: var(--font-head); font-size: 12px; font-weight: 700;
-    margin-bottom: 10px;
-    text-transform: uppercase; letter-spacing: .5px;
-  }
+  .score-verdict { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 99px; font-family: var(--font-head); font-size: 12px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
   .verdict-needs { background: var(--amber-lo); color: var(--amber); border: 1px solid rgba(245,166,35,.3); }
   .verdict-approved { background: var(--green-lo); color: var(--green); border: 1px solid rgba(34,197,94,.3); }
   .score-filename { font-family: var(--font-mono); font-size: 11px; color: var(--text-low); margin-top: 4px; }
   .score-timestamp { font-size: 11px; color: var(--text-low); margin-top: 2px; }
 
-  /* ─── CATEGORY BARS ─────────────────────── */
   .cat-list { display: flex; flex-direction: column; gap: 16px; }
-  .cat-row { }
   .cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
   .cat-name { font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: .3px; display: flex; align-items: center; gap: 7px; }
   .cat-name .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
@@ -472,23 +219,10 @@
   .cat-bar-fill { height: 100%; border-radius: 99px; width: 0%; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
   .cat-detail { font-size: 11px; color: var(--text-mid); margin-top: 5px; }
 
-  /* ─── VIOLATIONS ────────────────────────── */
   .violation-list { display: flex; flex-direction: column; gap: 8px; }
-  .violation-item {
-    display: flex; gap: 12px; align-items: flex-start;
-    padding: 12px 16px;
-    background: var(--bg-mid);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: border-color var(--transition);
-    animation: fadeSlide .3s ease both;
-  }
+  .violation-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 16px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color var(--transition); animation: fadeSlide .3s ease both; }
   .violation-item:hover { border-color: var(--border-hi); }
-  .violation-icon {
-    width: 28px; height: 28px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 13px;
-  }
+  .violation-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 13px; }
   .vi-color { background: rgba(92,124,250,.15); }
   .vi-type  { background: rgba(0,212,170,.1); }
   .vi-layout{ background: rgba(245,166,35,.1); }
@@ -497,7 +231,6 @@
   .violation-text strong { color: var(--text); font-weight: 600; }
   .violation-cat { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .5px; margin-top: 3px; }
 
-  /* ─── KPI CARDS ─────────────────────────── */
   .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .kpi-card { padding: 18px 20px; }
   .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; font-family: var(--font-head); font-weight: 600; color: var(--text-mid); margin-bottom: 8px; }
@@ -507,558 +240,188 @@
   .delta-up { color: var(--green); }
   .delta-down { color: var(--red); }
 
-  /* ─── MINI SCORE TILES ──────────────────── */
   .score-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-  .score-tile {
-    padding: 14px 16px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: border-color var(--transition);
-  }
+  .score-tile { padding: 14px 16px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color var(--transition); }
   .score-tile:hover { border-color: var(--border-hi); }
   .tile-label { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; font-family: var(--font-head); font-weight: 700; color: var(--text-low); margin-bottom: 8px; }
   .tile-value { font-family: var(--font-mono); font-size: 24px; font-weight: 600; }
   .tile-bar { margin-top: 8px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
   .tile-bar-fill { height: 100%; border-radius: 99px; width: 0%; transition: width 1.4s cubic-bezier(.4,0,.2,1); }
 
-  /* ─── HISTORY TABLE ─────────────────────── */
   .history-table { width: 100%; border-collapse: collapse; }
   .history-table th { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text-low); padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
-  .history-table td { padding: 12px 14px; font-size: 12.5px; color: var(--text-mid); border-bottom: 1px solid rgba(29,35,64,.5); }
+  .history-table td { padding: 12px 14px; font-size: 12.5px; color: var(--text-mid); border-bottom: 1px solid rgba(29,35,64,.5); cursor: pointer; }
   .history-table tr:hover td { background: var(--panel-hi); }
   .history-table .asset-name { color: var(--text); font-weight: 500; }
-  .status-pill {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 2px 10px; border-radius: 99px;
-    font-size: 10px; font-family: var(--font-head); font-weight: 700; letter-spacing: .3px; text-transform: uppercase;
-  }
+  .status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 99px; font-size: 10px; font-family: var(--font-head); font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
   .pill-approved { background: var(--green-lo); color: var(--green); }
   .pill-needs { background: var(--amber-lo); color: var(--amber); }
   .pill-rejected { background: var(--red-lo); color: var(--red); }
 
-  /* ─── SECTION DIVIDER ───────────────────── */
-  .section-gap { margin-bottom: 20px; }
   .section-label { font-family: var(--font-head); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--text-low); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
   .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
 
-  /* ─── EMPTY STATE ───────────────────────── */
-  .empty-state {
-    text-align: center; padding: 60px 40px;
-    color: var(--text-low);
-  }
-  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: .4; }
-  .empty-text { font-size: 14px; font-family: var(--font-head); }
-
-  /* ─── TOAST ─────────────────────────────── */
-  .toast {
-    position: fixed; bottom: 28px; right: 28px; z-index: 300;
-    background: var(--panel-hi); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 20px;
-    display: flex; align-items: center; gap: 12px;
-    font-size: 13px; color: var(--text);
-    box-shadow: 0 8px 32px rgba(0,0,0,.4);
-    transform: translateY(80px); opacity: 0;
-    transition: all .4s cubic-bezier(.4,0,.2,1);
-    pointer-events: none;
-  }
+  .toast { position: fixed; bottom: 28px; right: 28px; z-index: 300; background: var(--panel-hi); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text); box-shadow: 0 8px 32px rgba(0,0,0,.4); transform: translateY(80px); opacity: 0; transition: all .4s cubic-bezier(.4,0,.2,1); pointer-events: none; }
   .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
-  .toast-icon { font-size: 16px; }
-
-  /* ─── DIVIDER ────────────────────────────── */
   .divider { height: 1px; background: var(--border); margin: 22px 0; }
-
-  /* ─── SCROLLABLE CONTENT ─────────────────── */
-  .scroll-fade { position: relative; }
-
-  /* ─── REVIEW ASSET PREVIEW ───────────────── */
-  .asset-preview-box {
-    background: var(--bg-mid); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); overflow: hidden;
-    aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .asset-preview-placeholder { text-align: center; color: var(--text-low); }
-  .asset-preview-placeholder svg { width: 40px; height: 40px; margin-bottom: 8px; opacity: .3; }
-
-  /* ─── ANNOTATION SPOTS ───────────────────── */
-  .annotation { position: absolute; }
-  .ann-dot {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: var(--red);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; color: #fff;
-    cursor: pointer;
-    animation: dotPulse 2s infinite;
-    box-shadow: 0 0 12px rgba(240,82,82,.5);
-  }
-  @keyframes dotPulse { 0%,100%{box-shadow: 0 0 6px rgba(240,82,82,.5)} 50%{box-shadow: 0 0 18px rgba(240,82,82,.8)} }
-
-  /* ─── GUIDELINE SAVED CHIP ───────────────── */
-  .saved-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--green-lo); border: 1px solid rgba(34,197,94,.2);
-    border-radius: 99px; padding: 4px 12px;
-    font-size: 11px; color: var(--green); font-family: var(--font-head); font-weight: 600;
-    opacity: 0; transition: opacity .3s;
-  }
+  .saved-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-lo); border: 1px solid rgba(34,197,94,.2); border-radius: 99px; padding: 4px 12px; font-size: 11px; color: var(--green); font-family: var(--font-head); font-weight: 600; opacity: 0; transition: opacity .3s; }
   .saved-badge.visible { opacity: 1; }
 
-  /* ─── RESPONSIVE SAFETY ──────────────────── */
-  @media (max-width: 1100px) {
-    .kpi-grid { grid-template-columns: 1fr 1fr; }
-    .score-tiles { grid-template-columns: 1fr 1fr; }
-  }
 </style>
 </head>
 <body>
 
 <div class="app">
-  <!-- ═══════ SIDEBAR ═══════ -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <div>
-        <div class="brand-name">Brandcast AI</div>
-        <span class="brand-tag">v2.4.1 BETA</span>
-      </div>
+      <div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div><div class="brand-name">Brandcast AI</div><span class="brand-tag">v2.4.1 BETA</span></div>
     </div>
-
     <nav class="sidebar-nav">
-      <div class="nav-item active" data-tab="brand-setup">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-        </svg>
-        Brand Setup
-      </div>
-      <div class="nav-item" data-tab="upload">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-        </svg>
-        Upload &amp; Analyze
-        <span class="nav-badge warn" id="pending-badge" style="display:none">1</span>
-      </div>
-      <div class="nav-item" data-tab="dashboard">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
-        </svg>
-        Approval Dashboard
-        <span class="nav-badge" id="dash-badge">47</span>
-      </div>
-
-      <div style="margin-top:auto;padding-top:14px;">
-        <div class="section-label" style="margin-bottom:8px;">System</div>
-        <div class="nav-item" style="cursor:default; opacity:.5;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Audit Log
-        </div>
-        <div class="nav-item" style="cursor:default; opacity:.5;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-          Settings
-        </div>
-      </div>
+      <div class="nav-item active" data-tab="brand-setup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg> Brand Setup</div>
+      <div class="nav-item" data-tab="upload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload &amp; Analyze <span class="nav-badge warn" id="pending-badge" style="display:none">1</span></div>
+      <div class="nav-item" data-tab="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Approval Dashboard <span class="nav-badge" id="dash-badge">47</span></div>
     </nav>
-
     <div class="sidebar-footer">
-      <div class="user-pill">
-        <div class="user-avatar">AJ</div>
-        <div class="user-info">
-          <div class="user-name">Alex Johnson</div>
-          <div class="user-role">Brand Manager</div>
-        </div>
-      </div>
-      <div class="sidebar-status">
-        <div class="status-dot"></div>
-        <div class="status-text">AI Engine Online</div>
-      </div>
+      <div class="user-pill"><div class="user-avatar">AJ</div><div class="user-info"><div class="user-name">Alex Johnson</div><div class="user-role">Brand Manager</div></div></div>
+      <div class="sidebar-status"><div class="status-dot"></div><div class="status-text">AI Engine Online</div></div>
     </div>
   </aside>
 
-  <!-- ═══════ MAIN ═══════ -->
   <main class="main" id="main-scroll">
-
-    <!-- Top Bar -->
     <div class="topbar">
-      <div class="topbar-left">
-        <div class="topbar-title" id="topbar-title">Brand Setup</div>
-        <div class="topbar-crumb" id="topbar-crumb">Configure your brand identity source of truth</div>
-      </div>
-      <div class="topbar-right">
-        <div class="topbar-chip" id="help-chip">? Help</div>
-        <div class="topbar-chip primary" id="topbar-action">New Review</div>
-      </div>
+      <div class="topbar-left"><div class="topbar-title" id="topbar-title">Brand Setup</div><div class="topbar-crumb" id="topbar-crumb">Configure your brand identity source of truth</div></div>
+      <div class="topbar-right"><div class="topbar-chip" id="help-chip">? Help</div><div class="topbar-chip primary" id="topbar-action">New Review</div></div>
     </div>
 
-    <!-- ═══ TAB 1: BRAND SETUP ═══ -->
     <section class="tab-panel active" id="tab-brand-setup">
-      <div class="page-header">
-        <div class="page-title">Brand Configuration</div>
-        <div class="page-sub">Define your brand identity rules. This becomes the Source of Truth for all automated compliance checks.</div>
-      </div>
-
+      <div class="page-header"><div class="page-title">Brand Configuration</div><div class="page-sub">Define your brand identity rules. This becomes the Source of Truth for all automated compliance checks.</div></div>
       <div class="grid-2" style="gap:20px; align-items:start;">
-        <!-- Left column -->
         <div style="display:flex;flex-direction:column;gap:16px;">
-
           <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-              Identity
-            </div>
-            <div class="form-group">
-              <label class="form-label">Brand Name</label>
-              <input type="text" class="form-input" id="brand-name" placeholder="e.g. Acme Corporation" value="Acme Creative Co.">
-              <div class="input-hint">Used as the reference name in all compliance reports.</div>
-            </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label class="form-label">Brand Tagline <span style="opacity:.4;font-size:10px;">(optional)</span></label>
-              <input type="text" class="form-input" placeholder="e.g. Built for the brave">
-            </div>
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Identity</div>
+            <div class="form-group"><label class="form-label">Brand Name</label><input type="text" class="form-input" id="brand-name" placeholder="e.g. Acme Corporation" value="Acme Creative Co."></div>
           </div>
-
           <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-              Brand Guidelines &amp; Rules
-            </div>
-            <div class="inner-tabs">
-              <div class="inner-tab active" data-inner="text">Write Guidelines</div>
-              <div class="inner-tab" data-inner="upload">Upload File</div>
-            </div>
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> Brand Guidelines &amp; Rules</div>
+            <div class="inner-tabs"><div class="inner-tab active" data-inner="text">Write Guidelines</div><div class="inner-tab" data-inner="upload">Upload File</div></div>
             <div id="inner-text" class="inner-panel">
-              <textarea class="form-textarea" id="brand-guidelines" style="min-height:160px;" placeholder="e.g.
-• Logo must always appear on a white or brand-primary background
+              <textarea class="form-textarea" id="brand-guidelines" style="min-height:160px;">• Logo must always appear on a white or brand-primary background
 • Minimum logo size: 40px height on digital
-• Clear space: 1× logo height on all sides
-• Never stretch, rotate, or recolor the logo
-• Primary typeface: Neue Haas Grotesk Display
-• Minimum body text size: 12pt / 16px
-• Margins: 40px minimum on all sides for digital
-• Headlines must be set in brand-approved color palette only">• Logo must always appear on a white or brand-primary background
-• Minimum logo size: 40px height on digital
-• Clear space: 1× logo height on all sides
-• Never stretch, rotate, or recolor the logo
-• Primary typeface: Neue Haas Grotesk Display
-• Minimum body text size: 12pt / 16px
-• Margins: 40px minimum on all sides for digital
-• Headlines set in approved palette only
-• CTA buttons must use brand primary or secondary colors</textarea>
-              <div class="input-hint">Describe rules precisely. The AI uses this text verbatim as compliance criteria.</div>
+• Primary typeface: Neue Haas Grotesk Display</textarea>
             </div>
             <div id="inner-upload" class="inner-panel" style="display:none;">
               <div class="mini-upload" onclick="document.getElementById('guide-file').click()">
                 <div class="mini-upload-icon">📄</div>
-                <div class="mini-upload-text"><strong>Click to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported</div>
+                <div class="mini-upload-text" id="guide-upload-text"><strong>Click to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported</div>
               </div>
-              <input type="file" id="guide-file" accept=".pdf,.pptx,.docx" style="display:none">
+              <input type="file" id="guide-file" accept=".pdf,.pptx,.docx" style="display:none" onchange="handleGuidelineUpload(this)">
             </div>
           </div>
-
         </div>
-
-        <!-- Right column -->
         <div style="display:flex;flex-direction:column;gap:16px;">
-
           <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-              Brand Color Palette
-            </div>
-
-            <div class="palette-grid" id="palette-grid">
-              <!-- swatches injected by JS -->
-            </div>
-
-            <div class="hex-input-row">
-              <div class="hex-preview-swatch" id="hex-preview-swatch"></div>
-              <input type="text" class="form-input" id="hex-input" placeholder="#FF5A5F" style="font-family:var(--font-mono);font-size:13px;" maxlength="7">
-              <button class="btn btn-outline" onclick="addColor()" style="white-space:nowrap;flex-shrink:0;">+ Add</button>
-            </div>
-            <div class="input-hint mt-16" style="margin-top:8px;">Enter exact hex values from your brand book. Colors outside this palette will be flagged.</div>
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg> Brand Color Palette</div>
+            <div class="palette-grid" id="palette-grid"></div>
+            <div class="hex-input-row"><div class="hex-preview-swatch" id="hex-preview-swatch"></div><input type="text" class="form-input" id="hex-input" placeholder="#FF5A5F" style="font-family:var(--font-mono);font-size:13px;" maxlength="7"><button class="btn btn-outline" onclick="addColor()">+ Add</button></div>
           </div>
-
-          <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-              Approved Typefaces
-            </div>
-            <div id="typeface-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-              <!-- injected by JS -->
-            </div>
-            <div class="hex-input-row">
-              <input type="text" class="form-input" id="font-input" placeholder="e.g. Neue Haas Grotesk" style="font-size:13px;">
-              <button class="btn btn-outline" onclick="addFont()" style="white-space:nowrap;flex-shrink:0;">+ Add</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              Logo Upload
-            </div>
-            <div class="mini-upload" onclick="document.getElementById('logo-file').click()">
-              <div class="mini-upload-icon">🏷️</div>
-              <div class="mini-upload-text" id="logo-upload-text"><strong>Upload master logo</strong> files<br>SVG, PNG transparent preferred</div>
-            </div>
-            <input type="file" id="logo-file" accept=".svg,.png" style="display:none" onchange="handleLogoUpload(this)">
-          </div>
-
         </div>
       </div>
-
       <div class="divider"></div>
       <div style="display:flex;align-items:center;gap:14px;">
-        <button class="btn btn-primary btn-lg" onclick="saveGuidelines()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Save guidelines &amp; continue
-        </button>
-        <div class="saved-badge" id="saved-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Saved successfully
-        </div>
+        <button class="btn btn-primary btn-lg" onclick="saveGuidelines()">Save guidelines &amp; continue</button>
+        <div class="saved-badge" id="saved-badge">✅ Saved successfully</div>
       </div>
     </section>
 
-    <!-- ═══ TAB 2: UPLOAD & ANALYZE ═══ -->
     <section class="tab-panel" id="tab-upload">
-      <div class="page-header">
-        <div class="page-title">Upload Creative Asset</div>
-        <div class="page-sub">Drop in your finished creative. Brandcast AI will scan it against your brand guidelines in seconds.</div>
-      </div>
-
+      <div class="page-header"><div class="page-title">Upload Creative Asset</div><div class="page-sub">Drop in your finished creative. Brandcast AI will scan it against your brand guidelines in seconds.</div></div>
       <div class="grid-2" style="gap:20px;align-items:start;">
         <div style="display:flex;flex-direction:column;gap:16px;">
-
-          <!-- Drop Zone -->
-          <div class="drop-zone" id="drop-zone"
-            ondragover="handleDragOver(event)"
-            ondragleave="handleDragLeave(event)"
-            ondrop="handleDrop(event)"
-            onclick="document.getElementById('asset-file').click()">
+          <div class="drop-zone" id="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" onclick="document.getElementById('asset-file').click()">
             <div id="drop-content">
-              <div class="drop-zone-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
-              </div>
+              <div class="drop-zone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
               <div class="drop-zone-title">Drop your creative asset here</div>
               <div class="drop-zone-sub">or click to browse from your computer</div>
-              <div class="drop-zone-types">
-                <span class="file-type-tag">PNG</span>
-                <span class="file-type-tag">JPG</span>
-                <span class="file-type-tag">WEBP</span>
-                <span class="file-type-tag">GIF</span>
-              </div>
             </div>
-            <div class="preview-container" id="preview-container">
-              <img class="preview-img" id="preview-img" src="" alt="Preview">
-              <div class="preview-name" id="preview-name"></div>
-            </div>
+            <div class="preview-container" id="preview-container"><img class="preview-img" id="preview-img" src="" alt="Preview"><div class="preview-name" id="preview-name"></div></div>
             <input type="file" id="asset-file" accept=".png,.jpg,.jpeg,.webp,.gif" style="display:none" onchange="handleFileSelect(this)">
           </div>
-
-          <!-- Platform selector -->
           <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              Target Platform
-            </div>
-            <div class="platform-grid" id="platform-grid">
-              <!-- injected by JS -->
-            </div>
+            <div class="card-title">Target Platform</div>
+            <div class="platform-grid" id="platform-grid"></div>
           </div>
-
         </div>
-
         <div style="display:flex;flex-direction:column;gap:16px;">
-
           <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              Review Settings
-            </div>
-            <div class="form-group">
-              <label class="form-label">Sensitivity Level</label>
-              <select class="form-select" id="sensitivity">
-                <option value="strict">Strict — Flag all deviations</option>
-                <option value="standard" selected>Standard — Flag major issues</option>
-                <option value="lenient">Lenient — Flag critical only</option>
-              </select>
-            </div>
+            <div class="card-title">Review Settings</div>
             <div class="form-group">
               <label class="form-label">Apply Brand Profile</label>
-              <select class="form-select">
-                <option>Acme Creative Co. (active)</option>
-                <option>— Add profile —</option>
+              <select class="form-select" id="brand-profile-select" onchange="handleProfileChange(this)">
+                <option value="Acme Creative Co.">Acme Creative Co. (active)</option>
+                <option value="new">— Add profile —</option>
               </select>
             </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label class="form-label">Reviewer Notes <span style="opacity:.4;font-size:10px;">(optional)</span></label>
-              <textarea class="form-textarea" placeholder="Any context about this submission, client requests, edge cases…" style="min-height:80px;"></textarea>
-            </div>
           </div>
-
-          <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Review Checklist
-            </div>
-            <div id="checklist" style="display:flex;flex-direction:column;gap:8px;">
-              <!-- injected by JS -->
-            </div>
-          </div>
-
-          <button class="btn btn-teal btn-lg w-full" onclick="runReview()" id="run-btn" style="justify-content:center;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Run Automated Review
-          </button>
-          <div style="font-size:11px;color:var(--text-low);text-align:center;">Powered by Brandcast Vision Engine · avg. 3–8s analysis</div>
-
+          <button class="btn btn-teal btn-lg w-full" onclick="runReview()" id="run-btn" style="justify-content:center;">Run Automated Review</button>
         </div>
       </div>
     </section>
 
-    <!-- ═══ TAB 3: APPROVAL DASHBOARD ═══ -->
     <section class="tab-panel" id="tab-dashboard">
-      <div class="page-header">
-        <div class="page-title">Approval Dashboard</div>
-        <div class="page-sub">Brand compliance results, violation breakdowns, and historical review performance.</div>
-      </div>
-
-      <!-- KPI ROW -->
+      <div class="page-header"><div class="page-title">Approval Dashboard</div></div>
       <div class="kpi-grid" style="margin-bottom:20px;">
-        <div class="card kpi-card">
-          <div class="kpi-label">Total Reviews</div>
-          <div class="kpi-value" id="kpi-total">47<span class="kpi-unit"></span></div>
-          <div class="kpi-delta delta-up">↑ 12 this week</div>
-        </div>
-        <div class="card kpi-card">
-          <div class="kpi-label">Approval Rate</div>
-          <div class="kpi-value" id="kpi-rate">66<span class="kpi-unit">%</span></div>
-          <div class="kpi-delta delta-up">↑ 4% vs last month</div>
-        </div>
-        <div class="card kpi-card">
-          <div class="kpi-label">Avg. Review Time</div>
-          <div class="kpi-value" id="kpi-time">1.4<span class="kpi-unit">d</span></div>
-          <div class="kpi-delta delta-down">↓ 0.3d improvement</div>
-        </div>
-        <div class="card kpi-card">
-          <div class="kpi-label">Off-Brand Violation Rate</div>
-          <div class="kpi-value" id="kpi-viol">34<span class="kpi-unit">%</span></div>
-          <div class="kpi-delta delta-down">↓ 8% vs last month</div>
-        </div>
+        <div class="card kpi-card"><div class="kpi-label">Total Reviews</div><div class="kpi-value" id="kpi-total">47</div></div>
+        <div class="card kpi-card"><div class="kpi-label">Approval Rate</div><div class="kpi-value" id="kpi-rate">66%</div></div>
       </div>
 
-      <!-- LATEST RESULT (hidden until review runs) -->
       <div id="latest-result" style="display:none;">
         <div class="section-label">Latest Review Result</div>
-
         <div class="card" style="margin-bottom:16px;">
-          <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
-
-            <!-- Score ring -->
-            <div>
-              <div class="score-hero">
-                <div class="score-ring-wrap">
-                  <svg class="score-ring-svg" width="140" height="140" viewBox="0 0 140 140">
-                    <circle class="score-ring-bg" cx="70" cy="70" r="60"/>
-                    <circle class="score-ring-fill" id="main-ring" cx="70" cy="70" r="60"/>
-                  </svg>
-                  <div class="score-label">
-                    <div class="score-number" id="overall-num">—</div>
-                    <div class="score-denom">/10</div>
-                  </div>
-                </div>
-                <div class="score-info">
-                  <div class="score-verdict verdict-needs" id="verdict-badge">
-                    <span>⚠</span> <span id="verdict-text">Needs Edits</span>
-                  </div>
-                  <div style="font-family:var(--font-head);font-size:17px;font-weight:800;margin-bottom:4px;" id="result-brand-name">Acme Creative Co.</div>
-                  <div class="score-filename" id="result-filename">summer_campaign_v3.png</div>
-                  <div class="score-timestamp" id="result-timestamp">Reviewed just now · Meta Post · Standard sensitivity</div>
-                  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-                    <button class="btn btn-outline" style="font-size:12px;padding:7px 14px;" onclick="showToast('📋 Report copied to clipboard')">Export Report</button>
-                    <button class="btn btn-outline" style="font-size:12px;padding:7px 14px;" onclick="showToast('📧 Sent to design team')">Share with Team</button>
-                  </div>
-                </div>
-              </div>
+          <div class="score-hero">
+            <div class="score-ring-wrap">
+              <svg class="score-ring-svg" width="140" height="140" viewBox="0 0 140 140">
+                <circle class="score-ring-bg" cx="70" cy="70" r="60"/>
+                <circle class="score-ring-fill" id="main-ring" cx="70" cy="70" r="60"/>
+              </svg>
+              <div class="score-label"><div class="score-number" id="overall-num">—</div><div class="score-denom">/10</div></div>
             </div>
-
+            <div class="score-info">
+              <div class="score-verdict verdict-needs" id="verdict-badge"><span id="verdict-text">Needs Edits</span></div>
+              <div style="font-family:var(--font-head);font-size:17px;font-weight:800;margin-bottom:4px;" id="result-brand-name">Acme Creative Co.</div>
+              <div class="score-filename" id="result-filename">summer_campaign.png</div>
+              <div class="score-timestamp" id="result-timestamp">Reviewed just now</div>
+            </div>
           </div>
-        </div>
-
-        <!-- Score tiles -->
-        <div class="score-tiles" id="score-tiles">
-          <!-- injected by JS -->
         </div>
 
         <div class="grid-2" style="gap:16px;margin-bottom:16px;">
-          <!-- Category bars -->
           <div class="card">
-            <div class="card-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              Score Breakdown
-            </div>
-            <div class="cat-list" id="cat-bars">
-              <!-- injected by JS -->
-            </div>
+            <div class="card-title">Score Breakdown</div>
+            <div class="cat-list" id="cat-bars"></div>
           </div>
-
-          <!-- Violations -->
           <div class="card">
-            <div class="card-title" style="color:var(--red);">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Violations Found
-              <span style="margin-left:auto;background:var(--red-lo);color:var(--red);font-size:10px;padding:2px 8px;border-radius:99px;font-family:var(--font-mono);" id="viol-count">0</span>
-            </div>
-            <div class="violation-list" id="violation-list">
-              <!-- injected by JS -->
-            </div>
+            <div class="card-title" style="color:var(--red);">Violations Found <span style="margin-left:auto;background:var(--red-lo);color:var(--red);font-size:10px;padding:2px 8px;border-radius:99px;font-family:var(--font-mono);" id="viol-count">0</span></div>
+            <div class="violation-list" id="violation-list"></div>
           </div>
         </div>
       </div>
 
-      <!-- HISTORY TABLE -->
       <div class="section-label">Review History</div>
       <div class="card" style="padding:0;overflow:hidden;">
         <table class="history-table" id="history-table">
-          <thead>
-            <tr>
-              <th>Asset</th>
-              <th>Platform</th>
-              <th>Overall Score</th>
-              <th>Status</th>
-              <th>Violations</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody id="history-tbody">
-            <!-- injected by JS -->
-          </tbody>
+          <thead><tr><th>Asset</th><th>Platform</th><th>Overall Score</th><th>Status</th><th>Violations</th><th>Date</th></tr></thead>
+          <tbody id="history-tbody"></tbody>
         </table>
       </div>
     </section>
-
   </main>
 </div>
 
-<!-- ═══ ANALYZE OVERLAY ═══ -->
 <div class="analyze-overlay" id="analyze-overlay">
   <div class="analyze-box">
     <div style="font-size:36px;margin-bottom:10px;">🔍</div>
     <div class="analyze-title">Analyzing Asset…</div>
-    <div class="analyze-sub">Running brand compliance checks against your guidelines</div>
-    <div class="analyze-steps" id="analyze-steps">
-      <div class="analyze-step" data-step="0"><div class="step-dot"></div>Scanning logo placement &amp; distortion</div>
-      <div class="analyze-step" data-step="1"><div class="step-dot"></div>Checking color hexadecimal values</div>
-      <div class="analyze-step" data-step="2"><div class="step-dot"></div>Inspecting typography &amp; font sizes</div>
-      <div class="analyze-step" data-step="3"><div class="step-dot"></div>Measuring margin &amp; layout boundaries</div>
-      <div class="analyze-step" data-step="4"><div class="step-dot"></div>Generating compliance score</div>
-    </div>
     <div class="analyze-bar-wrap">
       <div class="analyze-bar-track"><div class="analyze-bar-fill" id="analyze-bar"></div></div>
       <div class="analyze-pct" id="analyze-pct">0%</div>
@@ -1066,66 +429,51 @@
   </div>
 </div>
 
-<!-- ═══ TOAST ═══ -->
-<div class="toast" id="toast">
-  <span class="toast-icon">✅</span>
-  <span id="toast-msg">Action completed</span>
+<div class="analyze-overlay" id="history-modal" onclick="closeHistoryModal(event)">
+  <div class="analyze-box" style="text-align:left; width: 500px;" onclick="event.stopPropagation()">
+    <div class="card-title" style="margin-bottom: 5px;">Historical Review Audit</div>
+    <div id="history-modal-content"></div>
+    <button class="btn btn-outline" style="margin-top: 20px; width: 100%; justify-content:center;" onclick="document.getElementById('history-modal').classList.remove('visible')">Close</button>
+  </div>
 </div>
+
+<div class="toast" id="toast"><span class="toast-icon">✅</span><span id="toast-msg">Action completed</span></div>
 
 <script>
 /* ═══════════════════════════════════════════════
-   STATE
-════════════════════════════════════════════════ */
+   STATE & DATA
+═══════════════════════════════════════════════ */
 const state = {
   palette: ['#D4351C', '#1B2B4B', '#F5F0E8', '#00A896', '#F2C94C'],
-  fonts: ['Neue Haas Grotesk Display', 'Neue Haas Grotesk Text'],
   selectedPlatform: 'meta-post',
   uploadedFile: null,
-  guideFile: null,
-  assetMeta: null,
+  imageDimensions: { w: 0, h: 0 },
   reviewDone: false,
   scores: null,
-  historyCount: 47,
-  brandProfiles: [],
-  currentProfileId: null,
 };
 
 const platforms = [
-  { id:'meta-post',        icon:'📘', name:'Meta Post',        width:1200, height:630 },
-  { id:'instagram-story',  icon:'📸', name:'IG Story',         width:1080, height:1920 },
-  { id:'tiktok',           icon:'🎵', name:'TikTok',           width:1080, height:1920 },
-  { id:'pinterest',        icon:'📌', name:'Pinterest',        width:1000, height:1500 },
-  { id:'google-ad',        icon:'🟦', name:'Google Ad',        width:1200, height:1200 },
-  { id:'youtube',          icon:'▶️', name:'YouTube',          width:1280, height:720 },
-  { id:'twitter-x',        icon:'✖️', name:'Twitter / X',      width:1200, height:675 },
-  { id:'linkedin',         icon:'💼', name:'LinkedIn',         width:1200, height:627 },
-  { id:'email-banner',     icon:'📧', name:'Email Banner',     width:1200, height:400 },
+  { id:'meta-post',     icon:'📘', name:'Meta Post', w: 1080, h: 1080 },
+  { id:'instagram-story', icon:'📸', name:'IG Story', w: 1080, h: 1920 },
+  { id:'tiktok',        icon:'🎵', name:'TikTok', w: 1080, h: 1920 },
+  { id:'pinterest',     icon:'📌', name:'Pinterest', w: 1000, h: 1500 },
+  { id:'google-ad',     icon:'🟦', name:'Google Ad', w: 300, h: 250 },
+  { id:'linkedin',      icon:'💼', name:'LinkedIn', w: 1200, h: 627 },
 ];
 
-const checklist = [
-  'Logo placement & distortion',
-  'Color palette compliance',
-  'Typography & font matching',
-  'Layout & margin boundaries',
-  'Contrast & readability',
-];
-
-const history = [
-  { name:'hero_banner_jul.png',     platform:'Meta Post',        score:8.2, status:'approved', viols:1, date:'Jul 14, 2025' },
-  { name:'summer_promo_v2.jpg',     platform:'IG Story',         score:4.9, status:'needs',    viols:5, date:'Jul 12, 2025' },
-  { name:'product_launch_ad.png',   platform:'Google Ad',        score:9.1, status:'approved', viols:0, date:'Jul 11, 2025' },
-  { name:'q2_report_cover.jpg',     platform:'LinkedIn',         score:6.5, status:'needs',    viols:3, date:'Jul 9, 2025'  },
-  { name:'email_header_may.png',    platform:'Email Banner',     score:7.8, status:'approved', viols:2, date:'Jul 7, 2025'  },
-  { name:'tiktok_thumbnail_v1.jpg', platform:'TikTok',           score:3.2, status:'rejected', viols:7, date:'Jul 4, 2025'  },
+const historyData = [
+  { name:'hero_banner_jul.png', platform:'Meta Post', score:8.2, status:'approved', viols:1, date:'Jul 14, 2025', details: 'Minor typography spacing issue. Approved.' },
+  { name:'summer_promo_v2.jpg', platform:'IG Story', score:4.9, status:'needs', viols:5, date:'Jul 12, 2025', details: 'Critical failure: Wrong dimensions (uploaded 1080x1080, expected 1080x1920), logo distorted, unapproved colors used.' },
+  { name:'product_launch_ad.png', platform:'Google Ad', score:9.1, status:'approved', viols:0, date:'Jul 11, 2025', details: 'Perfect compliance. No issues found.' }
 ];
 
 /* ═══════════════════════════════════════════════
-   NAVIGATION
-════════════════════════════════════════════════ */
+   TAB NAVIGATION
+═══════════════════════════════════════════════ */
 const topbarMeta = {
-  'brand-setup': { title:'Brand Setup',        crumb:'Configure your brand identity source of truth',        action:'New Review' },
-  'upload':      { title:'Upload & Analyze',   crumb:'Submit a creative asset for compliance review',       action:'Brand Setup' },
-  'dashboard':   { title:'Approval Dashboard', crumb:'Compliance results and review history',               action:'New Review' },
+  'brand-setup': { title:'Brand Setup', crumb:'Configure your brand identity source of truth' },
+  'upload':      { title:'Upload & Analyze', crumb:'Submit a creative asset for compliance review' },
+  'dashboard':   { title:'Approval Dashboard', crumb:'Compliance results and review history' },
 };
 
 document.querySelectorAll('.nav-item[data-tab]').forEach(el => {
@@ -1137,346 +485,104 @@ function switchTab(tab) {
   document.querySelector(`.nav-item[data-tab="${tab}"]`).classList.add('active');
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById(`tab-${tab}`).classList.add('active');
-  const m = topbarMeta[tab];
-  document.getElementById('topbar-title').textContent = m.title;
-  document.getElementById('topbar-crumb').textContent = m.crumb;
-  document.getElementById('topbar-action').textContent = m.action;
-  document.getElementById('main-scroll').scrollTop = 0;
-
-  if (tab === 'dashboard' && state.reviewDone) animateScores();
+  
+  document.getElementById('topbar-title').textContent = topbarMeta[tab].title;
+  document.getElementById('topbar-crumb').textContent = topbarMeta[tab].crumb;
+  
+  if(tab === 'dashboard' && state.reviewDone) animateScores();
 }
 
-document.getElementById('topbar-action').addEventListener('click', () => {
-  const cur = document.querySelector('.nav-item.active').dataset.tab;
-  if (cur === 'brand-setup') switchTab('upload');
-  else switchTab('upload');
-});
-
 /* ═══════════════════════════════════════════════
-   INNER TABS (Brand Guidelines)
-════════════════════════════════════════════════ */
+   BRAND PROFILES & GUIDELINES
+═══════════════════════════════════════════════ */
+function handleProfileChange(selectObj) {
+  if (selectObj.value === 'new') {
+    const newBrand = prompt("Enter new brand profile name:");
+    if (newBrand && newBrand.trim() !== '') {
+      const newOption = document.createElement('option');
+      newOption.value = newBrand;
+      newOption.text = newBrand + " (active)";
+      selectObj.add(newOption, selectObj.options[0]);
+      selectObj.value = newBrand;
+      document.getElementById('brand-name').value = newBrand;
+      showToast(`🏢 Created profile: ${newBrand}`);
+    } else {
+      selectObj.selectedIndex = 0; // revert
+    }
+  } else {
+    document.getElementById('brand-name').value = selectObj.value;
+  }
+}
+
 document.querySelectorAll('.inner-tab').forEach(el => {
   el.addEventListener('click', () => {
     document.querySelectorAll('.inner-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     const target = el.dataset.inner;
-    document.getElementById('inner-text').style.display   = target === 'text'   ? 'block' : 'none';
-    document.getElementById('inner-upload').style.display = target === 'upload' ? 'block' : 'none';
+    document.getElementById('inner-text').style.display = target==='text' ? 'block' : 'none';
+    document.getElementById('inner-upload').style.display = target==='upload' ? 'block' : 'none';
   });
 });
 
-/* ═══════════════════════════════════════════════
-   COLOR PALETTE
-════════════════════════════════════════════════ */
-function renderPalette() {
-  const grid = document.getElementById('palette-grid');
-  grid.innerHTML = '';
-  state.palette.forEach((hex, i) => {
-    const chip = document.createElement('div');
-    chip.className = 'color-chip';
-    chip.innerHTML = `
-      <div class="color-swatch" style="background:${hex};" title="${hex}">
-        <div class="color-remove" onclick="removeColor(${i},event)">✕</div>
-      </div>
-      <div class="color-hex">${hex}</div>
-    `;
-    grid.appendChild(chip);
-  });
-  const addBtn = document.createElement('div');
-  addBtn.innerHTML = `<button class="add-color-btn" onclick="focusHexInput()">+</button>`;
-  grid.appendChild(addBtn);
-}
-
-function removeColor(i, e) {
-  e.stopPropagation();
-  state.palette.splice(i, 1);
-  renderPalette();
-}
-
-function focusHexInput() {
-  document.getElementById('hex-input').focus();
-}
-
-function addColor() {
-  const val = document.getElementById('hex-input').value.trim();
-  if (/^#([0-9A-Fa-f]{6})$/.test(val)) {
-    state.palette.push(val.toUpperCase());
-    renderPalette();
-    document.getElementById('hex-input').value = '';
-    document.getElementById('hex-preview-swatch').style.background = '#fff';
-    showToast('🎨 Color added to palette');
-  } else {
-    showToast('⚠️ Please enter a valid hex code (e.g. #FF5A5F)');
+function handleGuidelineUpload(input) {
+  if(input.files[0]) {
+    document.getElementById('guide-upload-text').innerHTML = `<strong>✅ ${input.files[0].name}</strong><br><span style="color:var(--green)">Document Parsed</span>`;
+    showToast('📄 Guidelines document successfully imported');
   }
 }
 
-document.getElementById('hex-input').addEventListener('input', function () {
+/* ═══════════════════════════════════════════════
+   PALETTE
+═══════════════════════════════════════════════ */
+function renderPalette() {
+  const grid = document.getElementById('palette-grid');
+  grid.innerHTML = state.palette.map((hex, i) => `
+    <div class="color-chip">
+      <div class="color-swatch" style="background:${hex};"><div class="color-remove" onclick="removeColor(${i},event)">✕</div></div>
+      <div class="color-hex">${hex}</div>
+    </div>
+  `).join('') + `<div onclick="document.getElementById('hex-input').focus()"><button class="add-color-btn">+</button></div>`;
+}
+function removeColor(i, e) { e.stopPropagation(); state.palette.splice(i, 1); renderPalette(); }
+function addColor() {
+  const val = document.getElementById('hex-input').value.trim();
+  if(/^#([0-9A-Fa-f]{6})$/.test(val)) {
+    state.palette.push(val.toUpperCase()); renderPalette();
+    document.getElementById('hex-input').value = '';
+    showToast('🎨 Color added to palette');
+  } else showToast('⚠️ Enter valid hex (e.g. #FF5A5F)');
+}
+document.getElementById('hex-input').addEventListener('input', function() {
   const v = this.value.trim();
-  document.getElementById('hex-preview-swatch').style.background =
-    /^#([0-9A-Fa-f]{6})$/.test(v) ? v : 'var(--border)';
-});
-document.getElementById('hex-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addColor();
+  document.getElementById('hex-preview-swatch').style.background = /^#([0-9A-Fa-f]{6})$/.test(v) ? v : 'var(--border)';
 });
 
+function saveGuidelines() {
+  document.getElementById('saved-badge').classList.add('visible');
+  showToast('✅ Brand guidelines saved successfully');
+  setTimeout(() => document.getElementById('saved-badge').classList.remove('visible'), 3000);
+}
+
 /* ═══════════════════════════════════════════════
-   TYPEFACES
-════════════════════════════════════════════════ */
-function renderFonts() {
-  const list = document.getElementById('typeface-list');
-  list.innerHTML = state.fonts.map((f, i) => `
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg-mid);border:1px solid var(--border);border-radius:8px;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-      <span style="flex:1;font-size:13px;">${f}</span>
-      <span onclick="removeFont(${i})" style="cursor:pointer;color:var(--text-low);font-size:12px;padding:2px 6px;border-radius:4px;" title="Remove">✕</span>
+   PLATFORMS & ASSET UPLOAD
+═══════════════════════════════════════════════ */
+function renderPlatforms() {
+  const grid = document.getElementById('platform-grid');
+  grid.innerHTML = platforms.map(p => `
+    <div class="platform-opt ${p.id===state.selectedPlatform?'selected':''}" onclick="selectPlatform('${p.id}')">
+      <span class="plat-icon">${p.icon}</span>
+      <div class="plat-name">${p.name}</div>
+      <span class="plat-dims">${p.w}x${p.h}</span>
     </div>
   `).join('');
 }
 
-function addFont() {
-  const val = document.getElementById('font-input').value.trim();
-  if (val) {
-    state.fonts.push(val);
-    renderFonts();
-    document.getElementById('font-input').value = '';
-    showToast('✏️ Typeface added');
-  }
-}
-function removeFont(i) {
-  state.fonts.splice(i, 1);
-  renderFonts();
-}
-document.getElementById('font-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addFont();
-});
+function selectPlatform(id) { state.selectedPlatform = id; renderPlatforms(); }
 
-/* ═══════════════════════════════════════════════
-   LOGO UPLOAD
-════════════════════════════════════════════════ */
-function handleLogoUpload(input) {
-  if (input.files[0]) {
-    const name = input.files[0].name;
-    document.getElementById('logo-upload-text').innerHTML =
-      `<strong>✅ ${name}</strong><br><span style="color:var(--green)">Logo uploaded</span>`;
-    // sync into active profile if present
-    if (state.brandProfiles && state.currentProfileId) {
-      const profile = state.brandProfiles.find(p => p.id === state.currentProfileId);
-      if (profile) profile.logoName = name;
-    }
-    showToast('🏷️ Logo file loaded');
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   BRAND GUIDELINES FILE UPLOAD
-════════════════════════════════════════════════ */
-function handleGuideUpload(input) {
-  if (input.files[0]) {
-    state.guideFile = input.files[0];
-    const name = input.files[0].name;
-    const txt = document.querySelector('#inner-upload .mini-upload-text');
-    if (txt) {
-      txt.innerHTML =
-        `<strong>✅ ${name}</strong><br><span style="color:var(--green)">Guidelines file attached</span>`;
-    }
-    if (state.brandProfiles && state.currentProfileId) {
-      const profile = state.brandProfiles.find(p => p.id === state.currentProfileId);
-      if (profile) profile.guideFileName = name;
-    }
-    showToast('📄 Brand guidelines file attached');
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   BRAND PROFILES
-════════════════════════════════════════════════ */
-function initBrandProfiles() {
-  const nameInput = document.getElementById('brand-name');
-  const guidelinesTextarea = document.getElementById('brand-guidelines');
-  const initialName = nameInput ? (nameInput.value || 'Untitled Brand') : 'Untitled Brand';
-  const initialGuidelines = guidelinesTextarea ? guidelinesTextarea.value : '';
-  const profile = {
-    id: 'profile-1',
-    name: initialName,
-    active: true,
-    guidelinesText: initialGuidelines,
-    palette: [...state.palette],
-    fonts: [...state.fonts],
-    logoName: null,
-    guideFileName: null,
-  };
-  state.brandProfiles = [profile];
-  state.currentProfileId = profile.id;
-  renderProfileSelect();
-  updateProfileHint();
-}
-
-function renderProfileSelect() {
-  const select = document.getElementById('brand-profile-select');
-  if (!select) return;
-  select.innerHTML = '';
-  state.brandProfiles.forEach(profile => {
-    const opt = document.createElement('option');
-    opt.value = profile.id;
-    opt.textContent = profile.name + (profile.active ? ' (active)' : '');
-    if (profile.id === state.currentProfileId) opt.selected = true;
-    select.appendChild(opt);
-  });
-  const addOpt = document.createElement('option');
-  addOpt.value = '__add';
-  addOpt.textContent = '＋ Add new profile…';
-  select.appendChild(addOpt);
-}
-
-function updateProfileHint() {
-  const hint = document.getElementById('profile-hint');
-  if (!hint) return;
-  const active = state.brandProfiles.find(p => p.id === state.currentProfileId);
-  hint.textContent = active ? `Active profile: ${active.name}` : 'No active profile selected';
-}
-
-function handleProfileChange(selectEl) {
-  const value = selectEl.value;
-  if (value === '__add') {
-    // reset to current to avoid selecting the placeholder
-    selectEl.value = state.currentProfileId || '';
-    const name = window.prompt('Name for new brand profile?');
-    if (!name) return;
-    const current = state.brandProfiles.find(p => p.id === state.currentProfileId);
-    const newProfile = {
-      id: 'profile-' + (state.brandProfiles.length + 1),
-      name,
-      active: true,
-      guidelinesText: document.getElementById('brand-guidelines')?.value || '',
-      palette: [...state.palette],
-      fonts: [...state.fonts],
-      logoName: current?.logoName || null,
-      guideFileName: current?.guideFileName || null,
-    };
-    state.brandProfiles.forEach(p => (p.active = false));
-    state.brandProfiles.push(newProfile);
-    state.currentProfileId = newProfile.id;
-    renderProfileSelect();
-    updateProfileHint();
-    applyProfileToBrandSetup(newProfile);
-    showToast('🆕 Brand profile created');
-  } else {
-    const profile = state.brandProfiles.find(p => p.id === value);
-    if (!profile) return;
-    state.currentProfileId = profile.id;
-    state.brandProfiles.forEach(p => (p.active = p.id === profile.id));
-    applyProfileToBrandSetup(profile);
-    renderProfileSelect();
-    updateProfileHint();
-    showToast('📂 Applied brand profile');
-  }
-}
-
-function applyProfileToBrandSetup(profile) {
-  if (!profile) return;
-  const nameInput = document.getElementById('brand-name');
-  const guidelinesTextarea = document.getElementById('brand-guidelines');
-  if (nameInput) nameInput.value = profile.name;
-  if (guidelinesTextarea) guidelinesTextarea.value = profile.guidelinesText || '';
-  if (profile.palette && profile.palette.length) {
-    state.palette = [...profile.palette];
-    renderPalette();
-  }
-  if (profile.fonts && profile.fonts.length) {
-    state.fonts = [...profile.fonts];
-    renderFonts();
-  }
-  if (profile.logoName) {
-    document.getElementById('logo-upload-text').innerHTML =
-      `<strong>✅ ${profile.logoName}</strong><br><span style="color:var(--green)">Logo uploaded</span>`;
-  }
-  if (profile.guideFileName) {
-    const txt = document.querySelector('#inner-upload .mini-upload-text');
-    if (txt) {
-      txt.innerHTML =
-        `<strong>✅ ${profile.guideFileName}</strong><br><span style="color:var(--green)">Guidelines file attached</span>`;
-    }
-  }
-}
-
-/* ═══════════════════════════════════════════════
-   SAVE GUIDELINES
-════════════════════════════════════════════════ */
-function saveGuidelines() {
-  const badge = document.getElementById('saved-badge');
-  badge.classList.add('visible');
-  if (state.brandProfiles && state.currentProfileId) {
-    const profile = state.brandProfiles.find(p => p.id === state.currentProfileId);
-    if (profile) {
-      profile.name = document.getElementById('brand-name').value || profile.name;
-      profile.guidelinesText = document.getElementById('brand-guidelines')?.value || '';
-      profile.palette = [...state.palette];
-      profile.fonts = [...state.fonts];
-    }
-    renderProfileSelect();
-    updateProfileHint();
-  }
-  showToast('✅ Brand guidelines saved successfully');
-  setTimeout(() => badge.classList.remove('visible'), 3000);
-}
-
-/* ═══════════════════════════════════════════════
-   PLATFORMS
-════════════════════════════════════════════════ */
-function renderPlatforms() {
-  const grid = document.getElementById('platform-grid');
-  grid.innerHTML = platforms
-    .map(p => `
-      <div class="platform-opt ${p.id === state.selectedPlatform ? 'selected' : ''}" onclick="selectPlatform('${p.id}')">
-        <span class="plat-icon">${p.icon}</span>
-        <div class="plat-name">${p.name}</div>
-      </div>
-    `)
-    .join('');
-}
-
-function selectPlatform(id) {
-  state.selectedPlatform = id;
-  renderPlatforms();
-  updateSizeWarning();
-}
-
-/* ═══════════════════════════════════════════════
-   CHECKLIST
-════════════════════════════════════════════════ */
-function renderChecklist() {
-  document.getElementById('checklist').innerHTML = checklist
-    .map(
-      item => `
-    <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--text-mid);">
-      <input type="checkbox" checked style="accent-color:var(--accent);width:14px;height:14px;">
-      ${item}
-    </label>
-  `
-    )
-    .join('');
-}
-
-/* ═══════════════════════════════════════════════
-   FILE DROP / SELECT + SIZE CHECK
-════════════════════════════════════════════════ */
-function handleDragOver(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.add('drag-over');
-}
-function handleDragLeave(e) {
-  document.getElementById('drop-zone').classList.remove('drag-over');
-}
-function handleDrop(e) {
-  e.preventDefault();
-  const dz = document.getElementById('drop-zone');
-  dz.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file) loadFile(file);
-}
-function handleFileSelect(input) {
-  if (input.files[0]) loadFile(input.files[0]);
-}
+function handleDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over'); }
+function handleDragLeave(e) { document.getElementById('drop-zone').classList.remove('drag-over'); }
+function handleDrop(e) { e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over'); if(e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]); }
+function handleFileSelect(input) { if(input.files[0]) loadFile(input.files[0]); }
 
 function loadFile(file) {
   state.uploadedFile = file;
@@ -1486,367 +592,184 @@ function loadFile(file) {
     const pc = document.getElementById('preview-container');
     pc.classList.add('visible');
     document.getElementById('preview-img').src = ev.target.result;
-    document.getElementById('preview-name').textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+    document.getElementById('preview-name').textContent = `📎 ${file.name} (${(file.size/1024).toFixed(1)} KB)`;
     document.getElementById('drop-zone').classList.add('has-file');
-    document.getElementById('pending-badge').style.display = 'flex';
-
-    // read dimensions for size check
+    
+    // Extract actual dimensions for validation
     const img = new Image();
-    img.onload = () => {
-      state.assetMeta = { width: img.width, height: img.height };
-      updateSizeWarning();
+    img.onload = function() {
+      state.imageDimensions = { w: this.width, h: this.height };
     };
     img.src = ev.target.result;
+
   };
   reader.readAsDataURL(file);
   showToast(`📁 ${file.name} loaded`);
 }
 
-function updateSizeWarning() {
-  const el = document.getElementById('size-warning');
-  if (!el) return;
-  if (!state.assetMeta) {
-    el.textContent = '';
-    return;
-  }
-  const plat = platforms.find(p => p.id === state.selectedPlatform);
-  if (!plat || !plat.width || !plat.height) {
-    el.textContent = '';
-    return;
-  }
-  const w = state.assetMeta.width;
-  const h = state.assetMeta.height;
-  const ratio = w / h;
-  const expectedRatio = plat.width / plat.height;
-  const diff = Math.abs(ratio - expectedRatio) / expectedRatio;
-  if (diff < 0.05) {
-    el.style.color = 'var(--green)';
-    el.textContent = `✅ ${w}×${h} matches ${plat.name} (${plat.width}×${plat.height}).`;
-  } else {
-    el.style.color = 'var(--amber)';
-    el.textContent = `⚠️ ${w}×${h} differs from ${plat.name} (${plat.width}×${plat.height}). Expect cropping or padding.`;
-  }
-}
-
 /* ═══════════════════════════════════════════════
-   RUN REVIEW
-════════════════════════════════════════════════ */
+   REVIEW & VALIDATION LOGIC
+═══════════════════════════════════════════════ */
 function runReview() {
-  if (!state.uploadedFile) {
-    showToast('⚠️ Please upload a creative asset first');
-    return;
-  }
-
+  if(!state.uploadedFile) return showToast("⚠️ Please upload a creative asset first");
+  
   const overlay = document.getElementById('analyze-overlay');
   overlay.classList.add('visible');
-
-  const steps = document.querySelectorAll('.analyze-step');
   const bar = document.getElementById('analyze-bar');
   const pct = document.getElementById('analyze-pct');
 
   let current = 0;
-  const pcts = [20, 40, 60, 80, 100];
-
-  function advance() {
-    if (current < steps.length) {
-      if (current > 0) {
-        steps[current - 1].classList.add('done');
-        steps[current - 1].classList.remove('running');
-      }
-      steps[current].classList.add('running');
-      bar.style.width = pcts[current] + '%';
-      pct.textContent = pcts[current] + '%';
-      current++;
-      setTimeout(advance, 1100);
-    } else {
-      steps[steps.length - 1].classList.add('done');
-      steps[steps.length - 1].classList.remove('running');
+  const interval = setInterval(() => {
+    current += 10;
+    bar.style.width = current + '%';
+    pct.textContent = current + '%';
+    if(current >= 100) {
+      clearInterval(interval);
       setTimeout(() => {
         overlay.classList.remove('visible');
-        steps.forEach(s => {
-          s.classList.remove('done', 'running');
-        });
         bar.style.width = '0%';
-        pct.textContent = '0%';
         buildResults();
         switchTab('dashboard');
-        document.getElementById('pending-badge').style.display = 'none';
-      }, 600);
+      }, 500);
     }
-  }
-  advance();
+  }, 150);
 }
 
-/* ═══════════════════════════════════════════════
-   MOCK SCORES + RESULT RENDERING
-════════════════════════════════════════════════ */
 function buildResults() {
   const plat = platforms.find(p => p.id === state.selectedPlatform);
-  const filename = state.uploadedFile ? state.uploadedFile.name : 'summer_campaign_v3.png';
+  const filename = state.uploadedFile.name;
+  
+  // Base mock score
+  let scores = { logo: 7.5, color: 8.5, layout: 9.0, overall: 8.3 };
+  let violations = [];
 
-  const scores = {
-    logo: 7.5,
-    color: 5.5,
-    typography: 6.0,
-    layout: 8.0,
-    overall: 6.8,
-  };
+  // DYNAMIC VALIDATION: Check platform dimensions
+  if (state.imageDimensions.w > 0) {
+    if (state.imageDimensions.w !== plat.w || state.imageDimensions.h !== plat.h) {
+      scores.layout = 3.0; // penalize layout heavily
+      scores.overall = 5.5; 
+      violations.push({
+        catLabel:'Layout', cls:'vi-layout', icon:'🟡',
+        text:`<strong>Platform Dimension Mismatch:</strong> Uploaded asset is ${state.imageDimensions.w}x${state.imageDimensions.h}. Selected platform (${plat.name}) strictly requires ${plat.w}x${plat.h}.`
+      });
+    } else {
+      violations.push({
+        catLabel:'Layout', cls:'vi-layout', icon:'🟢',
+        text:`<strong>Perfect Sizing:</strong> Asset matches ${plat.name} specs exactly (${plat.w}x${plat.h}).`
+      });
+    }
+  }
+
+  // Add a static mock violation for flavor
+  violations.push({
+    catLabel:'Logo', cls:'vi-logo', icon:'🔴',
+    text:'<strong>Logo clear space:</strong> Background elements intrude on logo minimum padding.'
+  });
+
   state.scores = scores;
   state.reviewDone = true;
 
-  const violations = [
-    { cat:'logo',   icon:'🔴', cls:'vi-logo',  catLabel:'Logo',       text:'<strong>Logo distortion detected:</strong> Primary logo scaled non-proportionally (15% horizontal stretch applied).' },
-    { cat:'color',  icon:'🔵', cls:'vi-color', catLabel:'Color',      text:'<strong>Off-brand background color:</strong> Found <code style="font-family:var(--font-mono);font-size:11px;background:var(--bg);padding:1px 5px;border-radius:4px;">#E8432A</code>. Expected brand red <code style="font-family:var(--font-mono);font-size:11px;background:var(--bg);padding:1px 5px;border-radius:4px;">#D4351C</code> (ΔE: 4.2).' },
-    { cat:'type',   icon:'🟢', cls:'vi-type',  catLabel:'Typography', text:`<strong>Unapproved typeface:</strong> Headline uses 'Helvetica Neue', which is not in the approved typefaces list.` },
-    { cat:'type',   icon:'🟢', cls:'vi-type',  catLabel:'Typography', text:'<strong>Readability threshold:</strong> Body copy at 9pt falls below minimum 12pt. Text may be unreadable at final print size.' },
-    { cat:'layout', icon:'🟡', cls:'vi-layout',catLabel:'Layout',     text:'<strong>Margin violation:</strong> CTA button extends 8px beyond the defined right margin boundary (40px required).' },
-  ];
-
-  const platformName = plat ? plat.name : 'Meta Post';
-  const brandName = document.getElementById('brand-name').value || 'Acme Creative Co.';
-  const sensitivityLabel = document.getElementById('sensitivity')?.value || 'standard';
-  const timestampLabel = `Reviewed just now · ${platformName} · ${sensitivityLabel.charAt(0).toUpperCase() + sensitivityLabel.slice(1)} sensitivity`;
-
-  renderResultView({
-    filename,
-    brandName,
-    platformName,
-    scores,
-    violations,
-    timestampLabel,
-  });
-
-  // push to history
-  const record = {
-    name: filename,
-    platform: platformName,
-    score: scores.overall,
-    status: scores.overall >= 8 ? 'approved' : 'needs',
-    viols: violations.length,
-    date: 'Just now',
-  };
-  history.unshift(record);
-  renderHistory();
-  state.historyCount = history.length;
-  const dashBadge = document.getElementById('dash-badge');
-  if (dashBadge) dashBadge.textContent = state.historyCount;
-}
-
-function renderResultView({ filename, brandName, platformName, scores, violations, timestampLabel }) {
-  // verdict badge
+  // Verdict UI
   const verdictEl = document.getElementById('verdict-badge');
   const verdictTxt = document.getElementById('verdict-text');
-  if (scores.overall >= 8.5) {
-    verdictEl.className = 'score-verdict verdict-approved';
-    verdictTxt.textContent = 'Approved';
+  if(scores.overall >= 8.0) {
+    verdictEl.className = 'score-verdict verdict-approved'; verdictTxt.textContent = 'Approved';
   } else {
-    verdictEl.className = 'score-verdict verdict-needs';
-    verdictTxt.textContent = 'Needs Edits';
+    verdictEl.className = 'score-verdict verdict-needs'; verdictTxt.textContent = 'Needs Edits';
   }
 
   document.getElementById('result-filename').textContent = filename;
-  document.getElementById('result-brand-name').textContent = brandName;
-  document.getElementById('result-timestamp').textContent = timestampLabel;
-
-  // violations list
+  const selectedProfile = document.getElementById('brand-profile-select').value;
+  document.getElementById('result-brand-name').textContent = selectedProfile !== 'new' ? selectedProfile : 'Acme Creative Co.';
+  
   document.getElementById('viol-count').textContent = violations.length;
-  const violList = document.getElementById('violation-list');
-  violList.innerHTML = violations
-    .map(
-      (v, i) => `
-    <div class="violation-item" style="animation-delay:${i * 80}ms;">
+  document.getElementById('violation-list').innerHTML = violations.map(v => `
+    <div class="violation-item">
       <div class="violation-icon ${v.cls}">${v.icon}</div>
-      <div>
-        <div class="violation-text">${v.text}</div>
-        <div class="violation-cat" style="color:var(--text-low);">${v.catLabel}</div>
-      </div>
+      <div><div class="violation-text">${v.text}</div><div class="violation-cat" style="color:var(--text-low);">${v.catLabel}</div></div>
     </div>
-  `
-    )
-    .join('');
+  `).join('');
 
-  // score tiles
-  const tiles = [
-    { label: 'Logo Placement',     value: scores.logo,       color: 'var(--red)',    fill: '#f05252' },
-    { label: 'Color Palette',      value: scores.color,      color: 'var(--accent)', fill: '#5c7cfa' },
-    { label: 'Typography',         value: scores.typography, color: 'var(--teal)',   fill: '#00d4aa' },
-    { label: 'Layout & Margin',    value: scores.layout,     color: 'var(--amber)',  fill: '#f5a623' },
-  ];
-  document.getElementById('score-tiles').innerHTML = tiles
-    .map(
-      t => `
-    <div class="score-tile">
-      <div class="tile-label">${t.label}</div>
-      <div class="tile-value" style="color:${t.color};" data-val="${t.value}">—</div>
-      <div class="tile-bar"><div class="tile-bar-fill" style="background:${t.fill};" data-pct="${t.value * 10}"></div></div>
-    </div>
-  `
-    )
-    .join('');
+  document.getElementById('cat-bars').innerHTML = `
+    <div class="cat-row"><div class="cat-header"><div class="cat-name">Logo</div><div class="cat-score">${scores.logo}/10</div></div></div>
+    <div class="cat-row"><div class="cat-header"><div class="cat-name">Color</div><div class="cat-score">${scores.color}/10</div></div></div>
+    <div class="cat-row"><div class="cat-header"><div class="cat-name">Layout & Sizing</div><div class="cat-score">${scores.layout}/10</div></div></div>
+  `;
 
-  // category bars
-  const cats = [
-    { name: 'Logo Placement', score: scores.logo,       color: '#f05252', dotCol: 'var(--red)',    detail: 'Logo stretched horizontally; clear space insufficient.' },
-    { name: 'Color Palette',  score: scores.color,      color: '#5c7cfa', dotCol: 'var(--accent)', detail: '1 of 5 colors out of spec; background hue drift detected.' },
-    { name: 'Typography',     score: scores.typography, color: '#00d4aa', dotCol: 'var(--teal)',   detail: 'Unapproved typeface; 9pt body below readable threshold.' },
-    { name: 'Layout & Margin',score: scores.layout,     color: '#f5a623', dotCol: 'var(--amber)',  detail: 'CTA bleeds 8px over right margin; safe zone otherwise OK.' },
-  ];
-  document.getElementById('cat-bars').innerHTML = cats
-    .map(
-      c => `
-    <div class="cat-row">
-      <div class="cat-header">
-        <div class="cat-name"><span class="dot" style="background:${c.dotCol};"></span>${c.name}</div>
-        <div class="cat-score" style="color:${c.dotCol};" data-cat-val="${c.score}">—</div>
-      </div>
-      <div class="cat-bar-track"><div class="cat-bar-fill" style="background:${c.color};" data-pct="${c.score * 10}"></div></div>
-      <div class="cat-detail">${c.detail}</div>
-    </div>
-  `
-    )
-    .join('');
+  // Inject into history
+  historyData.unshift({
+    name: filename, platform: plat.name, score: scores.overall, 
+    status: scores.overall >= 8.0 ? 'approved' : 'needs', viols: violations.length, date: 'Just now',
+    details: violations.map(v => v.text.replace(/<[^>]*>?/gm, '')).join(' | ') // Strip HTML for details
+  });
+  renderHistory();
 
   document.getElementById('latest-result').style.display = 'block';
   animateScores();
 }
 
-/* ═══════════════════════════════════════════════
-   SCORE ANIMATIONS
-════════════════════════════════════════════════ */
 function animateScores() {
-  if (!state.scores) return;
-  const s = state.scores;
-
-  // overall ring
-  const overall = s.overall;
-  const circumference = 2 * Math.PI * 60;
+  const overall = state.scores.overall;
   const ring = document.getElementById('main-ring');
-  const offset = circumference - (overall / 10) * circumference;
+  const circumference = 380;
   ring.style.strokeDasharray = circumference;
-  ring.style.strokeDashoffset = circumference;
-  ring.className = `score-ring-fill ${overall >= 8.5 ? 'teal' : overall >= 6 ? 'accent' : 'amber'}`;
-  setTimeout(() => {
-    ring.style.strokeDashoffset = offset;
-  }, 100);
-
-  // overall number count-up
-  const numEl = document.getElementById('overall-num');
-  let n = 0;
-  const target = overall;
-  const step = () => {
-    n = Math.min(n + 0.2, target);
-    numEl.textContent = n.toFixed(1);
-    if (n < target) requestAnimationFrame(step);
-  };
-  setTimeout(step, 200);
-
-  // tile values count-up
-  document.querySelectorAll('.tile-value[data-val]').forEach(el => {
-    const tv = parseFloat(el.dataset.val);
-    let tn = 0;
-    const ts = () => {
-      tn = Math.min(tn + 0.3, tv);
-      el.textContent = tn.toFixed(1);
-      if (tn < tv) requestAnimationFrame(ts);
-    };
-    setTimeout(ts, 300);
-  });
-
-  // tile bar fills
-  setTimeout(() => {
-    document.querySelectorAll('.tile-bar-fill[data-pct]').forEach(el => {
-      el.style.width = el.dataset.pct + '%';
-    });
-  }, 200);
-
-  // cat bar scores count-up
-  document.querySelectorAll('[data-cat-val]').forEach(el => {
-    const cv = parseFloat(el.dataset.catVal);
-    let cn = 0;
-    const cs = () => {
-      cn = Math.min(cn + 0.25, cv);
-      el.textContent = cn.toFixed(1) + '/10';
-      if (cn < cv) requestAnimationFrame(cs);
-    };
-    setTimeout(cs, 350);
-  });
-
-  // cat bar fills
-  setTimeout(() => {
-    document.querySelectorAll('.cat-bar-fill[data-pct]').forEach(el => {
-      el.style.width = el.dataset.pct + '%';
-    });
-  }, 300);
+  ring.style.strokeDashoffset = circumference - (overall/10) * circumference;
+  ring.className = `score-ring-fill ${overall>=8.0?'teal':'amber'}`;
+  document.getElementById('overall-num').textContent = overall.toFixed(1);
 }
 
 /* ═══════════════════════════════════════════════
-   HISTORY TABLE SEED + ROW CLICK
-════════════════════════════════════════════════ */
+   HISTORY MODAL
+═══════════════════════════════════════════════ */
 function renderHistory() {
   const tbody = document.getElementById('history-tbody');
-  tbody.innerHTML = history
-    .map((h, idx) => {
-      const pillClass = h.status === 'approved' ? 'pill-approved' : h.status === 'needs' ? 'pill-needs' : 'pill-rejected';
-      const pillTxt = h.status === 'approved' ? 'Approved' : h.status === 'needs' ? 'Needs Edits' : 'Rejected';
-      const scoreColor = h.score >= 8 ? 'var(--green)' : h.score >= 6 ? 'var(--amber)' : 'var(--red)';
-      return `
-        <tr data-history-index="${idx}" onclick="openHistoryRow(${idx})">
-          <td class="asset-name">${h.name}</td>
-          <td>${h.platform}</td>
-          <td><span style="font-family:var(--font-mono);color:${scoreColor};">${h.score}</span></td>
-          <td><span class="status-pill ${pillClass}">${pillTxt}</span></td>
-          <td><span style="font-family:var(--font-mono);color:${h.viols > 0 ? 'var(--red)' : 'var(--green)'};">${h.viols}</span></td>
-          <td>${h.date}</td>
-        </tr>
-      `;
-    })
-    .join('');
+  tbody.innerHTML = historyData.map((h, index) => `
+    <tr onclick="openHistoryDetail(${index})">
+      <td class="asset-name">${h.name}</td>
+      <td>${h.platform}</td>
+      <td><span style="font-family:var(--font-mono);">${h.score}</span></td>
+      <td><span class="status-pill ${h.status==='approved'?'pill-approved':h.status==='needs'?'pill-needs':'pill-rejected'}">${h.status}</span></td>
+      <td>${h.viols}</td>
+      <td>${h.date}</td>
+    </tr>
+  `).join('');
 }
 
-function openHistoryRow(idx) {
-  const record = history[idx];
-  if (!record) return;
-  // set platform based on record
-  const plat = platforms.find(p => p.name === record.platform);
-  if (plat) {
-    state.selectedPlatform = plat.id;
-    renderPlatforms();
-    updateSizeWarning();
-  }
-  switchTab('upload');
-  setTimeout(() => {
-    document.getElementById('checklist')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 200);
-  showToast(`📝 Review tasks loaded for ${record.name}`);
+function openHistoryDetail(index) {
+  const data = historyData[index];
+  const modal = document.getElementById('history-modal');
+  document.getElementById('history-modal-content').innerHTML = `
+    <div style="font-size: 18px; font-family: var(--font-head); font-weight: bold; margin-bottom: 10px;">${data.name}</div>
+    <div style="margin-bottom: 5px;"><strong>Platform:</strong> ${data.platform}</div>
+    <div style="margin-bottom: 5px;"><strong>Score:</strong> ${data.score}/10</div>
+    <div style="margin-bottom: 15px;"><strong>Date:</strong> ${data.date}</div>
+    <div style="padding: 15px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px;">
+      <strong>Review Notes / Violations:</strong><br><br>
+      ${data.details}
+    </div>
+  `;
+  modal.classList.add('visible');
+}
+
+function closeHistoryModal(e) {
+  if (e.target.id === 'history-modal') document.getElementById('history-modal').classList.remove('visible');
 }
 
 /* ═══════════════════════════════════════════════
-   TOAST
-════════════════════════════════════════════════ */
+   TOAST & INIT
+═══════════════════════════════════════════════ */
 let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
-  const [icon, ...rest] = msg.split(' ');
-  t.querySelector('.toast-icon').textContent = icon;
-  document.getElementById('toast-msg').textContent = rest.join(' ');
+  document.getElementById('toast-msg').textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ═══════════════════════════════════════════════
-   INIT
-════════════════════════════════════════════════ */
 renderPalette();
-renderFonts();
 renderPlatforms();
-renderChecklist();
 renderHistory();
-state.historyCount = history.length;
-const dashBadge = document.getElementById('dash-badge');
-if (dashBadge) dashBadge.textContent = state.historyCount;
-document.getElementById('hex-preview-swatch').style.background = 'var(--border)';
-initBrandProfiles();
 </script>
 </body>
 </html>
