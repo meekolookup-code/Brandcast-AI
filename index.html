@@ -2147,6 +2147,46 @@ function saveGuidelines() {
   }, 1200);
 }
 
+/* ═══════════════════════════════════════════════
+   GEMINI API HELPER
+═══════════════════════════════════════════════ */
+const GEMINI_API_KEY = 'AlzaSyCza10wY20IOygWAGETgyw_jqzilW9zOXI';
+const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+async function callClaudeAPI(systemPrompt, userContent) {
+  // Convert Anthropic-style userContent array to Gemini parts
+  const parts = userContent.map(block => {
+    if (block.type === 'text') {
+      return { text: block.text };
+    } else if (block.type === 'image') {
+      return { inlineData: { mimeType: block.source.media_type, data: block.source.data } };
+    }
+    return null;
+  }).filter(Boolean);
+
+  const response = await fetch(GEMINI_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      system_instruction: { parts: [{ text: systemPrompt }] },
+      contents: [{ role: 'user', parts }],
+      generationConfig: { maxOutputTokens: 1500, temperature: 0.2 }
+    })
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Gemini API error ${response.status}: ${errText}`);
+  }
+
+  const data = await response.json();
+  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+  // Strip any accidental markdown fences
+  const clean = rawText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+  return JSON.parse(clean);
+}
+
 /* ── Step animation helper (runs while API call is in flight) ── */
 function startStepAnimation(steps, bar, pct, onDone) {
   let i = 0;
@@ -2280,17 +2320,7 @@ Analyze this creative asset for brand compliance.`
   ];
 
   try {
-    const res = await fetch('/.netlify/functions/analyze', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ system: systemPrompt, userContent })
-    });
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(`Server error ${res.status}: ${errText}`);
-    }
-    const data = await res.json();
-    apiResult = data;
+    apiResult = await callClaudeAPI(systemPrompt, userContent);
   } catch(err) {
     console.error('AI review error:', err);
     apiError = err;
@@ -2390,18 +2420,10 @@ Score each dimension 0–10 based on what you observe. Be specific.`;
     let result = null;
     try {
       const b64 = await toBase64(file);
-      const res = await fetch('/.netlify/functions/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system: systemPrompt,
-          userContent: [
-            { type: 'image', source: { type: 'base64', media_type: file.type || 'image/png', data: b64 } },
-            { type: 'text', text: `Brand: ${brandName}\nProfile: ${profileName}\nTarget platform: ${plat?.name || state.platform} (${plat?.dims || '—'})\nApproved brand colors: ${paletteHex}\n\nBrand Guidelines:\n${guidelinesText || '(No guidelines provided)'}\n${notes ? `\nReviewer notes: ${notes}` : ''}\n\nAnalyze this creative asset for brand compliance.` }
-          ]
-        })
-      });
-      if (res.ok) result = await res.json();
+      result = await callClaudeAPI(systemPrompt, [
+        { type: 'image', source: { type: 'base64', media_type: file.type || 'image/png', data: b64 } },
+        { type: 'text', text: `Brand: ${brandName}\nProfile: ${profileName}\nTarget platform: ${plat?.name || state.platform} (${plat?.dims || '—'})\nApproved brand colors: ${paletteHex}\n\nBrand Guidelines:\n${guidelinesText || '(No guidelines provided)'}\n${notes ? `\nReviewer notes: ${notes}` : ''}\n\nAnalyze this creative asset for brand compliance.` }
+      ]);
     } catch(err) { /* fallback below */ }
 
     if (!result) {
