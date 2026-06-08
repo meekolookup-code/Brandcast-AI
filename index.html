@@ -1041,12 +1041,12 @@
             </div>
             <div class="form-group">
               <label class="form-label">Brand Name</label>
-              <input type="text" class="form-input" id="brand-name" placeholder="e.g. Acme Corporation" value="Acme Creative Co.">
+              <input type="text" class="form-input" id="brand-name" placeholder="e.g. Acme Corporation">
             </div>
             <div class="form-group" style="margin-bottom:0;">
               <label class="form-label">Active Brand Profile</label>
               <select class="form-select" id="brand-profile-select" onchange="handleProfileSelectChange(this)">
-                <option value="Acme Creative Co.">Acme Creative Co. (active)</option>
+                <option value="My Brand">My Brand (active)</option>
                 <option value="new">＋ Add new profile…</option>
               </select>
               <div class="input-hint">Select or create a brand profile to apply during reviews.</div>
@@ -1063,11 +1063,7 @@
               <div class="inner-tab" data-inner="upload">Upload File</div>
             </div>
             <div id="inner-text" class="inner-panel">
-              <textarea class="form-textarea" id="brand-guidelines" style="min-height:160px;">• Logo must always appear on a white or brand-primary background
-• Minimum logo size: 40px height on digital
-• Primary typeface: Neue Haas Grotesk Display
-• Never stretch or distort the logo
-• Maintain minimum clear space equal to the height of the wordmark</textarea>
+              <textarea class="form-textarea" id="brand-guidelines" style="min-height:160px;" placeholder="Paste your brand guidelines here, or upload a PDF to extract them automatically…"></textarea>
             </div>
             <div id="inner-upload" class="inner-panel" style="display:none;">
               <div class="mini-upload" id="guideline-drop"
@@ -1227,7 +1223,7 @@
             <div class="form-group">
               <label class="form-label">Apply Brand Profile</label>
               <select class="form-select" id="upload-profile-select">
-                <option value="Acme Creative Co.">Acme Creative Co.</option>
+                <option value="My Brand">My Brand</option>
               </select>
             </div>
             <div class="form-group" style="margin-bottom:0;">
@@ -1274,6 +1270,8 @@
 
       <div id="latest-result" style="display:none;">
         <div class="section-label">Latest Review Result</div>
+
+        <!-- ── Header card: score ring + verdict + meta ── -->
         <div class="card" style="margin-bottom:16px;">
           <div class="score-hero">
             <div class="score-ring-wrap">
@@ -1285,14 +1283,20 @@
             </div>
             <div class="score-info">
               <div class="score-verdict verdict-needs" id="verdict-badge"><span id="verdict-text">Needs Edits</span></div>
-              <div style="font-family:var(--font-head);font-size:17px;font-weight:800;margin-bottom:4px;color:var(--text);" id="result-brand-name">Acme Creative Co.</div>
-              <div class="score-filename" id="result-filename">summer_campaign.png</div>
+              <div style="font-family:var(--font-head);font-size:17px;font-weight:800;margin-bottom:4px;color:var(--text);" id="result-brand-name">—</div>
+              <div class="score-filename" id="result-filename"></div>
               <div class="score-timestamp" id="result-timestamp">Reviewed just now</div>
             </div>
           </div>
-          <div id="result-ai-summary" style="display:none; margin-top:16px; padding:12px 16px; background:var(--panel-hi); border-radius:var(--radius); font-size:13px; color:var(--text-mid); line-height:1.65; border-left:3px solid var(--accent);"></div>
+
+          <!-- AI Verdict summary -->
+          <div id="result-ai-summary" style="display:none; margin-top:20px; padding:16px 18px; background:var(--panel-hi); border-radius:var(--radius); border-left:3px solid var(--accent);">
+            <div style="font-size:10px;font-family:var(--font-head);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">AI Verdict</div>
+            <div id="result-ai-summary-text" style="font-size:13px;color:var(--text);line-height:1.7;"></div>
+          </div>
         </div>
 
+        <!-- ── Category breakdown + violations side by side ── -->
         <div class="grid-2" style="gap:16px;margin-bottom:16px;">
           <div class="card">
             <div class="card-title">Score Breakdown</div>
@@ -1306,6 +1310,22 @@
             <div class="violation-list" id="violation-list"></div>
           </div>
         </div>
+
+        <!-- ── Detailed findings per category ── -->
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-title">Detailed Findings</div>
+          <div id="detailed-findings"></div>
+        </div>
+
+        <!-- ── Recommendations ── -->
+        <div class="card" id="recommendations-card" style="margin-bottom:16px;display:none;">
+          <div class="card-title" style="color:var(--amber);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Action Required
+          </div>
+          <div id="recommendations-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+
       </div>
 
       <!-- Batch results carousel (shown when multiple files analyzed) -->
@@ -1577,9 +1597,10 @@ function scrollToPricing() {
 ═══════════════════════════════════════════════ */
 let state = {
   file: null, files: [], fileDataUrls: {}, batchMode: false, batchResults: [],
-  platform: 'instagram-feed', profileName: 'Acme Creative Co.',
-  scores: {}, currentHistoryIndex: -1, reviewsUsed: 3, reviewsLimit: 5,
-  currentBatchIndex: 0, customDims: null, savedSizes: []
+  platform: 'instagram-feed', profileName: '',
+  scores: {}, currentHistoryIndex: -1, reviewsUsed: 0, reviewsLimit: 5,
+  currentBatchIndex: 0, customDims: null, savedSizes: [],
+  guidelineFile: null
 };
 
 const PLATFORMS = [
@@ -1592,16 +1613,12 @@ const PLATFORMS = [
   { id:'custom', name:'Custom Size', dims:'—', icon:'✏️' },
 ];
 
-const BRAND_COLORS = ['#5b73f5','#00b894','#f0a500','#e8485a','#7c5cfc','#1a1d2e'];
-let palette = [...BRAND_COLORS];
+const BRAND_COLORS = [];
+let palette = [];
 
-let profiles = [{ name:'Acme Creative Co.', active: true, emoji:'🎯' }];
+let profiles = [{ name:'My Brand', active: true, emoji:'🎯' }];
 
-let historyData = [
-  { name:'hero_banner_v3.png', platform:'Instagram Feed', score:8.2, status:'approved', viols:1, date:'Today, 10:42 AM', profile:'Acme Creative Co.', dims:'1080×1080', filesize:'1.2 MB', notes:'', violations:[{icon:'🔵',cls:'vi-color',text:'<strong>Minor tint deviation</strong> detected in bottom-left gradient — within tolerance.',catLabel:'COLOR'}] },
-  { name:'summer_sale_post.png', platform:'Facebook Post', score:5.8, status:'needs', viols:3, date:'Yesterday, 4:15 PM', profile:'Acme Creative Co.', dims:'1200×630', filesize:'875 KB', notes:'Campaign needs revision before launch', violations:[{icon:'🔵',cls:'vi-color',text:'<strong>Unauthorized brand color</strong> #FF3366 used in CTA button.',catLabel:'COLOR'},{icon:'🔤',cls:'vi-type',text:'<strong>Non-brand font</strong> "Arial Bold" detected in headline.',catLabel:'TYPOGRAPHY'},{icon:'⚖️',cls:'vi-layout',text:'<strong>Logo clear space</strong> violated — 8px margin instead of required 20px.',catLabel:'LOGO'}] },
-  { name:'newsletter_header.png', platform:'Display Leaderboard', score:9.1, status:'approved', viols:0, date:'May 12, 2:00 PM', profile:'Acme Creative Co.', dims:'728×90', filesize:'220 KB', notes:'', violations:[] },
-];
+let historyData = [];
 
 /* ═══════════════════════════════════════════════
    NAV
@@ -1638,53 +1655,93 @@ document.querySelectorAll('#guideline-inner-tabs .inner-tab').forEach(t => {
 });
 
 /* Guideline file — accepts a File object directly */
-function processGuidelineFile(f) {
+async function processGuidelineFile(f) {
   const drop = document.getElementById('guideline-drop');
   drop.classList.add('has-file');
   document.getElementById('guideline-file-info').style.display = 'flex';
   document.getElementById('guideline-file-name').textContent = f.name;
   document.getElementById('guideline-file-size').textContent = (f.size/1024).toFixed(0) + ' KB';
-  document.getElementById('guide-upload-text').innerHTML = '<strong style="color:var(--teal);">✓ File uploaded</strong>';
-  // Show validation prompt
+  document.getElementById('guide-upload-text').innerHTML = '<strong style="color:var(--teal);">✓ File uploaded — extracting guidelines…</strong>';
   document.getElementById('guideline-validate-prompt').style.display = 'block';
-  showToast('📄 Brand guidelines uploaded — extracting colors…');
 
-  // ── Feature 1: Automated Color Extraction ──
-  const fr = new FileReader();
-  fr.onload = evt => {
-    const text = evt.target.result || '';
-    // Extract HEX colors (#RRGGBB)
-    const hexMatches = text.match(/#[0-9a-fA-F]{6}\b/gi) || [];
-    // Extract RGB colors and convert to HEX
-    const rgbMatches = [...text.matchAll(/rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/gi)];
-    const rgbHex = rgbMatches.map(m => {
-      return '#' + [m[1],m[2],m[3]].map(v => parseInt(v).toString(16).padStart(2,'0')).join('');
+  // Don't store binary — we'll extract text instead to avoid payload size limits
+  state.guidelineFile = null;
+
+  showToast('📄 Extracting brand guidelines from PDF…');
+
+  try {
+    const b64 = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = e => res(e.target.result.split(',')[1]);
+      r.onerror = rej;
+      r.readAsDataURL(f);
     });
-    // Deduplicate and filter already-present colors
-    const allColors = [...new Set([...hexMatches, ...rgbHex].map(c => c.toUpperCase()))];
-    // Filter out pure black/white/very-common to avoid noise
-    const filtered = allColors.filter(c => !['#000000','#FFFFFF','#FFFFFFFF'].includes(c));
-    const newColors = filtered.filter(c => !palette.map(p=>p.toUpperCase()).includes(c));
-    if (newColors.length > 0) {
-      const toAdd = newColors.slice(0, 8);
-      // Mark as newly extracted so renderPalette can highlight them
-      newlyExtractedColors.clear();
-      toAdd.forEach(c => { palette.push(c); newlyExtractedColors.add(c); });
-      renderPalette();
-      // Set the hex input to the first extracted color for visibility
-      const inp = document.getElementById('hex-input');
-      inp.value = toAdd[0];
-      document.getElementById('hex-preview-swatch').style.background = toAdd[0];
-      // Show extraction banner directly above the palette grid
-      showColorExtractBanner(toAdd);
-      showToast(`🎨 ${toAdd.length} brand color${toAdd.length>1?'s':''} extracted and added to palette!`);
+
+    const isPdf = f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+
+    // Call API to extract both guidelines text AND brand colors from the PDF
+    const response = await fetch('/.netlify/functions/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system: 'You are a brand asset parser. Extract key brand guidelines and colors from the provided document. Return ONLY valid JSON, no markdown fences:\n{\n  "guidelines": "<concise bullet-point summary of brand rules, colors, typography, logo usage — max 600 chars>",\n  "colors": ["#XXXXXX", ...]\n}',
+        userContent: isPdf
+          ? [
+              { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: b64 } },
+              { type: 'text', text: 'Extract the brand guidelines summary and all brand hex color codes from this document.' }
+            ]
+          : [{ type: 'text', text: `Extract brand guidelines and hex color codes from this content:\n\n${await f.text()}` }]
+      })
+    });
+
+    if (response.ok) {
+      let extracted = {};
+      try {
+        extracted = await response.json();
+      } catch { extracted = {}; }
+
+      // Populate the guidelines textarea with extracted text
+      if (extracted.guidelines) {
+        document.getElementById('brand-guidelines').value = extracted.guidelines;
+        // Switch to text tab so user can see it
+        document.querySelectorAll('#guideline-inner-tabs .inner-tab').forEach(t => t.classList.remove('active'));
+        document.querySelector('#guideline-inner-tabs .inner-tab[data-inner="text"]')?.classList.add('active');
+        document.getElementById('inner-text').style.display = 'block';
+        document.getElementById('inner-upload').style.display = 'none';
+      }
+
+      // Add extracted colors to palette
+      const colors = Array.isArray(extracted.colors) ? extracted.colors : [];
+      const newColors = [...new Set(colors.map(c => c.toUpperCase()))]
+        .filter(c => /^#[0-9A-F]{6}$/.test(c))
+        .filter(c => !['#000000','#FFFFFF'].includes(c))
+        .filter(c => !palette.map(p => p.toUpperCase()).includes(c))
+        .slice(0, 8);
+
+      if (newColors.length > 0) {
+        newlyExtractedColors.clear();
+        newColors.forEach(c => { palette.push(c); newlyExtractedColors.add(c); });
+        renderPalette();
+        const inp = document.getElementById('hex-input');
+        inp.value = newColors[0];
+        document.getElementById('hex-preview-swatch').style.background = newColors[0];
+        showColorExtractBanner(newColors);
+        showToast(`✅ Guidelines extracted! ${newColors.length} brand color${newColors.length > 1 ? 's' : ''} added to palette.`);
+      } else {
+        showToast('✅ Guidelines extracted from PDF — add colors manually if needed.');
+      }
+
+      document.getElementById('guide-upload-text').innerHTML = '<strong style="color:var(--teal);">✓ Guidelines extracted</strong>';
     } else {
-      showToast('📄 Guidelines uploaded — no new colors found to extract');
+      const err = await response.json().catch(() => ({}));
+      showToast('⚠️ Could not extract guidelines: ' + (err.error || 'unknown error'));
+      document.getElementById('guide-upload-text').innerHTML = '<strong style="color:var(--amber);">⚠ Extraction failed — add guidelines manually</strong>';
     }
-  };
-  // Read as text — works well for DOCX/PPTX (XML inside), CSS files, and text files
-  // For pure binary PDFs without embedded text this may return garbled content but HEX codes still parse
-  fr.readAsText(f, 'utf-8');
+  } catch (err) {
+    console.error('Guideline extraction error:', err);
+    showToast('⚠️ Could not read PDF — paste guidelines manually.');
+    document.getElementById('guide-upload-text').innerHTML = '<strong style="color:var(--amber);">⚠ Extraction failed — add guidelines manually</strong>';
+  }
 }
 function handleGuidelineUpload(input) {
   if (!input.files[0]) return;
@@ -1724,6 +1781,7 @@ function removeGuidelineFile() {
   document.getElementById('guideline-validate-prompt').style.display = 'none';
   document.getElementById('guide-upload-text').innerHTML = '<strong>Click or drag to upload</strong> your brand guidelines<br>PDF, PPTX, DOCX supported';
   document.getElementById('guide-file').value = '';
+  state.guidelineFile = null;
   // Hide palette banner if it's showing
   const banner = document.getElementById('color-extract-banner');
   if (banner) { banner.style.display = 'none'; banner.innerHTML = ''; }
@@ -2150,8 +2208,8 @@ function saveGuidelines() {
 /* ═══════════════════════════════════════════════
    GEMINI API HELPER
 ═══════════════════════════════════════════════ */
-const GEMINI_API_KEY = 'AIzaSyCza10wY20IOygWAGETgyw_jqzilW9zOXI';
-const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_API_KEY = null; // Key is managed server-side via Netlify environment variable
+const GEMINI_ENDPOINT = null;
 
 function getMimeType(file) {
   if (file.type && file.type.startsWith('image/')) return file.type;
@@ -2161,48 +2219,24 @@ function getMimeType(file) {
 }
 
 async function callClaudeAPI(systemPrompt, userContent) {
-  // Convert Anthropic-style userContent array to Gemini parts
-  const parts = userContent.map(block => {
-    if (block.type === 'text') {
-      return { text: block.text };
-    } else if (block.type === 'image') {
-      // Ensure we always have a valid mimeType
-      const mimeType = block.source.media_type && block.source.media_type.startsWith('image/')
-        ? block.source.media_type
-        : 'image/jpeg';
-      return { inlineData: { mimeType, data: block.source.data } };
-    }
-    return null;
-  }).filter(Boolean);
-
-  const requestBody = {
-    system_instruction: { parts: [{ text: systemPrompt }] },
-    contents: [{ role: 'user', parts }],
-    generationConfig: { maxOutputTokens: 1500, temperature: 0.2 }
-  };
-
-  console.log('Calling Gemini API...', GEMINI_ENDPOINT);
-  const response = await fetch(GEMINI_ENDPOINT, {
+  const response = await fetch('/.netlify/functions/analyze', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody)
+    body: JSON.stringify({ system: systemPrompt, userContent })
   });
 
   if (!response.ok) {
-    const errText = await response.text();
-    console.error('Gemini API error response:', errText);
-    throw new Error(`Gemini API error ${response.status}: ${errText}`);
+    const errData = await response.json().catch(() => ({}));
+    throw new Error(errData.error || `Server error ${response.status}`);
   }
 
   const data = await response.json();
-  console.log('Gemini raw response:', JSON.stringify(data).slice(0, 300));
 
-  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  if (!rawText) throw new Error('Gemini returned empty response. Full response: ' + JSON.stringify(data));
-
-  // Strip any accidental markdown fences
-  const clean = rawText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
-  return JSON.parse(clean);
+  // Normalise: Anthropic returns scores.colors as "colors", map to match app expectations
+  if (data.scores) {
+    data.scores.colors = data.scores.colors ?? data.scores.color ?? 7;
+  }
+  return data;
 }
 
 /* ── Step animation helper (runs while API call is in flight) ── */
@@ -2310,13 +2344,25 @@ async function runReview() {
   "violations": [
     { "category": "COLOR|TYPOGRAPHY|LOGO|LAYOUT|IMAGERY", "severity": "error|warning|info", "title": "<short title>", "detail": "<specific actionable description referencing what you see in the image>" }
   ],
-  "summary": "<2-3 sentence plain-English verdict on overall compliance>",
+  "findings": {
+    "colors": { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences about colors observed vs. brand palette>" },
+    "typography": { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences about fonts, weights, hierarchy>" },
+    "logo": { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences about logo usage, clear space, placement>" },
+    "layout": { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences about composition, spacing, platform sizing>" }
+  },
+  "recommendations": [
+    "<specific actionable fix the designer should make, starting with a verb>"
+  ],
+  "summary": "<2-3 sentence plain-English overall verdict>",
   "approved": <true if overall >= 7.5, else false>
 }
 
-Score each dimension 0–10 based on what you can actually observe in the image vs. the guidelines. If a dimension is not checkable from this image alone, score it 8.0 and note that in a violation with severity "info". Be specific — name actual colors, fonts, or elements you see.`;
+Score each dimension 0–10 based on what you can actually observe in the image vs. the guidelines. If a dimension is not checkable from this image alone, score it 8.0 and set status to "pass" with a note. Be specific — name actual colors, fonts, or elements you see. Recommendations should only appear for actual issues found (empty array if approved).`;
 
-  const userContent = [
+  const userContent = [];
+
+  // Image only — guidelines are passed as text in the prompt below (extracted from PDF on upload)
+  userContent.push(
     {
       type: 'image',
       source: { type: 'base64', media_type: getMimeType(state.file), data: await toBase64(state.file) }
@@ -2335,7 +2381,7 @@ ${notes ? `Reviewer notes: ${notes}` : ''}
 
 Analyze this creative asset for brand compliance.`
     }
-  ];
+  );
 
   try {
     apiResult = await callClaudeAPI(systemPrompt, userContent);
@@ -2411,12 +2457,19 @@ async function runBatchReview() {
     "overall": <0-10 float, weighted average>
   },
   "violations": [
-    { "category": "COLOR|TYPOGRAPHY|LOGO|LAYOUT|IMAGERY", "severity": "error|warning|info", "title": "<short title>", "detail": "<specific actionable description referencing what you see in the image>" }
+    { "category": "COLOR|TYPOGRAPHY|LOGO|LAYOUT|IMAGERY", "severity": "error|warning|info", "title": "<short title>", "detail": "<specific actionable description>" }
   ],
-  "summary": "<2-3 sentence plain-English verdict on overall compliance>",
+  "findings": {
+    "colors":     { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences>" },
+    "typography": { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences>" },
+    "logo":       { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences>" },
+    "layout":     { "status": "pass|warn|fail", "heading": "<one line>", "detail": "<2-3 sentences>" }
+  },
+  "recommendations": ["<actionable fix starting with a verb>"],
+  "summary": "<2-3 sentence plain-English verdict>",
   "approved": <true if overall >= 7.5, else false>
 }
-Score each dimension 0–10 based on what you observe. Be specific.`;
+Score each dimension 0–10. Be specific about what you observe.`;
 
   const batchResultsData = [];
 
@@ -2636,8 +2689,9 @@ function completeReview(result, plat, profileName, notes) {
 
   // Show AI summary if present
   const summaryEl = document.getElementById('result-ai-summary');
-  if (summaryEl && result.summary) {
-    summaryEl.textContent = result.summary;
+  const summaryTextEl = document.getElementById('result-ai-summary-text');
+  if (summaryEl && summaryTextEl && result.summary) {
+    summaryTextEl.textContent = result.summary;
     summaryEl.style.display = 'block';
   }
 
@@ -2646,10 +2700,10 @@ function completeReview(result, plat, profileName, notes) {
   document.getElementById('verdict-text').textContent = result.approved ? '✅ Approved' : '⚠️ Needs Edits';
   document.getElementById('latest-result').style.display = 'block';
   document.getElementById('pending-badge').style.display = 'none';
-  animateScores(scores, viols);
+  animateScores(scores, viols, result);
 }
 
-function animateScores(scores, viols) {
+function animateScores(scores, viols, result) {
   const ring = document.getElementById('main-ring');
   const circ = 380;
   ring.style.strokeDasharray = circ;
@@ -2658,24 +2712,29 @@ function animateScores(scores, viols) {
   document.getElementById('overall-num').textContent = scores.overall.toFixed(1);
 
   const cats = [
-    {name:'Color Compliance',key:'colors',color:'#5b73f5'},
-    {name:'Typography',key:'typography',color:'#00b894'},
-    {name:'Logo Usage',key:'logo',color:'#7c5cfc'},
-    {name:'Layout',key:'layout',color:'#f0a500'},
+    {name:'Color Compliance', key:'colors',     color:'#5b73f5', label:'COLOR'},
+    {name:'Typography',       key:'typography', color:'#00b894', label:'TYPOGRAPHY'},
+    {name:'Logo Usage',       key:'logo',       color:'#7c5cfc', label:'LOGO'},
+    {name:'Layout',           key:'layout',     color:'#f0a500', label:'LAYOUT'},
   ];
-  document.getElementById('cat-bars').innerHTML = cats.map(c => `
-    <div>
+  document.getElementById('cat-bars').innerHTML = cats.map(c => {
+    const s = (scores[c.key] || 0);
+    const barColor = s >= 8 ? 'var(--teal)' : s >= 6 ? c.color : 'var(--red)';
+    return `
+    <div style="margin-bottom:14px;">
       <div class="cat-header">
         <div class="cat-name"><div class="dot" style="background:${c.color}"></div>${c.name}</div>
-        <div class="cat-score" style="color:${c.color}">${scores[c.key].toFixed(1)}</div>
+        <div class="cat-score" style="color:${barColor}">${s.toFixed(1)}</div>
       </div>
-      <div class="cat-bar-track"><div class="cat-bar-fill" id="bar-${c.key}" style="background:${c.color}"></div></div>
-    </div>`).join('');
+      <div class="cat-bar-track"><div class="cat-bar-fill" id="bar-${c.key}" style="background:${barColor}"></div></div>
+    </div>`;
+  }).join('');
   setTimeout(() => cats.forEach(c => {
     const el = document.getElementById('bar-'+c.key);
-    if (el) el.style.width = (scores[c.key]/10*100)+'%';
+    if (el) el.style.width = ((scores[c.key]||0)/10*100)+'%';
   }), 50);
 
+  // Violations
   document.getElementById('viol-count').textContent = viols.length;
   document.getElementById('violation-list').innerHTML = viols.length === 0
     ? '<div style="text-align:center;padding:20px;color:var(--teal);font-size:13px;">🎉 No violations found — perfect compliance!</div>'
@@ -2684,6 +2743,58 @@ function animateScores(scores, viols) {
         <div class="violation-icon ${v.cls}">${v.icon}</div>
         <div><div class="violation-text">${v.text}</div><div class="violation-cat" style="color:var(--text-low);">${v.catLabel}</div></div>
       </div>`).join('');
+
+  // Detailed findings
+  const findings = result?.findings || {};
+  const statusConfig = {
+    pass: { bg: 'var(--green-lo)', border: 'rgba(39,174,96,.25)', color: 'var(--green)', icon: '✅', label: 'PASS' },
+    warn: { bg: 'var(--amber-lo)', border: 'rgba(240,165,0,.25)',  color: 'var(--amber)', icon: '⚠️', label: 'WARN' },
+    fail: { bg: 'var(--red-lo)',   border: 'rgba(232,72,90,.25)',  color: 'var(--red)',   icon: '❌', label: 'FAIL' },
+  };
+  const findingOrder = [
+    { key:'colors',     label:'Color Compliance', icon:'🎨' },
+    { key:'typography', label:'Typography',        icon:'🔤' },
+    { key:'logo',       label:'Logo Usage',        icon:'〽️' },
+    { key:'layout',     label:'Layout & Sizing',   icon:'📐' },
+  ];
+  const findingsEl = document.getElementById('detailed-findings');
+  if (findingsEl) {
+    findingsEl.innerHTML = findingOrder.map(f => {
+      const fd = findings[f.key];
+      if (!fd) return '';
+      const cfg = statusConfig[fd.status] || statusConfig.pass;
+      return `
+      <div style="padding:14px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start;">
+        <div style="flex-shrink:0;padding:6px 10px;border-radius:8px;background:${cfg.bg};border:1px solid ${cfg.border};font-size:11px;font-family:var(--font-head);font-weight:700;color:${cfg.color};display:flex;align-items:center;gap:5px;white-space:nowrap;">
+          ${cfg.icon} ${cfg.label}
+        </div>
+        <div style="flex:1;">
+          <div style="font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">${f.icon} ${f.label} — ${fd.heading || ''}</div>
+          <div style="font-size:12.5px;color:var(--text-mid);line-height:1.65;">${fd.detail || ''}</div>
+        </div>
+      </div>`;
+    }).join('');
+    // Remove last border
+    const rows = findingsEl.querySelectorAll('[style*="border-bottom"]');
+    if (rows.length > 0) rows[rows.length-1].style.borderBottom = 'none';
+  }
+
+  // Recommendations
+  const recs = result?.recommendations || [];
+  const recsCard = document.getElementById('recommendations-card');
+  const recsList = document.getElementById('recommendations-list');
+  if (recsCard && recsList) {
+    if (recs.length > 0) {
+      recsCard.style.display = 'block';
+      recsList.innerHTML = recs.map((r, i) => `
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--amber-lo);border:1px solid rgba(240,165,0,.2);border-radius:var(--radius);">
+          <div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--amber);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">${i+1}</div>
+          <div style="font-size:12.5px;color:var(--text);line-height:1.6;">${r}</div>
+        </div>`).join('');
+    } else {
+      recsCard.style.display = 'none';
+    }
+  }
 }
 
 /* ═══════════════════════════════════════════════
